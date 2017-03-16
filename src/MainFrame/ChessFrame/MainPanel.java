@@ -356,7 +356,7 @@ public class MainPanel extends JPanel {
                                     if(flag==true)break;//Means  there is a Pice in the Way
                                 }
                             }
-                            if(!flag&&P1.Pice_already_there(newP)){ //Pice_already_there checks if a piecce of the sme color is thee
+                            if(!flag&&P1.Piece_already_there(newP)){ //Pice_already_there checks if a piecce of the sme color is thee
                                 //(if flag =false this means "The pice able to MOVE as logic""
                                 // So We Check If the New Place Make  a Check To Black King !!!
                                 boolean kin2=true;
@@ -524,13 +524,13 @@ public class MainPanel extends JPanel {
                                             other=P1.returnPostion(k);
                                             f.x=other.x;
                                             f.y=other.y;
-                                            P1.Killedpiec(k);
+                                            P1.killedPiece(k);
                                         } else if(inHand<=8) {
                                             kill=true;
                                             other=P1.returnPostion(k);
                                             f.x=other.x;
                                             f.y=other.y;
-                                            P1.Killedpiec(k);
+                                            P1.killedPiece(k);
                                         } else {
                                             end_move=false;
                                             P2.changePostion(myold,inHand);
