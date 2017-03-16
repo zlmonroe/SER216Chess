@@ -2,76 +2,9 @@
 package MainFrame.ChessFrame.players;
 
 
-import MainFrame.ChessFrame.players.Pieces.Castle;
-import MainFrame.ChessFrame.players.Pieces.Elephent;
-import MainFrame.ChessFrame.players.Pieces.Horse;
-import MainFrame.ChessFrame.players.Pieces.Queen;
-import MainFrame.ChessFrame.players.Pieces.Solider;
-import MainFrame.ChessFrame.players.Pieces.king;
-import java.awt.Button;
-import java.awt.Canvas;
-import java.awt.Checkbox;
-import java.awt.CheckboxMenuItem;
-import java.awt.Choice;
-import java.awt.Dialog;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FileDialog;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Frame;
-import java.awt.HeadlessException;
-import java.awt.Image;
-import java.awt.Label;
-import java.awt.List;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
-import java.awt.Panel;
-import java.awt.Point;
-import java.awt.PopupMenu;
-import java.awt.PrintJob;
-import java.awt.ScrollPane;
-import java.awt.Scrollbar;
-import java.awt.TextArea;
-import java.awt.TextField;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.datatransfer.Clipboard;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.InvalidDnDOperationException;
-import java.awt.dnd.peer.DragSourceContextPeer;
-import java.awt.im.InputMethodHighlight;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.awt.peer.ButtonPeer;
-import java.awt.peer.CanvasPeer;
-import java.awt.peer.CheckboxMenuItemPeer;
-import java.awt.peer.CheckboxPeer;
-import java.awt.peer.ChoicePeer;
-import java.awt.peer.DialogPeer;
-import java.awt.peer.FileDialogPeer;
-import java.awt.peer.FontPeer;
-import java.awt.peer.FramePeer;
-import java.awt.peer.LabelPeer;
-import java.awt.peer.ListPeer;
-import java.awt.peer.MenuBarPeer;
-import java.awt.peer.MenuItemPeer;
-import java.awt.peer.MenuPeer;
-import java.awt.peer.PanelPeer;
-import java.awt.peer.PopupMenuPeer;
-import java.awt.peer.ScrollPanePeer;
-import java.awt.peer.ScrollbarPeer;
-import java.awt.peer.TextAreaPeer;
-import java.awt.peer.TextFieldPeer;
-import java.awt.peer.WindowPeer;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Map;
-import java.util.Properties;
+import MainFrame.ChessFrame.players.Pieces.*;
+
+import java.awt.*;
 
 
 public class player1 {
@@ -342,7 +275,7 @@ public class player1 {
         }
         return false;
     }
-    public boolean Killedpiec(int i) {
+    public boolean killedPiece(int i) {
         Point out=new Point(13,13);
         switch(i) {
             
@@ -366,7 +299,7 @@ public class player1 {
         
         return false;
     }
-    public boolean checKing(Point p1,Point p2,int i) {
+    public boolean checkKing(Point p1, Point p2, int i) {
         switch(i) {
             
             case 17:return  WC1.checkKing(p1.x,p1.y,p2);
@@ -476,10 +409,7 @@ public class player1 {
         
         inHand=-1;
         return true;
-        
-        
-        
-        
+
     }
     public boolean  see_king_Check(player2 Black) {
         
@@ -545,7 +475,7 @@ public class player1 {
     }
     
     
-    public boolean Pice_already_there(Point newP) {
+    public boolean Piece_already_there(Point newP) {
         Point samePostion;
         for(int i=17;i<=32;i++) {
             if(GetInhand()!=i)// There is no need to check the inHand pice
@@ -569,7 +499,7 @@ public class player1 {
         
         return true;
     }
-    public boolean Pice_already_there_from_enemy(Point newP,player2 enemy) {
+    public boolean Piece_already_there_from_enemy(Point newP, player2 enemy) {
         Point samePostion;
         for(int i=1;i<=16;i++) {
             samePostion=enemy.returnPostion(i);
@@ -583,7 +513,7 @@ public class player1 {
         
         return true;
     }
-    public int Get_Pice_already_there_from_enemy(Point newP,player2 enemy) {
+    public int Get_Piece_already_there_from_enemy(Point newP, player2 enemy) {
         Point samePostion;
         for(int i=1;i<=16;i++) {
             samePostion=enemy.returnPostion(i);
@@ -623,7 +553,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there(PlaceCheck))
+            if(Piece_already_there(PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 
                 
@@ -651,7 +581,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 
                 WK.setPoint(Oldp);
@@ -682,7 +612,7 @@ public class player1 {
                 somthing_killed=true;
             }
             
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 
                 WK.setPoint(Oldp);
@@ -710,7 +640,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 if(somthing_killed) {
                     enemy.changePostion(other,ate_to_protect);
@@ -737,7 +667,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 
                 if(somthing_killed) {
@@ -764,7 +694,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 
                 if(somthing_killed) {
@@ -791,7 +721,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 if(somthing_killed) {
                     enemy.changePostion(other,ate_to_protect);
@@ -818,7 +748,7 @@ public class player1 {
             if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                 somthing_killed=true;
             }
-            if(Pice_already_there( PlaceCheck))
+            if(Piece_already_there( PlaceCheck))
                 if(!see_king_Check(enemy)) {
                 if(somthing_killed) {
                     enemy.changePostion(other,ate_to_protect);
@@ -873,7 +803,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck))
+                    if(Piece_already_there(PlaceCheck))
                         if(!see_king_Check(enemy)) {
                         WC.setX(Oldp1.x);
                         WC.setY(Oldp1.y);
@@ -906,7 +836,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck) )
+                    if(Piece_already_there(PlaceCheck) )
                         if(!see_king_Check(enemy)) {
                         WC.setX(Oldp1.x);
                         WC.setY(Oldp1.y);
@@ -963,7 +893,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck))
+                    if(Piece_already_there(PlaceCheck))
                         if(!see_king_Check(enemy)) {
                         
                         if(somthing_killed) {
@@ -995,7 +925,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck))
+                    if(Piece_already_there(PlaceCheck))
                         if(!see_king_Check(enemy)) {
                         if(somthing_killed) {
                             enemy.changePostion(other,ate_to_protect);
@@ -1056,7 +986,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     WH.setPoint(oldp1);
                     
@@ -1082,7 +1012,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1107,7 +1037,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1131,7 +1061,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1156,7 +1086,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1180,7 +1110,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1204,7 +1134,7 @@ public class player1 {
                 if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                     somthing_killed=true;
                 }
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1230,7 +1160,7 @@ public class player1 {
                     somthing_killed=true;
                 }
                 
-                if(Pice_already_there(PlaceCheck) )
+                if(Piece_already_there(PlaceCheck) )
                     if(!see_king_Check(enemy)) {
                     if(somthing_killed) {
                         enemy.changePostion(other,ate_to_protect);
@@ -1275,7 +1205,7 @@ public class player1 {
                         somthing_killed=true;
                     }
                     
-                    if(Pice_already_there(PlaceCheck))
+                    if(Piece_already_there(PlaceCheck))
                         if(!see_king_Check(enemy)) {
                         WQ.setPoint(Oldp1);
                         
@@ -1307,7 +1237,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck))
+                    if(Piece_already_there(PlaceCheck))
                         if(!see_king_Check(enemy)) {
                         WQ.setPoint(Oldp1);
                         if(somthing_killed) {
@@ -1342,7 +1272,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck) )
+                    if(Piece_already_there(PlaceCheck) )
                         if(!see_king_Check(enemy)) {
                         WQ.setX(Oldp1.x);
                         if(somthing_killed) {
@@ -1375,7 +1305,7 @@ public class player1 {
                     if(kill_to_protect_king(enemy,returnPostion(inHand))) {
                         somthing_killed=true;
                     }
-                    if(Pice_already_there(PlaceCheck) )
+                    if(Piece_already_there(PlaceCheck) )
                         if(!see_king_Check(enemy)) {
                         WQ.setY(Oldp1.y);
                         if(somthing_killed) {
@@ -1420,8 +1350,8 @@ public class player1 {
                 
                 PlaceCheck.y=Oldp1.y-1;
                 
-                if(Pice_already_there(PlaceCheck))
-                    if(Pice_already_there_from_enemy(PlaceCheck,enemy)) {
+                if(Piece_already_there(PlaceCheck))
+                    if(Piece_already_there_from_enemy(PlaceCheck,enemy)) {
                     if(!see_king_Check(enemy)) {
                         
                         Sold.setPoint(Oldp1);
@@ -1435,8 +1365,8 @@ public class player1 {
                 PlaceCheck.y=Oldp1.y-1;
                 
                 
-                if(Pice_already_there(PlaceCheck))
-                    if(Pice_already_there_from_enemy(PlaceCheck,enemy)) {
+                if(Piece_already_there(PlaceCheck))
+                    if(Piece_already_there_from_enemy(PlaceCheck,enemy)) {
                     
                     if(!see_king_Check(enemy)) {
                         Sold.setPoint(Oldp1);
@@ -1448,7 +1378,7 @@ public class player1 {
                     }
             }
             
-            if(!Pice_already_there_from_enemy(new Point(Oldp1.x-1,Oldp1.y-1),enemy))
+            if(!Piece_already_there_from_enemy(new Point(Oldp1.x-1,Oldp1.y-1),enemy))
                 if(kill_to_protect_king(enemy,new Point(Oldp1.x-1,Oldp1.y-1))) {
                 
                 if(!see_king_Check(enemy)) {
@@ -1460,7 +1390,7 @@ public class player1 {
                 enemy.changePostion(other,ate_to_protect);
                 }
             
-            if(!Pice_already_there_from_enemy(new Point(Oldp1.x+1,Oldp1.y-1),enemy))
+            if(!Piece_already_there_from_enemy(new Point(Oldp1.x+1,Oldp1.y-1),enemy))
                 if(kill_to_protect_king(enemy,new Point(Oldp1.x+1,Oldp1.y-1))) {
                 if(!see_king_Check(enemy)) {
                     enemy.changePostion(other,ate_to_protect);

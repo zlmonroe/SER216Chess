@@ -1725,7 +1725,7 @@ public class player2 implements Enumeration
                 
                 
                 
-                enemy.Killedpiec(i);
+                enemy.killedPiece(i);
                 return true;
             }
         }

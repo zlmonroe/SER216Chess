@@ -36,7 +36,7 @@ public class File_Menu extends JMenu
     }
     public String getportNumber()
     {
-        return NItem.getportNumber();
+        return NItem.getPortNumber();
     }
     
     

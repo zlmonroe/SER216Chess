@@ -17,16 +17,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.event.*;
 import java.lang.String;
-import javax.swing.JScrollPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
-import javax.net.*;
 
 
 public class MainPanel extends JPanel {
@@ -384,7 +379,7 @@ public class MainPanel extends JPanel {
                             }
                             
                             
-                            if(!flag&&P1.Pice_already_there(newP))
+                            if(!flag&&P1.Piece_already_there(newP))
                                 //(if flag =false this means "The pice able to MOVE as logic""
                             {
                                 // So We Check If the New Place Make  a Check To Black King !!!
@@ -626,7 +621,7 @@ public class MainPanel extends JPanel {
                                             f.x=other.x;
                                             f.y=other.y;
                                             
-                                            P1.Killedpiec(k);
+                                            P1.killedPiece(k);
                                         } else if(inHand<=8) {
                                             kill=true;
                                             
@@ -634,7 +629,7 @@ public class MainPanel extends JPanel {
                                             
                                             f.x=other.x;
                                             f.y=other.y;
-                                            P1.Killedpiec(k);
+                                            P1.killedPiece(k);
                                         } else {
                                             end_move=false;
                                             P2.changePostion(myold,inHand);
@@ -994,7 +989,7 @@ public class MainPanel extends JPanel {
                         
                         P1.changePostion(new Point(newX,newY),newInHand);
                         
-                        P2.Killedpiec(P1.Get_Pice_already_there_from_enemy(new Point(newX,newY),P2));
+                        P2.Killedpiec(P1.Get_Piece_already_there_from_enemy(new Point(newX,newY),P2));
                         P2.checkKing(false);
                         
                         if(P2.see_king_Check(P1))
@@ -1027,7 +1022,7 @@ public class MainPanel extends JPanel {
                         P2.SetInhand(newInHand);
                         P2.changePostion(new Point(newX,newY),newInHand);
                         
-                        P1.Killedpiec(P2.Get_Pice_already_there_from_enemy(new Point(newX,newY),P1));
+                        P1.killedPiece(P2.Get_Pice_already_there_from_enemy(new Point(newX,newY),P1));
                         players_turn=1;
                         
                         P1.checkKing(false);

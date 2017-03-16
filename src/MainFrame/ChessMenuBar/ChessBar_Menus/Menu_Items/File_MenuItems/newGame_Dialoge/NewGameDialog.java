@@ -2,36 +2,20 @@
 
 package MainFrame.ChessMenuBar.ChessBar_Menus.Menu_Items.File_MenuItems.newGame_Dialoge;
 
-import MainFrame.ChessMenuBar.Chess_MainMenuBar;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
+import MainFrame.ChessFrame.MainFrame;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.ButtonGroup;
-import javax.swing.JDialog;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import java.awt.Container;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import MainFrame.ChessFrame.MainFrame;
-import MainFrame.ChessFrame.MainPanel;
-import MainFrame.ChessFrame.StatusPanel;
-import MainFrame.ChessFrame.ToolPanel;
-import MainFrame.ChessFrame.ChatPanel;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 
 
-public class NewGameDialoge extends JDialog {
+public class NewGameDialog extends JDialog {
     
-    /** Creates a new instance of NewGameDialoge */
-    public NewGameDialoge( final MainFrame ff) {
+    /** Creates a new instance of NewGameDialog */
+    public NewGameDialog(final MainFrame ff) {
         super(ff, "New Game", true);
         
         setSize(300,350);
@@ -86,24 +70,20 @@ public class NewGameDialoge extends JDialog {
         
         As_server.setEnabled(false);
         As_client.setEnabled(false);
-        
-        mynewFrame=ff;
-        
+
+
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
                 String selected=(String) myCom.getSelectedItem();
-                
-                
-                
-                
-                if(selected=="Local")
-                    mynewFrame.start_Again();
+
+                if(selected.equals("Local"))
+                    NewGameDialog.this.ff.start_Again();
                 else {
                     if(Buttongroup.getSelection()==As_server.getModel())
-                        mynewFrame.start_As_Server();
+                        NewGameDialog.this.ff.start_As_Server();
                     else
-                        mynewFrame.start_As_Client();
+                        NewGameDialog.this.ff.start_As_Client();
                 }
                 
                 dispose();
@@ -117,8 +97,7 @@ public class NewGameDialoge extends JDialog {
         
         
         panel.setLayout(null);
-        
-        
+
         panel.add(myCom);
         panel.add(button1);
         panel.add(button2);
@@ -189,7 +168,7 @@ public class NewGameDialoge extends JDialog {
     private final JTextField port_text=new JTextField(5);
     private final JRadioButton As_server=new JRadioButton("Server");
     private final JRadioButton As_client=new JRadioButton("Client");
-    private MainFrame mynewFrame;
+    private MainFrame ff;
     private ButtonGroup Buttongroup = new ButtonGroup();
     
     public void paintComponents(Graphics g) {
