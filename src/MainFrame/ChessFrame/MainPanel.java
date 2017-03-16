@@ -292,6 +292,21 @@ public class MainPanel extends JPanel {
     }
     
     /// You can inherit from Adapter and avoid meaningless
+    /*When the mouse is released:
+    Get the selected piece and its original position
+    Get the new position that the user is trying to move it to
+    Check if the move is legal for the piece type
+    Check if other pieces are in the way
+    Check if there are enemy pieces in the spot
+    Check if I am a diagonal pawn or another piece
+        If I am, set the piece to be killed
+        If I am not, my move is invalid and we start again
+    Move the piece (temporarily)
+    If my king is in check, move back and start again
+    If my king is not in check, check if my enemy is in checkmate
+    If my enemy is in check, end the game
+    If my enemy is not in check, repaint the screen, send the data to my enemy, and repaint.*/
+
    private class  Mousehere implements MouseListener {
     	//Fncs from the interface that are unecessary
         public void mouseClicked(MouseEvent e) {}
