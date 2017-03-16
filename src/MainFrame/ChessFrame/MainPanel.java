@@ -292,75 +292,46 @@ public class MainPanel extends JPanel {
     }
     
     /// You can inherit from Adapter and avoid meaningless
-    private class  Mousehere implements MouseListener {
+   private class  Mousehere implements MouseListener {
+    	//Fncs from the interface that are unecessary
+        public void mouseClicked(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {}
         
-        public void mouseClicked(MouseEvent e) {
-            
-            
-        }
-        
-        public void mousePressed(MouseEvent e) {
-            
-            
-        }
-        
-    
-        
+        //fnc for when the mouse is placed
         public void mouseReleased(MouseEvent e) {
             boolean can_Send=false;
             
-            if(!GameOver) {
-                
+            if(!GameOver) { //if the game is not over
                 Point newP;
                 Point samePostion;
-                if(P1.GetInhand()!=-1) {
+                if(P1.GetInhand()!=-1) { //Get in hand
+                	int otherindex;
+                	//Point old=P1.returnOldPostion(P1.GetInhand());//this stuff isn't used anywhere, i think...
+                    //int x=old.x;
+                    //int y=old.y;
+                    Point present=P1.returnPostion(P1.GetInhand());//this is the original position
                     
-                    
-                    newP=P1.getPixelPoint(P1.GetInhand());
-                    newP.x/=Divide;
-                    newP.y/=Divide;
-                    newP.x++;
+                    newP=P1.getPixelPoint(P1.GetInhand());// this, i think, is the new position of the piece
+                    newP.x/=Divide; //divide is used to convert from the cooridinate in pixels to the rows
+                    newP.y/=Divide; //divide is used to convert from the cooridinate in pixels to the rows
+                    newP.x++; //I don't know why this happens...
                     newP.y++;
-                    int otherindex;
-                    
-                    Point old=P1.returnOldPostion(P1.GetInhand());
-                    int x=old.x;
-                    int y=old.y;
-                    Point present=P1.returnPostion(P1.GetInhand());
-                    
-                    
-                    
-                    ///////////////////////////////////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////////////
-                    
-                    
-                    
-                    
                     if(Iam_Server||local) {
-                        
-                        
                         // set the seen of the solider -white
-                        if(P1.GetInhand()<33&&P1.GetInhand()>24) {
-                            for(int i=1;i<17;i++) {
-                                samePostion=P2.returnPostion(i);
-                                if(samePostion.x==newP.x&&samePostion.y==newP.y) {
-                                    if(P1.setSeentoSiliders(P1.GetInhand(),samePostion))
+                        if(P1.GetInhand()<33&&P1.GetInhand()>24) {//if the piece in hand is a pawn
+                            for(int i=1;i<17;i++) {//for every black piece
+                                samePostion=P2.returnPostion(i); //get the black pieces position
+                                if(samePostion.x==newP.x&&samePostion.y==newP.y) {//if the position is the same
+                                    if(P1.setSeentoSiliders(P1.GetInhand(),samePostion))//if the pawn is moving diagonally
                                         break;
                                 }
                             }
                         }
-///////////////////////////////////////////////////////////////////////////////////
-                        if(!(newP.x== present.x&&newP.y== present.y)/*&&!P1.returncheckKing()*/)
-                            if(P1.checkthemove(newP,P1.GetInhand() )) // if the move is illegal
-                            {
-                            
-                            
-                            boolean flag=false;
-                            
-                            
-                            for(int i=1;i<=32;i++) {
-                                if(P1.GetInhand()!=i)// check if there is peices in the WAY
-                                {
+                        if(!(newP.x== present.x&&newP.y== present.y)) //If the new position is not the same as the old
+                            if(P1.checkthemove(newP,P1.GetInhand() )){ // if the move is illegal
+                            	boolean flag=false;
+                            	for(int i=1;i<=32;i++) {
+                            		if(P1.GetInhand()!=i){// check if there is pieces in the WAY
                                     if(i<17)
                                         flag=P1.checktheWay(newP,P2.returnPostion(i),P1.GetInhand());//Means there is somting in the Way so can't move
                                     else {
@@ -369,19 +340,9 @@ public class MainPanel extends JPanel {
                                     
                                     if(flag==true)break;//Means  there is a Pice in the Way
                                 }
-                                
-                                
-                                
-                                
-                                //
-                                
-                                
                             }
-                            
-                            
-                            if(!flag&&P1.Piece_already_there(newP))
+                            if(!flag&&P1.Pice_already_there(newP)){ //Pice_already_there checks if a piecce of the sme color is thee
                                 //(if flag =false this means "The pice able to MOVE as logic""
-                            {
                                 // So We Check If the New Place Make  a Check To Black King !!!
                                 boolean kin2=true;
                                 Point myold=new Point();
@@ -393,134 +354,81 @@ public class MainPanel extends JPanel {
                                 boolean kill=false;
                                 int killed=-1;
                                 boolean end_move=true;
-                                
-                                
-                                
                                 ////***  Start Here to Check the King
-                                
-                                for(int k=1;k<17;k++) {
+                                for(int k=1;k<17;k++) {// for all black pieces
                                     // I have to Check the Place
-                                    
-                                    other=P2.returnPostion(k);
-                                    
-                                    
-                                    
-                                    
-                                    if(newP.x==other.x&&newP.y==other.y) {
-                                        
+                                    other=P2.returnPostion(k); // get the black piecce
+                                    if(newP.x==other.x&&newP.y==other.y) {//checking if a black piece is on the new position
                                         int inHand=P1.GetInhand();
-                                        
-                                        if(inHand>24&&P1.returnsoliderSeen(inHand)) {
-                                            kill=true;
-                                            
-                                            
+                                        if(inHand>24&&P1.returnsoliderSeen(inHand)) {//if this piece is a pawn and it is moving diagonally
+                                            kill=true; //says we have killed a piece
                                             f.x=other.x;
                                             f.y=other.y;
-                                            
-                                            P2.Killedpiec(k);
-                                        } else if(inHand<=24) {
+                                            P2.Killedpiec(k); //I assume this kills the other players piece
+                                        } else if(inHand<=24) {// if it isn't a pawn, we don't have to check anything, just kill
                                             kill=true;
                                             
                                             f.x=other.x;
                                             f.y=other.y;
                                             
                                             P2.Killedpiec(k);
-                                        } else {
+                                        } else {// moves the piece back to the old piece
                                             P1.changePostion(myold,inHand);
                                             end_move=false;
-                                            
                                             break;
                                         }
-                                        
-                                        
-                                        killed=k;//!!!
-                                        
+                                        killed=k;//The piece that is killed is called "killed"
                                         break;
-                                        
                                     }
-                                    
                                 }
-                                
-                                
-                                if(end_move)
+                                if(end_move)//If the move is over, move the piece
                                     P1.changePostion(newP,P1.GetInhand());// Here is the mOve ended
                                 
-                                P1.checkKing(false);
-                                if(P1.see_king_Check(P2))
+                                P1.checkKing(false);//set kingIsInCheck to false
+                                if(P1.see_king_Check(P2)){//if our king is in check after the move
                                     // if my king will be in check if i move
                                     //so i can't move and i will return back to old postion'
-                                {
                                     P1.changePostion(myold,P1.GetInhand());
                                     P1.checkKing(true);
                                     end_move=false;
                                 }
-                                if(kill&&P1.returncheckKing()) {
-                                    P2.changePostion(f,killed);
-                                    
-                                    
+                                if(kill&&P1.returncheckKing()) {//change the position f the killed piece back
+                                    P2.changePostion(f,killed);//f is the point that can be killed
                                 }
                                 
-                                
-                                
                                 if(!P1.returncheckKing()) {
-                                    
-                                    if(P2.see_king_Check(P1))
+                                    if(P2.see_king_Check(P1)){
                                         // if my king will be in check if i move
-                                        //so i can't move and i will return back to old postion'
-                                    {
-                                        
+                                        //so i can't move and i will return back to old position
                                         P2.checkKing(true);
                                         end_move=false;
-                                        if(P2.Check_Mate_GameOver(P1)) {
-                                            GameOver();
+                                        if(P2.Check_Mate_GameOver(P1)) {//I believe this checks if P2 is in check
+                                            GameOver();//printing the move to the screen
                                             Box=Integer.toString(P2.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
                                             can_Send=true;
                                         }
-                                        
-                                        else {
+                                        else {//printing the move to the screen
                                             Box=Integer.toString(P1.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
-                                            
                                             CheckStatus();
                                             can_Send=true;
-                                            
                                         }
-                                        
-                                        
                                     }
-                                    
-                                    
-                                    
-                                    
-                                    if(end_move) {
+                                    if(end_move) {//printing the move to the screen
                                         Box=Integer.toString(P1.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
-                                        
-                                        
                                         ChangeTurn();
                                         can_Send=true;
                                     }
-                                    
-                                    
-                                    
                                 }
-                                
                             }
-                            
-                            }
-                        
-                        P1.SetInhand(-1);
-                        
+                        }
+                        P1.SetInhand(-1);//set in hand to neg one because it is not p1's turn
                         repaint();
-                        
-                        if(can_Send&&((Iam_Server||Iam_Client))) {
-                            
+                        if(can_Send&&((Iam_Server||Iam_Client))) {//send the move to the other guy
                             Send_move();
                             //Send_to.resume();
-                            
-                            //          Recv_from.resume();
-                            
+                            //Recv_from.resume();
                         }
-                        
-                        if(GameOver)
+                        if(GameOver)//if we put P2's king in check, game over
                             JOptionPane.showConfirmDialog(null,"Check Mate\n White won the game","Game Over",JOptionPane.PLAIN_MESSAGE);
                         
                     }
@@ -529,9 +437,9 @@ public class MainPanel extends JPanel {
                 //////////////////////////////Black///////////////////////////////////////////
                 //////////////////////////////Black//////////////////////////////////////////////
                 //////////////////////////////Black//////////////////////////////////////////////
+                //This probably does the same thing the white player does
                 else if(P2.GetInhand()!=-1)//white
                 {
-                    
                     if(Iam_Client||local) {
                         newP=P2.getPixelPoint(P2.GetInhand());
                         newP.x/=Divide;
@@ -541,8 +449,6 @@ public class MainPanel extends JPanel {
                         boolean Kingch=false;
                         Point old=P2.returnOldPostion(P2.GetInhand());
                         Point present=P2.returnPostion(P2.GetInhand());
-                        
-                        
                         // set the seen of the solider -black
                         // set the seen of the solider -black
                         // set the seen of the solider -black
@@ -552,14 +458,11 @@ public class MainPanel extends JPanel {
                                 
                                 if(samePostion.x==newP.x&&samePostion.y==newP.y) {
                                     if(P2.setSeentoSiliders(P2.GetInhand(),samePostion)) {
-                                        
                                         break;
                                     }
                                 }
                             }
                         }
-                        
-                        
                         if(!(newP.x== present.x&&newP.y== present.y)/*&&!P2.returncheckKing()*/)
                             if(P2.checkthemove(newP,P2.GetInhand())) {
                             boolean flag=false;
@@ -573,9 +476,6 @@ public class MainPanel extends JPanel {
                                     if(flag)break;
                                 }
                             }
-                            
-                            
-                            
                             for(int i=1;i<=16&&!flag;i++) {
                                 if(P2.GetInhand()!=i) {
                                     if(flag==false) {
@@ -586,12 +486,9 @@ public class MainPanel extends JPanel {
                                             
                                         }
                                     }
-                                    
                                 }
-                                
                                 if(flag)break;
                             }
-                            
                             if(!flag) {
                                 Point kingPostion2=P2.returnPostion(8);
                                 Point myold=new Point();
@@ -603,50 +500,33 @@ public class MainPanel extends JPanel {
                                 boolean kill=false;
                                 boolean end_move=true;
                                 int killed=-1;
-                                
-                                
-                                
                                 for(int k=17;k<33;k++) {
                                     other=P1.returnPostion(k);
                                     if(newP.x==other.x&&newP.y==other.y) {
-                                        
                                         int inHand=P2.GetInhand();
-                                        
-                                        
                                         if(inHand>8&&P2.returnsoliderSeen(inHand)) {
                                             kill=true;
-                                            
                                             other=P1.returnPostion(k);
-                                            
                                             f.x=other.x;
                                             f.y=other.y;
-                                            
-                                            P1.killedPiece(k);
+                                            P1.Killedpiec(k);
                                         } else if(inHand<=8) {
                                             kill=true;
-                                            
                                             other=P1.returnPostion(k);
-                                            
                                             f.x=other.x;
                                             f.y=other.y;
-                                            P1.killedPiece(k);
+                                            P1.Killedpiec(k);
                                         } else {
                                             end_move=false;
                                             P2.changePostion(myold,inHand);
                                         }
-                                        
-                                        
-                                        
                                         killed=k;
                                         break;
-                                        
                                     }
-                                    
                                 }
                                 //boolean kin2=true;
                                 if(end_move)
                                     P2.changePostion(newP,P2.GetInhand());
-                                
                                 P2.checkKing(false);
                                 if(P2.see_king_Check(P1))
                                     // if my king will be in check if i move
@@ -654,84 +534,55 @@ public class MainPanel extends JPanel {
                                 {
                                     P2.changePostion(myold,P2.GetInhand());
                                     P2.checkKing(true);
-                                    
                                     end_move=false;
-                                    
-                                    
                                 }
                                 if(kill&&P2.returncheckKing()) {
-                                    
                                     P1.changePostion(f,killed);
                                 }
-                                
                                 if(P2.returncheckKing()) {
                                     P2.changePostion(myold,P2.GetInhand());
                                 }
-                                
-                                
                                 if(!P2.returncheckKing()) {
                                     if(P1.see_king_Check(P2))
                                         // if my king will be in check if i move
                                         //so i can't move and i will return back to old postion'
                                     {
-                                        
                                         P1.checkKing(true);
                                         end_move=false;
-                                        
-                                        
                                         if(P1.Check_Mate_GameOver(P2)) {
                                             Box=Integer.toString(P2.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
                                             GameOver();
-                                            
                                             can_Send=true;
                                         }
-                                        
                                         else {
                                             Box=Integer.toString(P2.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
                                             CheckStatus();
                                             can_Send=true;
                                         }
                                     }
-                                    
-                                    
                                     if(end_move) {
                                         Box=Integer.toString(P2.GetInhand())+Integer.toString(newP.x)+Integer.toString(newP.y);
                                         ChangeTurn();
                                         can_Send=true;
                                     }
-                                    
                                 }
-                                
                             }
-                            }
+                        }
                         P2.SetInhand(-1);
-                        
                         repaint();
-                        
                         if(can_Send&&((Iam_Server||Iam_Client))) {
-                            
                             //Send_to.resume();
                             Send_move();
                             ///     Recv_from.resume();
-                            
-                            
                         }
                         if(GameOver)
                             JOptionPane.showConfirmDialog(null,"Check Mate\n Black won the game","Game Over",JOptionPane.DEFAULT_OPTION);
-                        
                     }
                 }
             }
-            
         }
-        
-        public void mouseEntered(MouseEvent e) {
-            
-        }
-        
-        public void mouseExited(MouseEvent e) {
-            
-        }
+        public void mouseEntered(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {}
     }
     ////////*---------------Mohamed Sami ------------------*//////////////////
     public boolean BoardgetPostion(int x, int y)
