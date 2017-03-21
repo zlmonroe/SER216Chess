@@ -2,15 +2,13 @@
 
 package MainFrame.ChessFrame.players.Pieces;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.io.IOException;
+import java.awt.*;
 
 
-public class Elephent
+public class Elephant
 {
     
-    /** Creates a new instance of Elephent */
+    /** Creates a new instance of Elephant */
     private int  X,Y;
     private Point pixelPoint=new Point();
     private int pixelX,pixelY;
@@ -18,7 +16,7 @@ public class Elephent
     private pieceIcon PieceIcon;
     private Point p=new Point();
     private Point old=new Point();
-    public Elephent(String NameIcon,int startX,int startY)
+    public Elephant(String NameIcon,int startX,int startY)
     {
         
         PieceIcon=new pieceIcon(NameIcon);
@@ -298,7 +296,7 @@ public class Elephent
     }
     public String Tell_me()
     {
-        return "Elephent= ("+p.x+','+p.y+")";
+        return "Elephant= ("+p.x+','+p.y+")";
     }
     
 }

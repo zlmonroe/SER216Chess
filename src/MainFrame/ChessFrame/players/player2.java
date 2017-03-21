@@ -2,7 +2,7 @@
 
 package MainFrame.ChessFrame.players;
 import MainFrame.ChessFrame.players.Pieces.Castle;
-import MainFrame.ChessFrame.players.Pieces.Elephent;
+import MainFrame.ChessFrame.players.Pieces.Elephant;
 import MainFrame.ChessFrame.players.Pieces.Horse;
 import MainFrame.ChessFrame.players.Pieces.Queen;
 import MainFrame.ChessFrame.players.Pieces.Solider;
@@ -20,8 +20,8 @@ public class player2 implements Enumeration
     public Castle BC2;
     public Horse BH1;
     public Horse BH2;
-    public Elephent BE1;
-    public Elephent BE2;
+    public Elephant BE1;
+    public Elephant BE2;
     public Queen BQ;
     private king BK;
     public Solider[] BS=new Solider[8];
@@ -40,8 +40,8 @@ public class player2 implements Enumeration
         BC2=new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "br.gif",8,1);
         BH1=new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bn.gif",2,1);
         BH2=new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bn.gif",7,1);
-        BE1=new Elephent("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bb.gif",3,1);
-        BE2=new Elephent("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bb.gif",6,1);
+        BE1=new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bb.gif",3,1);
+        BE2=new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bb.gif",6,1);
         BQ=new Queen("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bq.gif",4,1);
         BK=new king("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator+ "bk.gif",5,1);
         int j=1;
@@ -510,18 +510,18 @@ public class player2 implements Enumeration
             System.out.println("I Killed Castle 2");
             return false;
         }
-        else if(!ElephentGenerate_moves(Enemy,BE1))
+        else if(!ElephantGenerate_moves(Enemy,BE1))
         {
             
             inHand=-1;
-            System.out.println("I Killed ELephent2");
+            System.out.println("I Killed Elephant2");
             return false;
         }
-        else if(!ElephentGenerate_moves(Enemy,BE2))
+        else if(!ElephantGenerate_moves(Enemy,BE2))
         {
             
             inHand=-1;
-            System.out.println("I Killed ELephent2");
+            System.out.println("I Killed Elephant2");
             
             return false;
         }
@@ -1044,7 +1044,7 @@ public class player2 implements Enumeration
         return true;
     }
     
-    public  boolean ElephentGenerate_moves(player1 enemy,Elephent BE)
+    public  boolean ElephantGenerate_moves(player1 enemy,Elephant BE)
     {
         boolean somthing_killed=false;
         Point Oldp1=new Point();
