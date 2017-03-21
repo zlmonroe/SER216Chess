@@ -71,7 +71,7 @@ public class NewGameDialog extends JDialog {
         As_server.setEnabled(false);
         As_client.setEnabled(false);
 
-
+        this.ff = ff;
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 

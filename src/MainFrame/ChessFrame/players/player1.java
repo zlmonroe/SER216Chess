@@ -15,8 +15,8 @@ public class player1 {
     public Horse WH1;
     public Horse WH2;
     public Queen WQ;
-    public Elephent WE1;
-    public Elephent WE2;
+    public Elephant WE1;
+    public Elephant WE2;
     public Solider[] WS=new Solider[8];
     public king WK;
     private int inHand=-1;
@@ -34,8 +34,8 @@ public class player1 {
         WC2=new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wr.gif",1,8);
         WH1=new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wn.gif",2,8);
         WH2=new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wn.gif",7,8);
-        WE1=new Elephent("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wb.gif",3,8);
-        WE2=new Elephent("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wb.gif",6,8);
+        WE1=new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wb.gif",3,8);
+        WE2=new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wb.gif",6,8);
         WQ=new Queen("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wq.gif",4,8);
         WK=new king("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator + "wk.gif",5,8);
         int j=1;
@@ -373,11 +373,11 @@ public class player1 {
             
             inHand=-1;
             return false;
-        } else if(!ElephentGenerate_moves(Enemy,WE1)) {
+        } else if(!ElephantGenerate_moves(Enemy,WE1)) {
             
             inHand=-1;
             return false;
-        } else if(!ElephentGenerate_moves(Enemy,WE2)) {
+        } else if(!ElephantGenerate_moves(Enemy,WE2)) {
             
             inHand=-1;
             return false;
@@ -869,7 +869,7 @@ public class player1 {
         return true;
     }
     
-    public  boolean ElephentGenerate_moves(player2 enemy,Elephent WE) {
+    public  boolean ElephantGenerate_moves(player2 enemy,Elephant WE) {
         boolean somthing_killed=false;
         Point Oldp1=new Point();
         Point PlaceCheck=new Point();
