@@ -1,11 +1,8 @@
-
-
 package MainFrame.ChessFrame;
 import MainFrame.ChessMenuBar.Chess_MainMenuBar;
 
 import javax.swing.*;
 import java.awt.*;
-
 
 public class MainFrame extends JFrame {
 
@@ -20,9 +17,9 @@ public class MainFrame extends JFrame {
     public MainFrame() {
 
         Toolpanel=new ToolPanel();
-        statusPanel =new StatusPanel();
+        statusPanel =new StatusPanel();//Finished commenting!!
         Mainpanel=new MainPanel(Toolpanel, statusPanel);
-        Chatpanel=new ChatPanel();
+        Chatpanel=new ChatPanel();//Chat panel has been commented!!
         contentPane=getContentPane();
 
         setTitle("Chess Game");
@@ -61,10 +58,4 @@ public class MainFrame extends JFrame {
         contentPane.add(Mainpanel);
         setTitle("Client player");
     }
-    
-
-    
 }
-
-
-
