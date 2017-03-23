@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
 public class ChatPanel extends JPanel {
 	
     private final mytextArea textArea=new mytextArea(6,20);
-    private final myTextFiled TextFiled=new myTextFiled(10);
+    private final myTextField textField=new myTextField(10);
     private final mybutton Sendbutton=new mybutton();
     private final JScrollPane TextAreaScroll=new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     private Socket chat_socket;
@@ -39,116 +39,114 @@ public class ChatPanel extends JPanel {
     /** Creates a new instance of ChatPanel */
     /*This just specifies how the panel should look and what other components are on it*/
     public ChatPanel() {
+    	//Basic panel stuff
         setSize(200,300);
         setLocation(600,350);
         TextAreaScroll.setSize(180,190);
         TextAreaScroll.setLocation(10,0);
-        
         setLayout(null);
         
         add(TextAreaScroll);//This is a Java class object
-        add(TextFiled);//This is a TextField class they create below
+        add(textField);//This is a TextField class they create below
         add(Sendbutton);//This is a class they create below
         
+        //I don't think this is necessary at all. Deleting it does nothing
         add(TextAreaScroll);
-        add(TextFiled);
+        add(textField);
         add(Sendbutton);
         
+        //Action listener for the send button 
         Sendbutton.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
                 
-                textArea.append("\n"+TextFiled.getText());
-                if(I_am_What) {
+            	//adds whatever was in the text field to the text area
+                textArea.append("\n"+textField.getText());
+                
+                if(I_am_What) {//if it is the server
                     Send_text_server();
-                    TextFiled.setText(null);
-                } else {
+                    textField.setText(null);//clears the text field
+                } else {// if it is the client
                     Send_text_chat();
-                    TextFiled.setText(null);
+                    textField.setText(null);//clears the text field
                 }
                 
             }
         });
         
-        TextFiled.addKeyListener(new KeyListener() {
+        //Action listener for "enter" key
+        textField.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
-                //System.out.println("okdddd  "+e.KEY_PRESSED+"  "+e.VK_PAGE_DOWN);
-                
-                
-                if( e.getKeyChar()=='\n') {
-                    textArea.append("\n"+TextFiled.getText());
-                    
-                    if(I_am_What) {
+            	if( e.getKeyChar()=='\n') {//if the key pressed is te enter key, ie new line, do this
+            		//adds whatever was in the text field to the text area
+                    textArea.append("\n"+textField.getText());
+                    if(I_am_What) {//If it is the server
                         Send_text_server();
-                        TextFiled.setText(null);
-                    } else {
+                        textField.setText(null);
+                    } else {//if it is the client
                         Send_text_chat();
-                        TextFiled.setText(null);
+                        textField.setText(null);
                     }
                     
                 }
             }
+            //useless fncs that are part of the interface
             public void keyReleased(KeyEvent e) {
             }
             public void keyTyped(KeyEvent e) {
             }
         });
-        //add(chatPanelScroll);
     }
+    
     public void start_chat() {
+    	//Basic stuff for the chat panel: Makes all of this stuff usable
         TextAreaScroll.setEnabled(true);
-        TextFiled.setEnabled(true);
+        textField.setEnabled(true);
         Sendbutton.setEnabled(true);
+        //sets this to false because it is the client. This fnc s only called for the client. 
         I_am_What=false;
+        
         try {
             send_socket=new Socket("127.0.0.1",5002);
             in2=new BufferedReader(new InputStreamReader(send_socket.getInputStream()));
             out2=new PrintWriter(send_socket.getOutputStream());
-        } catch (UnknownHostException ex) {
+        } 
+        catch (UnknownHostException ex) {
             ex.printStackTrace();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             ex.printStackTrace();
         }
         client_thread.start();
     }
+    
     public void Send_text_chat() {
-        out2.print(TextFiled.getText());
+        out2.print(textField.getText());
         out2.print("\r\n");
         
         out2.flush();
         
     }
     public void Send_text_server() {
-        out1.print(TextFiled.getText());
+        out1.print(textField.getText());
         out1.print("\r\n");
         out1.flush();
     }
+    
     public void listen_chat() {
-        
         TextAreaScroll.setEnabled(true);
-        TextFiled.setEnabled(true);
+        textField.setEnabled(true);
         Sendbutton.setEnabled(true);
-        
         I_am_What=true;
         try {
-            
             server_chat=new ServerSocket(5002);
-            
             chat_socket=server_chat.accept();
-            
             in1=new BufferedReader(new InputStreamReader( chat_socket.getInputStream()));
-            
             out1=new PrintWriter(chat_socket.getOutputStream());
-            
-            //chat_socket.setSoTimeout(10000);
-            
-            myserv_thread.start();
-            
-            
+            myserv_thread.start(); 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
     }
     
     class client_chat extends Thread {
@@ -210,9 +208,9 @@ class mybutton extends JButton {
 }
 //This is the class they created for the TextFeild. I don't think it is necessary because it doesn't add any new functionality to TextField
 //This field is the one you enter info for the chat box
-class myTextFiled extends JTextField {
+class myTextField extends JTextField {
 	private final JScrollPane TextAreaScroll=new JScrollPane();//I don't think this is necessary
-    myTextFiled(int FiledLength) {
+    myTextField(int FiledLength) {
     	//the following three line can be done outside of the contrustor, I don't think they needed to make this class at all.
         super(FiledLength);
         setSize(180,20);
