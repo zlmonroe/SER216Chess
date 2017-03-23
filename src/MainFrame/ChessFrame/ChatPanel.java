@@ -1,4 +1,3 @@
-
 package MainFrame.ChessFrame;
 
 import javax.swing.*;
@@ -156,13 +155,13 @@ public class ChatPanel extends JPanel {
         public void run() {
             String receive = null;
             while(true) {
-                try {
-                    receive=in2.readLine();
-                } catch (IOException ex) {
+                try {//tries to read the line from the server
+                    receive=in2.readLine();// this returns null if there is nothing
+                } catch (IOException ex) {//ignores any exceptions
                     ex.printStackTrace();
                 }
                 
-                if(receive!=null) {
+                if(receive!=null) {//if it is not null, print this on the test area of the chat panel
                     textArea.append("\n"+"Other: "+receive);
                 }
             }
@@ -172,16 +171,13 @@ public class ChatPanel extends JPanel {
         public void run() {
             String receive = null;
             while(true) {
-                try {
-                    receive=in1.readLine();
+                try {//tries to read the line from the server
+                    receive=in1.readLine();// this returns null if there is nothing
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                
-                if(receive!=null) {
-                    
+                if(receive!=null) {//if it is not null, print this on the test area of the chat panel
                     textArea.append("\n"+"Other: "+receive );
-                    
                 }
             }
         }
@@ -221,7 +217,5 @@ class myTextField extends JTextField {
         
         add(TextAreaScroll);//I don't know why this exists because it doesn't show up
         this.setToolTipText("Write Text Here");//this shows up when you hover over
-        
     }
 }
-
