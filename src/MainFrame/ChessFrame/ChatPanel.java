@@ -107,9 +107,9 @@ public class ChatPanel extends JPanel {
         I_am_What=false;
         
         try {
-            send_socket=new Socket("127.0.0.1",5002);
-            in2=new BufferedReader(new InputStreamReader(send_socket.getInputStream()));
-            out2=new PrintWriter(send_socket.getOutputStream());
+            send_socket = new Socket("127.0.0.1",5002);//IP Address and port hard coded in.  Port and IP that the client will be sending stuff to.
+            in2=new BufferedReader(new InputStreamReader(send_socket.getInputStream())); //buffered reader for input to the client
+            out2=new PrintWriter(send_socket.getOutputStream()); //print writer for output from the client
         } 
         catch (UnknownHostException ex) {
             ex.printStackTrace();
@@ -117,32 +117,35 @@ public class ChatPanel extends JPanel {
         catch (IOException ex) {
             ex.printStackTrace();
         }
-        client_thread.start();
+        //begins the client thread
+        client_thread.start();//i believe that the placement of this outside of the try block allows the client to run even when there is no server
     }
     
     public void Send_text_chat() {
-        out2.print(textField.getText());
-        out2.print("\r\n");
-        
-        out2.flush();
-        
+        out2.print(textField.getText()); //sends the info in the text field to the server
+        out2.print("\r\n");//idk
+        out2.flush();//clears the output stream
     }
+    
     public void Send_text_server() {
-        out1.print(textField.getText());
-        out1.print("\r\n");
-        out1.flush();
+        out1.print(textField.getText()); //sends the info in the text field to the client
+        out1.print("\r\n");//idk
+        out1.flush();//clears the output stream
     }
     
     public void listen_chat() {
+    	//Basic stuff for the chat panel: Makes all of this stuff usable
         TextAreaScroll.setEnabled(true);
         textField.setEnabled(true);
         Sendbutton.setEnabled(true);
+        //sets this to false because it is the server. This fnc s only called for the server.
         I_am_What=true;
         try {
-            server_chat=new ServerSocket(5002);
-            chat_socket=server_chat.accept();
-            in1=new BufferedReader(new InputStreamReader( chat_socket.getInputStream()));
-            out1=new PrintWriter(chat_socket.getOutputStream());
+            server_chat=new ServerSocket(5002);//This is the port that the server will be expecting input from
+            chat_socket=server_chat.accept();//Client socket ffrom the server's perspective
+            in1=new BufferedReader(new InputStreamReader( chat_socket.getInputStream()));//buffered reader for input to the client
+            out1=new PrintWriter(chat_socket.getOutputStream());//print writer for output from the client
+            //begins the sever thread
             myserv_thread.start(); 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -221,3 +224,4 @@ class myTextField extends JTextField {
         
     }
 }
+
