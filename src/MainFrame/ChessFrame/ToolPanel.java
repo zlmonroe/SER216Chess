@@ -1,6 +1,4 @@
-
 package MainFrame.ChessFrame;
-
 
 import MainFrame.ChessFrame.ThreadTimer.ThreadTimer;
 import java.awt.Color;
@@ -13,46 +11,26 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-
-
 public class ToolPanel extends JPanel {
-    /** Creates a new instance of ToolPanel */
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        //        Graphics2D g2 = (Graphics2D)g;
-        
-        // draw a rectangle
-        
-       /* Ellipse2D start= new Ellipse2D.Double(100, 34, 30, 30);
-        Ellipse2D stop= new Ellipse2D.Double(100, 234, 30, 30);
-        g2.setColor(Color.RED.darker());
-        g2.fill(start);
-        g2.setColor(Color.GREEN.darker());
-        g2.fill(stop);
-        
-        Ellipse2D surr1= new Ellipse2D.Double(100, 34, 30, 30);
-        Ellipse2D surr2= new Ellipse2D.Double(100, 234, 30, 30);
-        
-        g2.setColor(Color.BLACK.brighter());
-        
-        
-        g2.draw(surr1);
-        g2.draw(surr2);*/
-        
-        
-        
-        
-    }
-    
-    
+	
+    private final JTextField JLturn1=new JTextField(" P2  Turn ");
+    private final JTextField JLturn2=new JTextField(" P1  Turn ");
+    private final JTextField JLwhite=new JTextField("  White ");
+    private final JTextField JLblack=new JTextField("  Black ");
+    private final myHistoryList HistoryList=new myHistoryList();
+    private final short number_of_turn=1;
+    private final JScrollPane HistoryScroll=new JScrollPane(HistoryList,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    private final JLabel Screen1=new JLabel();
+    private final JLabel  Screen2=new JLabel();
+    private final JLabel TimDesc1=new JLabel(" Timer 1");
+    private final JLabel TimDesc2=new JLabel(" Timer 2");
+    private ThreadTimer Timer1;
+    private ThreadTimer Timer2;
     
     public ToolPanel() {
         setSize(200,350);
         setLocation(600,0);
         setLayout(null);
-        
-        
         
         JLturn1.setSize(60,25);
         JLturn1.setLocation(20,10);
@@ -99,14 +77,8 @@ public class ToolPanel extends JPanel {
         HistoryScroll.setSize(150,150);
         HistoryScroll.setLocation(20,70);
         add(HistoryScroll);
-        
-        
-        
-        
     }
     public  void setturn() {
-        
-        
     }
     public void add_to_History(Object newItem) {
         HistoryList.addElemen_tolist(newItem);
@@ -123,20 +95,6 @@ public class ToolPanel extends JPanel {
         Timer1.stop();
         Timer2.stop();
     }
-    
-    private final JTextField JLturn1=new JTextField(" P2  Turn ");
-    private final JTextField JLturn2=new JTextField(" P1  Turn ");
-    private final JTextField JLwhite=new JTextField("  White ");
-    private final JTextField JLblack=new JTextField("  Black ");
-    private final myHistoryList HistoryList=new myHistoryList();
-    private final short number_of_turn=1;
-    private final JScrollPane HistoryScroll=new JScrollPane(HistoryList,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-    private final JLabel Screen1=new JLabel();
-    private final JLabel  Screen2=new JLabel();
-    private final JLabel TimDesc1=new JLabel(" Timer 1");
-    private final JLabel TimDesc2=new JLabel(" Timer 2");
-    private ThreadTimer Timer1;
-    private ThreadTimer Timer2;
     
     public void start_Again() {
         if(Timer1!=null) {
@@ -156,16 +114,32 @@ public class ToolPanel extends JPanel {
         
     }
     
-    
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        /*Graphics2D g2 = (Graphics2D)g;
+        draw a rectangle
+        Ellipse2D start= new Ellipse2D.Double(100, 34, 30, 30);
+        Ellipse2D stop= new Ellipse2D.Double(100, 234, 30, 30);
+        g2.setColor(Color.RED.darker());
+        g2.fill(start);
+        g2.setColor(Color.GREEN.darker());
+        g2.fill(stop);
+        
+        Ellipse2D surr1= new Ellipse2D.Double(100, 34, 30, 30);
+        Ellipse2D surr2= new Ellipse2D.Double(100, 234, 30, 30);
+        
+        g2.setColor(Color.BLACK.brighter());
+        g2.draw(surr1);
+        g2.draw(surr2);*/
+    }
 }
 
 class myHistoryList extends JList {
     myHistoryList() {
-        
         this.setBackground(Color.ORANGE);
         setModel(listModel);
         listModel.addElement("Player: New Moves");
-        
     }
     public void clean_list() {
         listModel.clear();
