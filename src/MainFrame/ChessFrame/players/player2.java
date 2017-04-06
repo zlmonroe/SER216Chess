@@ -2,12 +2,8 @@
 
 package MainFrame.ChessFrame.players;
 
-import MainFrame.ChessFrame.players.Pieces.Castle;
-import MainFrame.ChessFrame.players.Pieces.Elephant;
-import MainFrame.ChessFrame.players.Pieces.Horse;
-import MainFrame.ChessFrame.players.Pieces.Queen;
-import MainFrame.ChessFrame.players.Pieces.Solider;
-import MainFrame.ChessFrame.players.Pieces.king;
+import MainFrame.ChessFrame.players.Pieces.*;
+import MainFrame.ChessFrame.players.Pieces.Bishop;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -15,15 +11,15 @@ import java.util.Enumeration;
 
 
 public class player2 implements Enumeration {
-    public Castle BC1;
-    public Castle BC2;
-    public Horse BH1;
-    public Horse BH2;
-    public Elephant BE1;
-    public Elephant BE2;
+    public Rook BC1;
+    public Rook BC2;
+    public Knight BH1;
+    public Knight BH2;
+    public Bishop BE1;
+    public Bishop BE2;
     public Queen BQ;
-    private king BK;
-    public Solider[] BS = new Solider[8];
+    private King BK;
+    public Pawn[] BS = new Pawn[8];
     private int choosenOne;
     private int inHand = -1;
     private boolean kingischeck = false;
@@ -36,18 +32,18 @@ public class player2 implements Enumeration {
      * Creates a new instance of player2
      */
     public player2() {
-        String fileSeparator = new String(System.getProperty("file.separator"));
-        BC1 = new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "br.gif", 1, 1);
-        BC2 = new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "br.gif", 8, 1);
-        BH1 = new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bn.gif", 2, 1);
-        BH2 = new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bn.gif", 7, 1);
-        BE1 = new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bb.gif", 3, 1);
-        BE2 = new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bb.gif", 6, 1);
+        String fileSeparator = System.getProperty("file.separator");
+        BC1 = new Rook("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "br.gif", 1, 1);
+        BC2 = new Rook("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "br.gif", 8, 1);
+        BH1 = new Knight("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bn.gif", 2, 1);
+        BH2 = new Knight("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bn.gif", 7, 1);
+        BE1 = new Bishop("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bb.gif", 3, 1);
+        BE2 = new Bishop("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bb.gif", 6, 1);
         BQ = new Queen("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bq.gif", 4, 1);
-        BK = new king("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bk.gif", 5, 1);
+        BK = new King("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bk.gif", 5, 1);
         int j = 1;
         for (int i = 0; i <= 7; i++, j++) {
-            BS[i] = new Solider("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bp.gif", j, 2);
+            BS[i] = new Pawn("src" + fileSeparator + "Icons" + fileSeparator + "Player2Icons" + fileSeparator + "bp.gif", j, 2);
         }
     }
 
@@ -726,7 +722,7 @@ public class player2 implements Enumeration {
 
                 }
             }
-            //   if(stillIn_Check){ return true;}//Here Means White king is in check !!!
+            //   if(stillIn_Check){ return true;}//Here Means White King is in check !!!
             if (i == 32) {
 
                 return false;
@@ -748,13 +744,13 @@ public class player2 implements Enumeration {
         } else if (!CastleGenerate_moves(Enemy, BC1)) {
 
             inHand = -1;
-            System.out.println("I Killed Castle 2");
+            System.out.println("I Killed Rook 2");
 
             return false;
         } else if (!CastleGenerate_moves(Enemy, BC2)) {
 
             inHand = -1;
-            System.out.println("I Killed Castle 2");
+            System.out.println("I Killed Rook 2");
             return false;
         } else if (!ElephantGenerate_moves(Enemy, BE1)) {
 
@@ -770,12 +766,12 @@ public class player2 implements Enumeration {
         } else if (!HosreGenerate_moves(Enemy, BH1)) {
 
             inHand = -1;
-            System.out.println("I Killed Horse 2");
+            System.out.println("I Killed Knight 2");
             return false;
         } else if (!HosreGenerate_moves(Enemy, BH2)) {
 
             inHand = -1;
-            System.out.println("I Killed Horse 2");
+            System.out.println("I Killed Knight 2");
             return false;
         } else if (!QueenGenerate_moves(Enemy)) {
 
@@ -790,7 +786,7 @@ public class player2 implements Enumeration {
 
                 inHand = -1;
 
-                System.out.println("I Killed Solider 2");
+                System.out.println("I Killed Pawn 2");
 
                 return false;
             }
@@ -1104,7 +1100,7 @@ public class player2 implements Enumeration {
 
     }
 
-    public boolean CastleGenerate_moves(player1 enemy, Castle BC) {
+    public boolean CastleGenerate_moves(player1 enemy, Rook BC) {
         boolean somthing_killed = false;
         Point Oldp1 = new Point();
 
@@ -1203,7 +1199,7 @@ public class player2 implements Enumeration {
         return true;
     }
 
-    public boolean ElephantGenerate_moves(player1 enemy, Elephant BE) {
+    public boolean ElephantGenerate_moves(player1 enemy, Bishop BE) {
         boolean somthing_killed = false;
         Point Oldp1 = new Point();
         Point PlaceCheck = new Point();
@@ -1291,7 +1287,7 @@ public class player2 implements Enumeration {
         return true;
     }
 
-    public boolean HosreGenerate_moves(player1 enemy, Horse BH) {
+    public boolean HosreGenerate_moves(player1 enemy, Knight BH) {
         Point oldp1 = new Point();
         boolean somthing_killed = false;
         oldp1 = BH.returnPostion();
@@ -1670,7 +1666,7 @@ public class player2 implements Enumeration {
 
     }
 
-    public boolean SoliderGenerate_moves(player1 enemy, Solider Sold) {
+    public boolean SoliderGenerate_moves(player1 enemy, Pawn Sold) {
         Point Oldp1 = new Point();
         Oldp1 = Sold.returnPostion();
         Point PlaceCheck = new Point();

@@ -7,10 +7,10 @@ import java.awt.Point;
 import java.io.IOException;
 
 
-public class king {
+public class King {
 
     /**
-     * Creates a new instance of king
+     * Creates a new instance of King
      */
     private int X, Y;
     private Point pixelPoint = new Point();
@@ -20,7 +20,7 @@ public class king {
     private Point old = new Point();
     private Point p = new Point();
 
-    public king(String NameIcon, int startX, int startY) {
+    public King(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
 
@@ -100,7 +100,7 @@ public class king {
 
     public boolean Inthispostion(int x, int y) {
         if (p.x == x && p.y == y)
-            return true;//cant kill the king anymore;
+            return true;//cant kill the King anymore;
         return false;
     }
 

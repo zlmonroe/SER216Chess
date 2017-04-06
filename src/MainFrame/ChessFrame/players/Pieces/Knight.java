@@ -2,14 +2,12 @@
 
 package MainFrame.ChessFrame.players.Pieces;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.io.IOException;
+import java.awt.*;
 
-public class Horse {
+public class Knight {
 
     /**
-     * Creates a new instance of Horse
+     * Creates a new instance of Knight
      */
     private int X, Y;
     private Point pixelPoint = new Point();
@@ -20,7 +18,7 @@ public class Horse {
     private pieceIcon PieceIcon;
     private Point p = new Point();
 
-    public Horse(String NameIcon, int startX, int startY) {
+    public Knight(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
 
@@ -120,6 +118,6 @@ public class Horse {
     }
 
     public String Tell_me() {
-        return "Horse= (" + p.x + ',' + p.y + ")";
+        return "Knight= (" + p.x + ',' + p.y + ")";
     }
 }

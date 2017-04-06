@@ -12,15 +12,15 @@ public class player1 {
     /**
      * Creates a new instance of player1
      */
-    public Castle WC1;
-    public Castle WC2;
-    public Horse WH1;
-    public Horse WH2;
+    public Rook WC1;
+    public Rook WC2;
+    public Knight WH1;
+    public Knight WH2;
     public Queen WQ;
-    public Elephant WE1;
-    public Elephant WE2;
-    public Solider[] WS = new Solider[8];
-    public king WK;
+    public Bishop WE1;
+    public Bishop WE2;
+    public Pawn[] WS = new Pawn[8];
+    public King WK;
     private int inHand = -1;
     private boolean kingischeck = false;
     private int choosenOne;
@@ -31,17 +31,17 @@ public class player1 {
 
     public player1() {
         String fileSeparator = System.getProperty("file.separator");
-        WC1 = new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wr.gif", 8, 8);
-        WC2 = new Castle("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wr.gif", 1, 8);
-        WH1 = new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wn.gif", 2, 8);
-        WH2 = new Horse("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wn.gif", 7, 8);
-        WE1 = new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wb.gif", 3, 8);
-        WE2 = new Elephant("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wb.gif", 6, 8);
+        WC1 = new Rook("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wr.gif", 8, 8);
+        WC2 = new Rook("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wr.gif", 1, 8);
+        WH1 = new Knight("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wn.gif", 2, 8);
+        WH2 = new Knight("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wn.gif", 7, 8);
+        WE1 = new Bishop("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wb.gif", 3, 8);
+        WE2 = new Bishop("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wb.gif", 6, 8);
         WQ = new Queen("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wq.gif", 4, 8);
-        WK = new king("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wk.gif", 5, 8);
+        WK = new King("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wk.gif", 5, 8);
         int j = 1;
         for (int i = 0; i <= 7; i++, j++) {
-            WS[i] = new Solider("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wp.gif", j, 7);
+            WS[i] = new Pawn("src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" + fileSeparator + "wp.gif", j, 7);
         }
     }
 
@@ -663,7 +663,7 @@ public class player1 {
             if (!SoliderGenerate_moves(Enemy, WS[i])) {
 
                 inHand = -1;
-                System.out.println("I Killed Solider 1");
+                System.out.println("I Killed Pawn 1");
                 return false;
             }
         }
@@ -714,7 +714,7 @@ public class player1 {
                     break;
                 }
             }
-            //   if(stillIn_Check){ return true;}//Here Means White king is in check !!!
+            //   if(stillIn_Check){ return true;}//Here Means White King is in check !!!
             if (i == 16) {
                 return false;
             }
@@ -1004,7 +1004,7 @@ public class player1 {
         return true;
     }
 
-    public boolean CastleGenerate_moves(player2 enemy, Castle WC) {
+    public boolean CastleGenerate_moves(player2 enemy, Rook WC) {
         boolean somthing_killed = false;
         Point Oldp1 = new Point();
 
@@ -1098,7 +1098,7 @@ public class player1 {
         return true;
     }
 
-    public boolean ElephantGenerate_moves(player2 enemy, Elephant WE) {
+    public boolean ElephantGenerate_moves(player2 enemy, Bishop WE) {
         boolean somthing_killed = false;
         Point Oldp1 = new Point();
         Point PlaceCheck = new Point();
@@ -1186,7 +1186,7 @@ public class player1 {
         return true;
     }
 
-    public boolean HosreGenerate_moves(player2 enemy, Horse WH) {
+    public boolean HosreGenerate_moves(player2 enemy, Knight WH) {
         Point oldp1 = new Point();
         boolean somthing_killed = false;
         oldp1 = WH.returnPostion();
@@ -1565,7 +1565,7 @@ public class player1 {
 
     }
 
-    public boolean SoliderGenerate_moves(player2 enemy, Solider Sold) {
+    public boolean SoliderGenerate_moves(player2 enemy, Pawn Sold) {
         Point Oldp1 = new Point();
         Oldp1 = Sold.returnPostion();
         Point PlaceCheck = new Point();

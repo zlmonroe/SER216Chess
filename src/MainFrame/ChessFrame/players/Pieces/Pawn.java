@@ -5,10 +5,10 @@ package MainFrame.ChessFrame.players.Pieces;
 import java.awt.Image;
 import java.awt.Point;
 
-public class Solider {
+public class Pawn {
 
     /**
-     * Creates a new instance of Solider
+     * Creates a new instance of Pawn
      */
     private int X, Y;
     private Point pixelPoint = new Point();
@@ -20,7 +20,7 @@ public class Solider {
     private Point old = new Point();
     private boolean myseen = false;
 
-    public Solider(String NameIcon, int startX, int startY) {
+    public Pawn(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
 

@@ -5,10 +5,10 @@ package MainFrame.ChessFrame.players.Pieces;
 import java.awt.*;
 
 
-public class Elephant {
+public class Bishop {
 
     /**
-     * Creates a new instance of Elephant
+     * Creates a new instance of Bishop
      */
     private int X, Y;
     private Point pixelPoint = new Point();
@@ -18,7 +18,7 @@ public class Elephant {
     private Point p = new Point();
     private Point old = new Point();
 
-    public Elephant(String NameIcon, int startX, int startY) {
+    public Bishop(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
 
@@ -257,7 +257,7 @@ public class Elephant {
     }
 
     public String Tell_me() {
-        return "Elephant= (" + p.x + ',' + p.y + ")";
+        return "Bishop= (" + p.x + ',' + p.y + ")";
     }
 
 }

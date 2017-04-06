@@ -293,8 +293,8 @@ public class MainPanel extends JPanel {
         If I am, set the piece to be killed
         If I am not, my move is invalid and we start again
     Move the piece (temporarily)
-    If my king is in check, move back and start again
-    If my king is not in check, check if my enemy is in checkmate
+    If my King is in check, move back and start again
+    If my King is not in check, check if my enemy is in checkmate
     If my enemy is in check, end the game
     If my enemy is not in check, repaint the screen, send the data to my enemy, and repaint.*/
 
@@ -394,8 +394,8 @@ public class MainPanel extends JPanel {
                                         P1.changePostion(newP, P1.GetInhand());// Here is the mOve ended
 
                                     P1.checkKing(false);//set kingIsInCheck to false
-                                    if (P1.see_king_Check(P2)) {//if our king is in check after the move
-                                        // if my king will be in check if i move
+                                    if (P1.see_king_Check(P2)) {//if our King is in check after the move
+                                        // if my King will be in check if i move
                                         //so i can't move and i will return back to old postion'
                                         P1.changePostion(myold, P1.GetInhand());
                                         P1.checkKing(true);
@@ -407,7 +407,7 @@ public class MainPanel extends JPanel {
 
                                     if (!P1.returncheckKing()) {
                                         if (P2.see_king_Check(P1)) {
-                                            // if my king will be in check if i move
+                                            // if my King will be in check if i move
                                             //so i can't move and i will return back to old position
                                             P2.checkKing(true);
                                             end_move = false;
@@ -436,7 +436,7 @@ public class MainPanel extends JPanel {
                             //Send_to.resume();
                             //Recv_from.resume();
                         }
-                        if (GameOver)//if we put P2's king in check, game over
+                        if (GameOver)//if we put P2's King in check, game over
                             JOptionPane.showConfirmDialog(null, "Check Mate\n White won the game", "Game Over", JOptionPane.PLAIN_MESSAGE);
 
                     }
@@ -537,7 +537,7 @@ public class MainPanel extends JPanel {
                                         P2.changePostion(newP, P2.GetInhand());
                                     P2.checkKing(false);
                                     if (P2.see_king_Check(P1))
-                                    // if my king will be in check if i move
+                                    // if my King will be in check if i move
                                     //so i can't move and i will return back to old postion'
                                     {
                                         P2.changePostion(myold, P2.GetInhand());
@@ -552,7 +552,7 @@ public class MainPanel extends JPanel {
                                     }
                                     if (!P2.returncheckKing()) {
                                         if (P1.see_king_Check(P2))
-                                        // if my king will be in check if i move
+                                        // if my King will be in check if i move
                                         //so i can't move and i will return back to old postion'
                                         {
                                             P1.checkKing(true);
@@ -849,7 +849,7 @@ public class MainPanel extends JPanel {
                         P2.checkKing(false);
 
                         if (P2.see_king_Check(P1))
-                        // if my king will be in check if i move
+                        // if my King will be in check if i move
                         //so i can't move and i will return back to old postion'
                         {
 
@@ -880,7 +880,7 @@ public class MainPanel extends JPanel {
 
                         P1.checkKing(false);
                         if (P1.see_king_Check(P2))
-                        // if my king will be in check if i move
+                        // if my King will be in check if i move
                         //so i can't move and i will return back to old postion'
                         {
 

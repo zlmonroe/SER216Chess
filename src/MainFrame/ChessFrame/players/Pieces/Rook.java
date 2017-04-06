@@ -5,7 +5,7 @@ package MainFrame.ChessFrame.players.Pieces;
 import java.awt.*;
 
 
-public class Castle {
+public class Rook {
 
     private int X, Y;
     private int pixelX, pixelY;
@@ -15,7 +15,7 @@ public class Castle {
     private Point p = new Point();
     private Point old = new Point();
 
-    public Castle(String NameIcon, int startX, int startY) {
+    public Rook(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
 
@@ -214,6 +214,6 @@ public class Castle {
     }
 
     public String Tell_me() {
-        return "Castle= (" + p.x + ',' + p.y + ")";
+        return "Rook= (" + p.x + ',' + p.y + ")";
     }
 }
