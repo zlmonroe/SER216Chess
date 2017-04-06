@@ -86,18 +86,6 @@ public class player {
     }
 
 
-    public boolean pieceAlreadyThere(Point newP) {
-        Point samePosition;
-        for(Piece myPiece : this.pieces) {
-            samePosition = myPiece.getPixelPoint();
-            if (newP.x == samePosition.x && newP.y == samePosition.y) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     public boolean killProtectKing(Point movingTo) {
         Point kingPos = king.returnPosition();
 
@@ -112,7 +100,7 @@ public class player {
         return false;
     }
 
-    public boolean Piece_already_there(Point newP) {
+    public boolean pieceAlreadyThere(Point newP) {
         Point samePostion;
         for (Piece piece : this.pieces) {
             //Check if there is another one of my pieces in the new Point

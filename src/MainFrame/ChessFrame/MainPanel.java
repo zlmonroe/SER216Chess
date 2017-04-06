@@ -316,7 +316,7 @@ public class MainPanel extends JPanel {
                                     if(flag==true)break;//Means  there is a Pice in the Way
                                 }
                             }
-                            if(!flag&&P1.Piece_already_there(newP)){ //Pice_already_there checks if a piecce of the sme color is thee
+                            if(!flag&&P1.pieceAlreadyThere(newP)){ //Pice_already_there checks if a piecce of the sme color is thee
                                 //(if flag =false this means "The pice able to MOVE as logic""
                                 // So We Check If the New Place Make  a Check To Black King !!!
                                 boolean kin2=true;
