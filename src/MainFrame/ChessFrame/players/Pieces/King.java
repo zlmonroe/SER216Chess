@@ -2,9 +2,7 @@
 
 package MainFrame.ChessFrame.players.Pieces;
 
-import java.awt.Image;
-import java.awt.Point;
-import java.io.IOException;
+import java.awt.*;
 
 
 public class King {
@@ -34,7 +32,7 @@ public class King {
         return PieceIcon.returnPieceIcon();
     }
 
-    public Point returnPostion() {
+    public Point returnPosition() {
         return (Point) p.clone();
     }
 
@@ -56,7 +54,7 @@ public class King {
         return pixelY;
     }
 
-    public Point getpixelPoint() {
+    public Point getPixelPoint() {
         return pixelPoint;
     }
 
@@ -77,14 +75,14 @@ public class King {
         Y = p.y;
     }
 
-    public void toOld(Point Old) {
+    public void toOld(Point old) {
 
-        p.x = Old.x;
-        p.y = Old.y;
+        p.x = old.x;
+        p.y = old.y;
 
     }
 
-    public Point returnOld() {
+    public Point getOld() {
         return old;
     }
 
@@ -98,7 +96,7 @@ public class King {
         p.y = Y;
     }
 
-    public boolean Inthispostion(int x, int y) {
+    public boolean inThisPosition(int x, int y) {
         if (p.x == x && p.y == y)
             return true;//cant kill the King anymore;
         return false;
@@ -125,6 +123,7 @@ public class King {
     }
 
     public Point GeneratePossible_Moves() {
+        /* Not implemented */
         return new Point();
     }
 

@@ -69,7 +69,7 @@ public class player2 implements Enumeration {
             case 7:
                 return BQ.returnPostion();
             case 8:
-                return BK.returnPostion();
+                return BK.returnPosition();
             case 9:
                 return BS[0].returnPostion();
             case 10:
@@ -86,9 +86,10 @@ public class player2 implements Enumeration {
                 return BS[6].returnPostion();
             case 16:
                 return BS[7].returnPostion();
+            default:
+                return new Point(-1, -1);
 
         }
-        return new Point(-1, -1);
 
     }
 
@@ -110,7 +111,7 @@ public class player2 implements Enumeration {
             case 7:
                 return BQ.returnOld();
             case 8:
-                return BK.returnOld();
+                return BK.getOld();
             case 9:
                 return BS[0].returnOld();
             case 10:
@@ -127,9 +128,9 @@ public class player2 implements Enumeration {
                 return BS[6].returnOld();
             case 16:
                 return BS[7].returnOld();
-
+            default:
+                return new Point(-1, -1);
         }
-        return new Point(-1, -1);
 
     }
 
@@ -167,9 +168,10 @@ public class player2 implements Enumeration {
                 return BS[6].returnPieceImage();
             case 16:
                 return BS[7].returnPieceImage();
+            default:
+                return null;
 
         }
-        return null;
 
     }
 
@@ -355,7 +357,7 @@ public class player2 implements Enumeration {
             case 7:
                 return BQ.getpixelPoint();
             case 8:
-                return BK.getpixelPoint();
+                return BK.getPixelPoint();
             case 9:
                 return BS[0].getpixelPoint();
             case 10:
@@ -372,9 +374,9 @@ public class player2 implements Enumeration {
                 return BS[6].getpixelPoint();
             case 16:
                 return BS[7].getpixelPoint();
-
+            default:
+                return null;
         }
-        return null;
     }
 
     public void changePixel(int newPixelX, int newPixelY, int i) {
@@ -432,7 +434,7 @@ public class player2 implements Enumeration {
         }
     }
 
-    public boolean Killedpiec(int i) {
+    public boolean killedPiece(int i) {
         Point out = new Point(20, 20);
         switch (i) {
             case 1:
@@ -482,11 +484,12 @@ public class player2 implements Enumeration {
             case 16:
                 BS[7].setPoint(out);
                 return true;
+            default:
+                return false;
         }
-        return false;
     }
 
-    public boolean checkthemove(Point newP, int i) {
+    public boolean checkTheMove(Point newP, int i) {
         choosenOne = i;
         switch (choosenOne) {
 
@@ -522,8 +525,9 @@ public class player2 implements Enumeration {
                 return BS[6].Canmove(newP.x, newP.y, Color);
             case 16:
                 return BS[7].Canmove(newP.x, newP.y, Color);
+            default:
+                return false;
         }
-        return false;
     }
 
     public boolean setSeentoSiliders(int i, Point P) {
@@ -545,12 +549,13 @@ public class player2 implements Enumeration {
                 return BS[6].setSeenbychecking(P, "black");
             case 16:
                 return BS[7].setSeenbychecking(P, "black");
+            default:
+                return false;
         }
-        return false;
 
     }
 
-    public boolean returnsoliderSeen(int i) {
+    public boolean returnSoliderSeen(int i) {
         switch (i) {
 
             case 9:
@@ -569,11 +574,12 @@ public class player2 implements Enumeration {
                 return BS[6].returnMyseen();
             case 16:
                 return BS[7].returnMyseen();
+            default:
+                return false;
         }
-        return false;
     }
 
-    public boolean checktheWay(Point newP, Point postionFromOthers, int i) {
+    public boolean checkTheWay(Point newP, Point postionFromOthers, int i) {
         switch (i) {
             case 1:
                 return BC1.PieceInMYway(newP.x, newP.y, postionFromOthers);
@@ -599,16 +605,14 @@ public class player2 implements Enumeration {
                 return BS[5].PieceInMYway(newP.x, newP.y, postionFromOthers, Color);
             case 15:
                 return BS[6].PieceInMYway(newP.x, newP.y, postionFromOthers, Color);
-            case 16: {
+            case 16:
                 return BS[7].PieceInMYway(newP.x, newP.y, postionFromOthers, Color);
-            }
-
-
+            default:
+                return false;
         }
-        return false;
     }
 
-    public boolean checKing(Point p1, Point p2, int i) {
+    public boolean checkKing(Point p1, Point p2, int i) {
         switch (i) {
 
             case 1:
@@ -642,23 +646,24 @@ public class player2 implements Enumeration {
                 return BS[6].Canmove(p1.x, p1.y, Color);
             case 16:
                 return BS[7].Canmove(p1.x, p1.y, Color);
+            default:
+                return false;
         }
-        return false;
     }
 
     public int returnChosen() {
         return choosenOne;
     }
 
-    public void SetInhand(int i) {
+    public void setInHand(int i) {
         inHand = i;
     }
 
-    public int GetInhand() {
+    public int petInHand() {
         return inHand;
     }
 
-    public boolean CanMove(int x, int y) {
+    public boolean canMove(int x, int y) {
         return true;
     }
 
@@ -666,50 +671,38 @@ public class player2 implements Enumeration {
         kingischeck = newkingcheck;
     }
 
-    public boolean returncheckKing() {
+    public boolean returnCheckKing() {
         return kingischeck;
     }
 
-    public boolean see_king_Check(player1 White) {
+    public boolean seeKingCheck(player1 White) {
 
-        Point My_King_Postion = BK.returnPostion();
+        Point My_King_Postion = BK.returnPosition();
         boolean flag = false;
-
 
         //////////    Start Checking the King ////////////
         for (int i = 17; i < 33; i++) {
             if (i < 25) {
                 if (White.checkthemove(My_King_Postion, i)) {
-
                     flag = true;
                     for (int j = 1; j < 33; j++) {
-
                         if (j < 17) {
-
                             if (White.checktheWay(My_King_Postion, returnPostion(j), i)) {
                                 //Means there is somting in the Way so can't move'
-
                                 flag = false;
-
-
                             }
                         } else {
 
-                            if (j != 8)
+                            if (j != 8) {
                                 if (White.checktheWay(My_King_Postion, White.returnPostion(j), i)) {
-
                                     flag = false;
                                     //Means there is somting in the Way so can't move'
-
-
                                 }
-
+                            }
                         }
-
                     }
 
                     if (flag) {
-
                         break;
                     }
 
@@ -717,14 +710,11 @@ public class player2 implements Enumeration {
             } else {
                 // For soliders
                 if (White.setSeentoSiliders(i, My_King_Postion)) {
-
                     break;
-
                 }
             }
             //   if(stillIn_Check){ return true;}//Here Means White King is in check !!!
             if (i == 32) {
-
                 return false;
             }
         }
@@ -733,9 +723,7 @@ public class player2 implements Enumeration {
     }
 
     public boolean Check_Mate_GameOver(player1 Enemy) {
-
-
-        if (!KingGenerate_moves(Enemy)) {
+        if (!king_GenerateMoves(Enemy)) {
 
             inHand = -1;
             System.out.println("I Killed King  2");
@@ -758,23 +746,18 @@ public class player2 implements Enumeration {
             System.out.println("I Killed Elephant2");
             return false;
         } else if (!ElephantGenerate_moves(Enemy, BE2)) {
-
             inHand = -1;
             System.out.println("I Killed Elephant2");
-
             return false;
         } else if (!HosreGenerate_moves(Enemy, BH1)) {
-
             inHand = -1;
             System.out.println("I Killed Knight 2");
             return false;
         } else if (!HosreGenerate_moves(Enemy, BH2)) {
-
             inHand = -1;
             System.out.println("I Killed Knight 2");
             return false;
         } else if (!QueenGenerate_moves(Enemy)) {
-
             inHand = -1;
             System.out.println("I Killed Queen 2");
             return false;
@@ -783,69 +766,48 @@ public class player2 implements Enumeration {
         for (int i = 0; i <= 7; i++) {
             inHand = 9 + i;
             if (!SoliderGenerate_moves(Enemy, BS[i])) {
-
                 inHand = -1;
-
                 System.out.println("I Killed Pawn 2");
-
                 return false;
             }
         }
-
         inHand = -1;
         return true;
-
-
     }
 
 
-    public boolean Pice_already_there(Point newP) {
+    public boolean Piece_already_there(Point newP) {
         Point samePostion;
         for (int i = 1; i <= 16; i++) {
-            if (GetInhand() != i)// There is no need to check the inHand pice
+            if (petInHand() != i)// There is no need to check the inHand piece
             {
-
-
-                //Check if there is White Pices in the new Point
+                //Check if there is White Pieces in the new Point
                 //If so we Can't move (Same Color)!!
-
-
                 samePostion = returnPostion(i);
                 if (newP.x == samePostion.x && newP.y == samePostion.y) {
-
                     return false;
-
                 }
             }
         }
-
-
         return true;
     }
 
-    public boolean Pice_already_there_from_enemy(Point newP, player1 enemy) {
+    public boolean pieceAlreadyThereFromEnemy(Point newP, player1 enemy) {
         Point samePostion;
         for (int i = 17; i <= 32; i++) {
-
-
-            //Check if there is White Pices in the new Point
+            //Check if there is White Pieces in the new Point
             //If so we Can't move (Same Color)!!
-
-
             samePostion = enemy.returnPostion(i);
             if (newP.x == samePostion.x && newP.y == samePostion.y) {
-
                 return false;
-
             }
-
         }
 
 
         return true;
     }
 
-    public int Get_Pice_already_there_from_enemy(Point newP, player1 enemy) {
+    public int getPieceAlreadyThereFromEnemy(Point newP, player1 enemy) {
         Point samePostion;
         for (int i = 17; i <= 32; i++) {
             samePostion = enemy.returnPostion(i);
@@ -856,7 +818,7 @@ public class player2 implements Enumeration {
         return -1;
     }
 
-    public boolean KingGenerate_moves(player1 enemy) {
+    public boolean king_GenerateMoves(player1 enemy) {
         boolean somthing_killed = false;
         Point Oldp = new Point();
 
@@ -881,10 +843,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
-
-
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
                     BK.setPoint(Oldp);
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
@@ -892,8 +852,8 @@ public class player2 implements Enumeration {
                     }
                     return false;
                 }
-
         }
+
         BK.setPoint(Oldp);
         if (somthing_killed) {
             enemy.changePostion(other, ate_to_protect);
@@ -909,8 +869,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
 
                     BK.setPoint(Oldp);
                     if (somthing_killed) {
@@ -940,8 +900,8 @@ public class player2 implements Enumeration {
                 somthing_killed = true;
             }
 
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
 
                     BK.setPoint(Oldp);
                     if (somthing_killed) {
@@ -968,8 +928,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
                         somthing_killed = false;
@@ -995,8 +955,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
 
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
@@ -1022,8 +982,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
 
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
@@ -1049,8 +1009,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
                         somthing_killed = false;
@@ -1076,8 +1036,8 @@ public class player2 implements Enumeration {
             if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                 somthing_killed = true;
             }
-            if (Pice_already_there(PlaceCheck))
-                if (!see_king_Check(enemy)) {
+            if (Piece_already_there(PlaceCheck))
+                if (!seeKingCheck(enemy)) {
                     if (somthing_killed) {
                         enemy.changePostion(other, ate_to_protect);
                         somthing_killed = false;
@@ -1133,8 +1093,8 @@ public class player2 implements Enumeration {
                         somthing_killed = true;
                     }
 
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BC.setX(Oldp1.x);
                             BC.setY(Oldp1.y);
 
@@ -1166,8 +1126,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BC.setX(Oldp1.x);
                             BC.setY(Oldp1.y);
 
@@ -1223,8 +1183,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
 
                             if (somthing_killed) {
                                 enemy.changePostion(other, ate_to_protect);
@@ -1255,8 +1215,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             if (somthing_killed) {
                                 enemy.changePostion(other, ate_to_protect);
                                 somthing_killed = false;
@@ -1316,8 +1276,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         BH.setPoint(oldp1);
 
                         if (somthing_killed) {
@@ -1342,8 +1302,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1367,8 +1327,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1391,8 +1351,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1416,8 +1376,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1440,8 +1400,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1464,8 +1424,8 @@ public class player2 implements Enumeration {
                 if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                     somthing_killed = true;
                 }
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1490,8 +1450,8 @@ public class player2 implements Enumeration {
                     somthing_killed = true;
                 }
 
-                if (Pice_already_there(PlaceCheck))
-                    if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (!seeKingCheck(enemy)) {
                         if (somthing_killed) {
                             enemy.changePostion(other, ate_to_protect);
                             somthing_killed = false;
@@ -1535,8 +1495,8 @@ public class player2 implements Enumeration {
                         somthing_killed = true;
                     }
 
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BQ.setPoint(Oldp1);
 
                             if (somthing_killed) {
@@ -1567,8 +1527,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BQ.setPoint(Oldp1);
                             if (somthing_killed) {
                                 enemy.changePostion(other, ate_to_protect);
@@ -1602,8 +1562,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BQ.setX(Oldp1.x);
                             if (somthing_killed) {
                                 enemy.changePostion(other, ate_to_protect);
@@ -1635,8 +1595,8 @@ public class player2 implements Enumeration {
                     if (kill_to_protect_king(enemy, returnPostion(inHand))) {
                         somthing_killed = true;
                     }
-                    if (Pice_already_there(PlaceCheck))
-                        if (!see_king_Check(enemy)) {
+                    if (Piece_already_there(PlaceCheck))
+                        if (!seeKingCheck(enemy)) {
                             BQ.setY(Oldp1.y);
                             if (somthing_killed) {
                                 enemy.changePostion(other, ate_to_protect);
@@ -1680,9 +1640,9 @@ public class player2 implements Enumeration {
 
                 PlaceCheck.y = Oldp1.y + 2;
 
-                if (Pice_already_there(PlaceCheck))
-                    if (Pice_already_there_from_enemy(PlaceCheck, enemy)) {
-                        if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (pieceAlreadyThereFromEnemy(PlaceCheck, enemy)) {
+                        if (!seeKingCheck(enemy)) {
 
                             Sold.setPoint(Oldp1);
                             return false;
@@ -1695,9 +1655,9 @@ public class player2 implements Enumeration {
                 PlaceCheck.y = Oldp1.y + 1;
 
 
-                if (Pice_already_there(PlaceCheck))
-                    if (Pice_already_there_from_enemy(PlaceCheck, enemy)) {
-                        if (!see_king_Check(enemy)) {
+                if (Piece_already_there(PlaceCheck))
+                    if (pieceAlreadyThereFromEnemy(PlaceCheck, enemy)) {
+                        if (!seeKingCheck(enemy)) {
                             Sold.setPoint(Oldp1);
 
                             return false;
@@ -1705,10 +1665,10 @@ public class player2 implements Enumeration {
                     }
             }
 
-            if (Pice_already_there_from_enemy(new Point(Oldp1.x - 1, Oldp1.y + 1), enemy))
+            if (pieceAlreadyThereFromEnemy(new Point(Oldp1.x - 1, Oldp1.y + 1), enemy))
                 if (kill_to_protect_king(enemy, new Point(Oldp1.x - 1, Oldp1.y + 1))) {
 
-                    if (!see_king_Check(enemy)) {
+                    if (!seeKingCheck(enemy)) {
                         enemy.changePostion(other, ate_to_protect);
                         Sold.setPoint(Oldp1);
 
@@ -1717,9 +1677,9 @@ public class player2 implements Enumeration {
                     enemy.changePostion(other, ate_to_protect);
                 }
 
-            if (!Pice_already_there_from_enemy(new Point(Oldp1.x + 1, Oldp1.y + 1), enemy))
+            if (!pieceAlreadyThereFromEnemy(new Point(Oldp1.x + 1, Oldp1.y + 1), enemy))
                 if (kill_to_protect_king(enemy, new Point(Oldp1.x + 1, Oldp1.y + 1))) {
-                    if (!see_king_Check(enemy)) {
+                    if (!seeKingCheck(enemy)) {
                         enemy.changePostion(other, ate_to_protect);
                         Sold.setPoint(Oldp1);
 
@@ -1744,14 +1704,14 @@ public class player2 implements Enumeration {
             if (inHand != i)// check if there is peices in the WAY
             {
                 if (i < 17)
-                    flag = checktheWay(newP, enemy.returnPostion(i), inHand);//Means there is somting in the Way so can't move
+                    flag = checkTheWay(newP, enemy.returnPostion(i), inHand);//Means there is somting in the Way so can't move
                 else {
-                    flag = checktheWay(newP, returnPostion(i), inHand);
+                    flag = checkTheWay(newP, returnPostion(i), inHand);
                 }
 
                 if (flag == true) {
                     return false;
-                }//Means  there is a Pice in the Way
+                }//Means  there is a Piece in the Way
             }
         }
         return true;

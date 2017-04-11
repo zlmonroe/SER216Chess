@@ -14,16 +14,15 @@ public class Pawn {
     private Point pixelPoint = new Point();
     private int pixelX, pixelY;
     private boolean havelife = true;
-    private boolean movedbefore = false;
+    private boolean movedBefore = false;
     private pieceIcon PieceIcon;
     private Point p = new Point();
     private Point old = new Point();
-    private boolean myseen = false;
+    private boolean mySeen = false;
 
     public Pawn(String NameIcon, int startX, int startY) {
 
         PieceIcon = new pieceIcon(NameIcon);
-
 
         X = startX;
         Y = startY;
@@ -50,8 +49,8 @@ public class Pawn {
         Y = p.y = newPoint.y;
         p.x = X;
         p.y = Y;
-        movedbefore = true;
-        myseen = false;
+        movedBefore = true;
+        mySeen = false;
     }
 
     public Point returnOld() {
@@ -106,37 +105,35 @@ public class Pawn {
 
                 return true;
 
-            } else if ((((y - 2 == Y) && (x == (X)))) && !movedbefore) {
+            } else if ((((y - 2 == Y) && (x == (X)))) && !movedBefore) {
 
                 return true;
-            } else if ((y - 1 == Y && x + 1 == (X) || (y - 1 == Y && x - 1 == (X))) && myseen) {
+            } else if ((y - 1 == Y && x + 1 == (X) || (y - 1 == Y && x - 1 == (X))) && mySeen) {
                 return true;
             } else return false;
         } else if (typeColor == "white") {
             if (((y + 1 == Y) && (x == (X))) /*&&!Check_Solider_Sees(x,y)*/) {
                 return true;
-            } else if ((((y + 2 == Y) && (x == (X)))) && !movedbefore) {
+            } else if ((((y + 2 == Y) && (x == (X)))) && !movedBefore) {
                 return true;
-            } else if ((y + 1 == Y && x + 1 == (X) || (y + 1 == Y && x - 1 == (X))) && myseen) {
+            } else if ((y + 1 == Y && x + 1 == (X) || (y + 1 == Y && x - 1 == (X))) && mySeen) {
                 return true;
             } else
                 return false;
         }
         return false;
-
-
     }
 
     public boolean PieceInMYway(int x, int y, Point othersPostion, String typeColor) {
         if (Y - y == 2 || Y - y == -2) {
             if ((typeColor.equals("black"))) {
 
-                if ((((y - 1 == othersPostion.y) && (x == (othersPostion.x)))) && !movedbefore) {
+                if ((((y - 1 == othersPostion.y) && (x == (othersPostion.x)))) && !movedBefore) {
                     return true;
                 } else return false;
             } else if (typeColor.equals("white")) {
 
-                if (((y + 1 == othersPostion.y) && (x == (othersPostion.x)) && !movedbefore)) {
+                if (((y + 1 == othersPostion.y) && (x == (othersPostion.x)) && !movedBefore)) {
 
                     return true;
 
@@ -156,24 +153,24 @@ public class Pawn {
     }
 
     public void setMYseen(boolean newBoolean) {
-        myseen = newBoolean;
+        mySeen = newBoolean;
     }
 
     public boolean returnMyseen() {
-        return myseen;
+        return mySeen;
     }
 
     public boolean setSeenbychecking(Point newP, String Color) {
-        myseen = false;
+        mySeen = false;
         if ((Color.equals("black"))) {
             if ((newP.y - 1 == Y && newP.x + 1 == (X) || (newP.y - 1 == Y && newP.x - 1 == (X)))) {
 
-                myseen = true;
+                mySeen = true;
                 return true;
             } else return false;
         } else if (Color.equals("white")) {
             if ((newP.y + 1 == Y && newP.x + 1 == (X) || (newP.y + 1 == Y && newP.x - 1 == (X)))) {
-                myseen = true;
+                mySeen = true;
 
                 return true;
             } else return false;

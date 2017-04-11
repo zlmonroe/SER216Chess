@@ -64,7 +64,7 @@ public class player1 {
             case 23:
                 return WQ.returnPostion();
             case 24:
-                return WK.returnPostion();
+                return WK.returnPosition();
             case 25:
                 return WS[0].returnPostion();
             case 26:
@@ -104,7 +104,7 @@ public class player1 {
             case 23:
                 return WQ.returnOld();
             case 24:
-                return WK.returnOld();
+                return WK.getOld();
             case 25:
                 return WS[0].returnOld();
             case 26:
@@ -352,7 +352,7 @@ public class player1 {
             case 23:
                 return WQ.getpixelPoint();
             case 24:
-                return WK.getpixelPoint();
+                return WK.getPixelPoint();
             case 25:
                 return WS[0].getpixelPoint();
             case 26:
@@ -675,21 +675,21 @@ public class player1 {
 
     public boolean see_king_Check(player2 Black) {
 
-        Point My_King_Postion = WK.returnPostion();
+        Point My_King_Postion = WK.returnPosition();
         boolean flag = false;
 
 
         //////////    Start Checking the King ////////////
         for (int i = 1; i < 17; i++) {
             if (i < 9) {
-                if (Black.checkthemove(My_King_Postion, i)) {
+                if (Black.checkTheMove(My_King_Postion, i)) {
 
                     flag = true;
                     for (int j = 1; j < 33; j++) {
 
                         if (j < 17) {
 
-                            if (Black.checktheWay(My_King_Postion, Black.returnPostion(j), i)) {
+                            if (Black.checkTheWay(My_King_Postion, Black.returnPostion(j), i)) {
                                 //Means there is something in the Way so can't move'
 
                                 flag = false;
@@ -698,7 +698,7 @@ public class player1 {
                             }
                         } else {
                             if (j != 24)
-                                if (Black.checktheWay(My_King_Postion, returnPostion(j), i)) {
+                                if (Black.checkTheWay(My_King_Postion, returnPostion(j), i)) {
                                     flag = false;
                                     //Means there is something in the Way so can't move'
                                 }
@@ -727,9 +727,9 @@ public class player1 {
     public boolean Piece_already_there(Point newP) {
         Point samePostion;
         for (int i = 17; i <= 32; i++) {
-            if (GetInhand() != i)// There is no need to check the inHand pice
+            if (GetInhand() != i)// There is no need to check the inHand piece
             {
-                //Check if there is White Pices in the new Point
+                //Check if there is White Pieces in the new Point
                 //If so we Can't move (Same Color)!!
                 samePostion = returnPostion(i);
                 if (newP.x == samePostion.x && newP.y == samePostion.y) {
@@ -1653,7 +1653,7 @@ public class player1 {
 
                 if (flag == true) {
                     return false;
-                }//Means  there is a Pice in the Way
+                }//Means  there is a Piece in the Way
             }
         }
         return true;
@@ -1670,7 +1670,7 @@ public class player1 {
                 ate_to_protect = i;
 
 
-                enemy.Killedpiec(i);
+                enemy.killedPiece(i);
                 return true;
             }
         }

@@ -22,8 +22,8 @@ public class ChatPanel extends JPanel {
 
     private final mytextArea textArea = new mytextArea(6, 20);
     private final myTextField textField = new myTextField(10);
-    private final mybutton Sendbutton = new mybutton();
-    private final JScrollPane TextAreaScroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    private final mybutton sendButton = new mybutton();
+    private final JScrollPane textAreaScroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     private Socket chat_socket;
     private ServerSocket server_chat;
     private BufferedReader in1;
@@ -33,7 +33,7 @@ public class ChatPanel extends JPanel {
     private serv_chat myserv_thread = new serv_chat();
     private Socket send_socket;
     private client_chat client_thread = new client_chat();
-    private boolean I_am_What;
+    private boolean isServer;
 
     /**
      * Creates a new instance of ChatPanel
@@ -43,28 +43,28 @@ public class ChatPanel extends JPanel {
         //Basic panel stuff
         setSize(200, 300);
         setLocation(600, 350);
-        TextAreaScroll.setSize(180, 190);
-        TextAreaScroll.setLocation(10, 0);
+        textAreaScroll.setSize(180, 190);
+        textAreaScroll.setLocation(10, 0);
         setLayout(null);
 
-        add(TextAreaScroll);//This is a Java class object
+        add(textAreaScroll);//This is a Java class object
         add(textField);//This is a TextField class they create below
-        add(Sendbutton);//This is a class they create below
+        add(sendButton);//This is a class they create below
 
         //I don't think this is necessary at all. Deleting it does nothing
-        add(TextAreaScroll);
+        add(textAreaScroll);
         add(textField);
-        add(Sendbutton);
+        add(sendButton);
 
         //Action listener for the send button 
-        Sendbutton.addActionListener(new ActionListener() {
+        sendButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
 
                 //adds whatever was in the text field to the text area
                 textArea.append("\n" + textField.getText());
 
-                if (I_am_What) {//if it is the server
+                if (isServer) {//if it is the server
                     Send_text_server();
                     textField.setText(null);//clears the text field
                 } else {// if it is the client
@@ -81,7 +81,7 @@ public class ChatPanel extends JPanel {
                 if (e.getKeyChar() == '\n') {//if the key pressed is te enter key, ie new line, do this
                     //adds whatever was in the text field to the text area
                     textArea.append("\n" + textField.getText());
-                    if (I_am_What) {//If it is the server
+                    if (isServer) {//If it is the server
                         Send_text_server();
                         textField.setText(null);
                     } else {//if it is the client
@@ -103,11 +103,11 @@ public class ChatPanel extends JPanel {
 
     public void start_chat() {
         //Basic stuff for the chat panel: Makes all of this stuff usable
-        TextAreaScroll.setEnabled(true);
+        textAreaScroll.setEnabled(true);
         textField.setEnabled(true);
-        Sendbutton.setEnabled(true);
+        sendButton.setEnabled(true);
         //sets this to false because it is the client. This fnc s only called for the client. 
-        I_am_What = false;
+        isServer = false;
 
         try {
             send_socket = new Socket("127.0.0.1", 5002);//IP Address and port hard coded in.  Port and IP that the client will be sending stuff to.
@@ -136,11 +136,11 @@ public class ChatPanel extends JPanel {
 
     public void listen_chat() {
         //Basic stuff for the chat panel: Makes all of this stuff usable
-        TextAreaScroll.setEnabled(true);
+        textAreaScroll.setEnabled(true);
         textField.setEnabled(true);
-        Sendbutton.setEnabled(true);
+        sendButton.setEnabled(true);
         //sets this to false because it is the server. This fnc s only called for the server.
-        I_am_What = true;
+        isServer = true;
         try {
             server_chat = new ServerSocket(5002);//This is the port that the server will be expecting input from
             chat_socket = server_chat.accept();//Client socket ffrom the server's perspective
