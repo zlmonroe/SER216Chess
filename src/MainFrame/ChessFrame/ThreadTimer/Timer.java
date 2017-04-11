@@ -12,22 +12,43 @@ public class Timer {
         length = seconds*1000;
         isRunning = false;
     }
+
+    /**
+     * Method to start/resume timer countdown. Time remaining must be greater than 0 to start.
+     */
     public void start(){
-        if (!isRunning) {
+        if (!isRunning && length>0) {
             startTime = System.currentTimeMillis();
             isRunning = true;
         }
     }
+
+    /**
+     * Method to pause timer countdown
+     */
     public void pause(){
         if(isRunning) {
             length -= (System.currentTimeMillis() - startTime);
             isRunning = false;
         }
     }
+
+    /**
+     * Method to return the remaining time on the timer. will automatically stop timer if time would go negative.
+     * @return Returns time remaining on the timer, will not go negative.
+     */
     public double getTime(){
+        double time;
         if(isRunning)
-            return((int)(length-(System.currentTimeMillis()-startTime))/10/100.0);
+            time = (length-(System.currentTimeMillis()-startTime))/10/100.0;
         else
-            return (int)(length)/10/100.0;
+            time = (length)/10/100.0;
+        if(time<=0){
+            this.pause();
+            length = 0;
+            time = 0;
+        }
+        return time;
     }
 }
+
