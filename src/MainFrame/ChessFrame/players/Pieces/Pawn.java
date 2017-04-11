@@ -52,18 +52,18 @@ public class Pawn extends Piece{
         
         
     }
-    public boolean PieceInMYway(int x, int y,Point othersPostion ,String typeColor ) {
+    public boolean PieceInMYway(int x, int y,Point othersPosition ,String typeColor ) {
         if(Y-y==2||Y-y==-2) {
             if((typeColor.equals("black"))) {
                 
-                if((((y-1==othersPostion.y)&&(x==(othersPostion.x))))&&!movedbefore ) {
+                if((((y-1==othersPosition.y)&&(x==(othersPosition.x))))&&!movedbefore ) {
                     return true;
                 } else  return false;
             }
             
             else  if (typeColor.equals("white")) {
                 
-                if(((y+1==othersPostion.y)&&(x==(othersPostion.x)) &&!movedbefore)) {
+                if(((y+1==othersPosition.y)&&(x==(othersPosition.x)) &&!movedbefore)) {
                     
                     return true;
                     

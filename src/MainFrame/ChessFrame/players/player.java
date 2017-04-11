@@ -10,10 +10,10 @@ import java.awt.*;
 public class player {
 
     //Create all of the pieces for the player
-    private Castle leftCastle;
-    private Castle rightCastle;
-    private Horse leftHorse;
-    private Horse rightHorse;
+    private Rook leftRook;
+    private Rook rightRook;
+    private Knight leftKnight;
+    private Knight rightKnight;
     private Queen queen;
     private Bishop leftBishop;
     private Bishop rightBishop;
@@ -41,10 +41,10 @@ public class player {
         //fill array with newly initialized pieces
         char player = isWhite ? 'w':'b';
         for(int i=0;i<=7;i++) pieces[i] = new Pawn(player+"p.gif", i + 1, 7);
-        pieces[8] = leftCastle  = new Castle(player+"r.gif",8,8);
-        pieces[9] = rightCastle = new Castle(player+"r.gif",1,8);
-        pieces[10] = leftHorse   = new Horse(player+"n.gif",2,8);
-        pieces[11] = rightHorse  = new Horse(player+"n.gif",7,8);
+        pieces[8] = leftRook = new Rook(player+"r.gif",8,8);
+        pieces[9] = rightRook = new Rook(player+"r.gif",1,8);
+        pieces[10] = leftKnight = new Knight(player+"n.gif",2,8);
+        pieces[11] = rightKnight = new Knight(player+"n.gif",7,8);
         pieces[12] = leftBishop  = new Bishop(player+"b.gif",3,8);
         pieces[13] = rightBishop = new Bishop(player+"b.gif",6,8);
         pieces[14] = queen       = new Queen(player+"q.gif",4,8);
@@ -101,12 +101,12 @@ public class player {
     }
 
     public boolean pieceAlreadyThere(Point newP) {
-        Point samePostion;
+        Point samePosition;
         for (Piece piece : this.pieces) {
             //Check if there is another one of my pieces in the new Point
             //If so we Can't move (Same Color)!!
-            samePostion = piece.returnPosition();
-            if (newP.x == samePostion.x && newP.y == samePostion.y) {
+            samePosition = piece.returnPosition();
+            if (newP.x == samePosition.x && newP.y == samePosition.y) {
                 return true;
             }
 
