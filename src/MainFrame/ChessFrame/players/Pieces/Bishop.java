@@ -19,7 +19,7 @@ public class Bishop extends Piece {
         
         else return (x + y) == (X + Y);
     }
-    public boolean PieceInMYway(int x, int y,Point othersPostion) {
+    public boolean PieceInMYway(int x, int y,Point othersPosition) {
         int j=y;
         int i=x;
 
@@ -27,7 +27,7 @@ public class Bishop extends Piece {
             if(x>X&&y>Y) {
                 while((j!=Y+1)&&(i!=X+1)) {
                     j--;i--;
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -38,7 +38,7 @@ public class Bishop extends Piece {
                 while((j!=Y-1)&&(i!=X-1)) {
                     j++;i++;
 
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -49,7 +49,7 @@ public class Bishop extends Piece {
                 while(((j!=Y-1))&&((i!=X+1))) {
                     j++;i--;
                     
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -58,7 +58,7 @@ public class Bishop extends Piece {
             else  if((X>i)&&(Y<j)) {
                 while((j!=X+1)&&(i!=X-1)) {
                     j--;i++;
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -66,7 +66,7 @@ public class Bishop extends Piece {
         }
         return false;
     }
-    public boolean checkKing(int x, int y,Point othersPostion) {
+    public boolean checkKing(int x, int y,Point othersPosition) {
         int j=y;
         int i=x;
         
@@ -75,7 +75,7 @@ public class Bishop extends Piece {
                 while((j!=Y )&&(i!=X )) {
                     j--;i--;
                     
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -85,7 +85,7 @@ public class Bishop extends Piece {
                 while((j!=Y )&&(i!=X )) {
                     j++;i++;
 
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -96,7 +96,7 @@ public class Bishop extends Piece {
                 while(((j!=Y ))&&((i!=X ))) {
                     j++;i--;
 
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -105,7 +105,7 @@ public class Bishop extends Piece {
             else  if((X>i)&&(Y<j)) {
                 while((j!=X )&&(i!=X )) {
                     j--;i++;
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }

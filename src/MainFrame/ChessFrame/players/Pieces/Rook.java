@@ -6,9 +6,9 @@ package MainFrame.ChessFrame.players.Pieces;
 import java.awt.Point;
 
 
-public class Castle extends Piece {
+public class Rook extends Piece {
 
-    public Castle(String NameIcon,int  startX,int startY) {
+    public Rook(String NameIcon, int  startX, int startY) {
         super(NameIcon, startX, startY);
     }
 
@@ -62,7 +62,7 @@ public class Castle extends Piece {
         
         
     }
-    public boolean checkKing(int x, int y,Point othersPostion) {
+    public boolean checkKing(int x, int y,Point othersPosition) {
         int j=y;
         int i=x;
         if(((y==Y)&&(x>(X)||(x<(X))))) {
@@ -71,7 +71,7 @@ public class Castle extends Piece {
                 
                 while( (i!=X )) {
                 i--;
-                if(((othersPostion.y)==j)&&((othersPostion.x==i)))//there Same Color piece
+                if(((othersPosition.y)==j)&&((othersPosition.x==i)))//there Same Color piece
                 {
                     return true;
                 }
@@ -80,7 +80,7 @@ public class Castle extends Piece {
             else  if((X>i)) {
                 while( (i!=X )) {
                     i++;
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -89,7 +89,7 @@ public class Castle extends Piece {
             if((Y<j)) {
                 while((j!=Y )) {
                     j--;
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -97,7 +97,7 @@ public class Castle extends Piece {
                 while((j!=Y )) {
                     j++;
                     
-                    if(((othersPostion.y)==j)&&((othersPostion.x==i))) {
+                    if(((othersPosition.y)==j)&&((othersPosition.x==i))) {
                         return true;
                     }
                 }
@@ -108,6 +108,6 @@ public class Castle extends Piece {
         
     }
     public String Tell_me() {
-        return "Castle= ("+p.x+','+p.y+")";
+        return "Rook= ("+p.x+','+p.y+")";
     }
 }

@@ -218,7 +218,7 @@ public class MainPanel extends JPanel {
         }
         
         /// Puting the pieces
-        Point postionPoint;
+        Point positionPoint;
         int postX;
         int postY;
         Image img;
@@ -226,30 +226,30 @@ public class MainPanel extends JPanel {
         for (int i = 1; i <= 32; i++) {
             if(i<17) {
                 if(P1.pieces[i]==P2.getInHand()) {
-                    postionPoint=P1.pieces[i].getPixelPoint();
+                    positionPoint=P1.pieces[i].getPixelPoint();
                     
                 } else {
-                    postionPoint=P2.pieces[i].returnPosition();   }
+                    positionPoint=P2.pieces[i].returnPosition();   }
                 img=P2.pieces[i].returnPieceImage();
                 
             }
             
             else {
                 if(P2.pieces[i%16]==P2.getInHand()) {
-                    postionPoint=P1.pieces[i].getPixelPoint();
+                    positionPoint=P1.pieces[i].getPixelPoint();
                 } else {
-                    postionPoint=P1.pieces[i%16].returnPosition();
+                    positionPoint=P1.pieces[i%16].returnPosition();
                 }
                 img=P1.pieces[i%16].returnPieceImage();
             }
 
             if(P1.pieces[i]==P1.getInHand())
-                g2.drawImage(img,postionPoint.x-25,postionPoint.y-25,Divide-40,Divide-12 ,this);
+                g2.drawImage(img,positionPoint.x-25,positionPoint.y-25,Divide-40,Divide-12 ,this);
             else if(P2.pieces[i%16]==P2.getInHand())
-                g2.drawImage(img,postionPoint.x-25,postionPoint.y-25,Divide-40,Divide-12 ,this);
+                g2.drawImage(img,positionPoint.x-25,positionPoint.y-25,Divide-40,Divide-12 ,this);
             else {
-                postX=rowToX(postionPoint.x);
-                postY=colToY(postionPoint.y);
+                postX=rowToX(positionPoint.x);
+                postY=colToY(positionPoint.y);
                 g2.drawImage(img,postX+20,postY+4,Divide-40,Divide-12 ,this);
             }
         }
@@ -281,7 +281,7 @@ public class MainPanel extends JPanel {
             
             if(!GameOver) { //if the game is not over
                 Point newP;
-                Point samePostion;
+                Point samePosition;
                 if(P1.getInHand()!=null) { //Get in hand
                 	int otherindex;
                     Point present=P1.getInHand().returnPosition();//this is the original position
@@ -295,9 +295,9 @@ public class MainPanel extends JPanel {
                         // set the seen of the solider -white
                         if(P1.getInHand().getClass().isAssignableFrom(Pawn.class)) {//if the piece in hand is a pawn
                             for(Piece enemyPiece : P2.pieces) {//for every black piece
-                                samePostion=P2.returnPostion(i); //get the black pieces position
-                                if(samePostion.x==newP.x&&samePostion.y==newP.y) {//if the position is the same
-                                    if(P1.setSeentoSiliders(P1.getInHand(),samePostion))//if the pawn is moving diagonally
+                                samePosition=P2.returnPosition(i); //get the black pieces position
+                                if(samePosition.x==newP.x&&samePosition.y==newP.y) {//if the position is the same
+                                    if(P1.setSeentoSiliders(P1.getInHand(),samePosition))//if the pawn is moving diagonally
                                         break;
                                 }
                             }
@@ -308,7 +308,7 @@ public class MainPanel extends JPanel {
                             	for(int i=1;i<=32;i++) {
                             		if(P1.getInHand()!=i){// check if there is pieces in the WAY
                                     if(i<17)
-                                        flag=P1.checktheWay(newP,P2.returnPostion(i),P1.getInHand());//Means there is somting in the Way so can't move
+                                        flag=P1.checktheWay(newP,P2.returnPosition(i),P1.getInHand());//Means there is somting in the Way so can't move
                                     else {
                                         flag=P1.checktheWay(newP,P1.returnPosition(i),P1.getInHand());
                                     }
@@ -332,7 +332,7 @@ public class MainPanel extends JPanel {
                                 ////***  Start Here to Check the King
                                 for(int k=1;k<17;k++) {// for all black pieces
                                     // I have to Check the Place
-                                    other=P2.returnPostion(k); // get the black piecce
+                                    other=P2.returnPosition(k); // get the black piecce
                                     if(newP.x==other.x&&newP.y==other.y) {//checking if a black piece is on the new position
                                         int inHand=P1.getInHand();
                                         if(inHand>24&&P1.returnsoliderSeen(inHand)) {//if this piece is a pawn and it is moving diagonally
@@ -348,7 +348,7 @@ public class MainPanel extends JPanel {
 
                                             P2.Killedpiec(k);
                                         } else {// moves the piece back to the old piece
-                                            P1.changePostion(myold,inHand);
+                                            P1.changePosition(myold,inHand);
                                             end_move=false;
                                             break;
                                         }
@@ -357,18 +357,18 @@ public class MainPanel extends JPanel {
                                     }
                                 }
                                 if(end_move)//If the move is over, move the piece
-                                    P1.changePostion(newP,P1.getInHand());// Here is the mOve ended
+                                    P1.changePosition(newP,P1.getInHand());// Here is the mOve ended
 
                                 P1.checkKing(false);//set kingIsInCheck to false
                                 if(P1.see_king_Check(P2)){//if our King is in check after the move
                                     // if my King will be in check if i move
-                                    //so i can't move and i will return back to old postion'
-                                    P1.changePostion(myold,P1.getInHand());
+                                    //so i can't move and i will return back to old position'
+                                    P1.changePosition(myold,P1.getInHand());
                                     P1.checkKing(true);
                                     end_move=false;
                                 }
                                 if(kill&&P1.returncheckKing()) {//change the position f the killed piece back
-                                    P2.changePostion(f,killed);//f is the point that can be killed
+                                    P2.changePosition(f,killed);//f is the point that can be killed
                                 }
 
                                 if(!P1.returncheckKing()) {
@@ -422,17 +422,17 @@ public class MainPanel extends JPanel {
                         newP.x++;
                         newP.y++;
                         boolean Kingch=false;
-                        Point old=P2.returnOldPostion(P2.getInHand());
-                        Point present=P2.returnPostion(P2.getInHand());
+                        Point old=P2.returnOldPosition(P2.getInHand());
+                        Point present=P2.returnPosition(P2.getInHand());
                         // set the seen of the solider -black
                         // set the seen of the solider -black
                         // set the seen of the solider -black
                         if(P2.getInHand()<17&&P2.getInHand()>8) {
                             for(int i=17;i<33;i++) {
-                                samePostion=P1.returnPosition(i);
+                                samePosition=P1.returnPosition(i);
 
-                                if(samePostion.x==newP.x&&samePostion.y==newP.y) {
-                                    if(P2.setSeentoSiliders(P2.getInHand(),samePostion)) {
+                                if(samePosition.x==newP.x&&samePosition.y==newP.y) {
+                                    if(P2.setSeentoSiliders(P2.getInHand(),samePosition)) {
                                         break;
                                     }
                                 }
@@ -444,7 +444,7 @@ public class MainPanel extends JPanel {
                             for(int i=1;i<=32;i++) {
                                 if(P2.getInHand()!=i) {
                                     if(i<17)
-                                        flag=P2.checktheWay(newP,P2.returnPostion(i),P2.getInHand());
+                                        flag=P2.checktheWay(newP,P2.returnPosition(i),P2.getInHand());
                                     else
                                         flag=P2.checktheWay(newP,P1.returnPosition(i),P2.getInHand());
 
@@ -454,8 +454,8 @@ public class MainPanel extends JPanel {
                             for(int i=1;i<=16&&!flag;i++) {
                                 if(P2.getInHand()!=i) {
                                     if(flag==false) {
-                                        samePostion=P2.returnPostion(i);
-                                        if(newP.x==samePostion.x&&newP.y==samePostion.y) {
+                                        samePosition=P2.returnPosition(i);
+                                        if(newP.x==samePosition.x&&newP.y==samePosition.y) {
                                             flag =true;
                                             break;
 
@@ -465,9 +465,9 @@ public class MainPanel extends JPanel {
                                 if(flag)break;
                             }
                             if(!flag) {
-                                Point kingPostion2=P2.returnPostion(8);
+                                Point kingPosition2=P2.returnPosition(8);
                                 Point myold=new Point();
-                                Point o=P2.returnPostion(P2.getInHand());
+                                Point o=P2.returnPosition(P2.getInHand());
                                 myold.x=o.x;
                                 myold.y=o.y;
                                 Point other=new Point();
@@ -493,7 +493,7 @@ public class MainPanel extends JPanel {
                                             P1.killedPiece(k);
                                         } else {
                                             end_move=false;
-                                            P2.changePostion(myold,inHand);
+                                            P2.changePosition(myold,inHand);
                                         }
                                         killed=k;
                                         break;
@@ -501,26 +501,26 @@ public class MainPanel extends JPanel {
                                 }
                                 //boolean kin2=true;
                                 if(end_move)
-                                    P2.changePostion(newP,P2.getInHand());
+                                    P2.changePosition(newP,P2.getInHand());
                                 P2.checkKing(false);
                                 if(P2.see_king_Check(P1))
                                     // if my King will be in check if i move
-                                    //so i can't move and i will return back to old postion'
+                                    //so i can't move and i will return back to old position'
                                 {
-                                    P2.changePostion(myold,P2.getInHand());
+                                    P2.changePosition(myold,P2.getInHand());
                                     P2.checkKing(true);
                                     end_move=false;
                                 }
                                 if(kill&&P2.returncheckKing()) {
-                                    P1.changePostion(f,killed);
+                                    P1.changePosition(f,killed);
                                 }
                                 if(P2.returncheckKing()) {
-                                    P2.changePostion(myold,P2.getInHand());
+                                    P2.changePosition(myold,P2.getInHand());
                                 }
                                 if(!P2.returncheckKing()) {
                                     if(P1.see_king_Check(P2))
                                         // if my King will be in check if i move
-                                        //so i can't move and i will return back to old postion'
+                                        //so i can't move and i will return back to old position'
                                     {
                                         P1.checkKing(true);
                                         end_move=false;
@@ -560,7 +560,7 @@ public class MainPanel extends JPanel {
         public void mouseExited(MouseEvent e) {}
     }
     ////////*---------------Mohamed Sami ------------------*//////////////////
-    public boolean BoardgetPostion(int x, int y)
+    public boolean BoardgetPosition(int x, int y)
 
 
     {
@@ -588,7 +588,7 @@ public class MainPanel extends JPanel {
                 } else   if(players_turn==2&&P2.getInHand()==-1)//Player 2
                 {
                     for(int i=1;i<=16;i++) {
-                        Point p=P2.returnPostion(i);
+                        Point p=P2.returnPosition(i);
                         if(p.x==newX&&p.y==newY) {
                             P2.SetInhand(i); whenHandleAndPice(x,y);return true;}
                     }
@@ -659,13 +659,13 @@ public class MainPanel extends JPanel {
         
         if(Iam_Server==true||Iam_Client==true&&Game_started) {
             if(Iam_Server&&players_turn==1) {
-                return BoardgetPostion(x,y);
+                return BoardgetPosition(x,y);
             } else if(Iam_Client&&players_turn==2) {
-                return BoardgetPostion(x,y);
+                return BoardgetPosition(x,y);
             } else
                 return false;
         } else {
-            return BoardgetPostion(x,y);
+            return BoardgetPosition(x,y);
         }
         
         
@@ -795,14 +795,14 @@ public class MainPanel extends JPanel {
                         P1.SetInhand(newInHand);
                         players_turn=2;
                         
-                        P1.changePostion(new Point(newX,newY),newInHand);
+                        P1.changePosition(new Point(newX,newY),newInHand);
                         
                         P2.Killedpiec(P1.Get_Piece_already_there_from_enemy(new Point(newX,newY),P2));
                         P2.checkKing(false);
                         
                         if(P2.see_king_Check(P1))
                             // if my King will be in check if i move
-                            //so i can't move and i will return back to old postion'
+                            //so i can't move and i will return back to old position'
                         {
                             
                             P2.checkKing(true);
@@ -825,7 +825,7 @@ public class MainPanel extends JPanel {
                         
                     } else {
                         P2.SetInhand(newInHand);
-                        P2.changePostion(new Point(newX,newY),newInHand);
+                        P2.changePosition(new Point(newX,newY),newInHand);
                         
                         P1.killedPiece(P2.Get_Pice_already_there_from_enemy(new Point(newX,newY),P1));
                         players_turn=1;
@@ -833,7 +833,7 @@ public class MainPanel extends JPanel {
                         P1.checkKing(false);
                         if(P1.see_king_Check(P2))
                             // if my King will be in check if i move
-                            //so i can't move and i will return back to old postion'
+                            //so i can't move and i will return back to old position'
                         {
                             
                             P1.checkKing(true);

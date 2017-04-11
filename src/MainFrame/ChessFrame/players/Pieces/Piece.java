@@ -83,7 +83,7 @@ public abstract class Piece {
         return haveLife;
     }
 
-    public boolean inThisPostion(int x, int y) {
+    public boolean inThisPosition(int x, int y) {
         if(p.x==x&&p.y==y)
             return true;
         return false;

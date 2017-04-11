@@ -19,14 +19,14 @@ public class Queen extends Piece {
             return false;
         }
     }
-    public boolean PieceInMYway(int x, int y, Point othersPostion) {
+    public boolean PieceInMYway(int x, int y, Point othersPosition) {
         int j = y;
         int i = x;
         if (((y == Y) && (x > (X) || (x < (X))))) {
             if ((X < i))
                 while ((i != X + 1)) {
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i)))//there Same Color piece
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i)))//there Same Color piece
                     {
                         return true;
                     }
@@ -34,7 +34,7 @@ public class Queen extends Piece {
             else if ((X > i)) {
                 while ((i != X - 1)) {
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -43,14 +43,14 @@ public class Queen extends Piece {
             if ((Y < j)) {
                 while ((j != Y + 1)) {
                     j--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
             } else if ((Y > j)) {
                 while ((j != Y - 1)) {
                     j++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -60,7 +60,7 @@ public class Queen extends Piece {
                 while ((j != Y + 1) && (i != X + 1)) {
                     j--;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -68,7 +68,7 @@ public class Queen extends Piece {
                 while ((j != Y - 1) && (i != X - 1)) {
                     j++;
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -77,7 +77,7 @@ public class Queen extends Piece {
                 while ((j != Y - 1) && (i != X + 1)) {
                     j++;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -85,7 +85,7 @@ public class Queen extends Piece {
                 while ((j != Y + 1) && (i != X - 1)) {
                     j--;
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -93,14 +93,14 @@ public class Queen extends Piece {
         }
         return false;
     }
-    public boolean checkKing(int x, int y, Point othersPostion) {
+    public boolean checkKing(int x, int y, Point othersPosition) {
         int j = y;
         int i = x;
         if (((y == Y) && (x > (X) || (x < (X))))) {
             if ((X < i))
                 while ((i != X)) {
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i)))//there Same Color piece
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i)))//there Same Color piece
                     {
                         return true;
                     }
@@ -108,7 +108,7 @@ public class Queen extends Piece {
             else if ((X > i)) {
                 while ((i != X)) {
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -117,14 +117,14 @@ public class Queen extends Piece {
             if ((Y < j)) {
                 while ((j != Y)) {
                     j--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
             } else if ((Y > j)) {
                 while ((j != Y)) {
                     j++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -134,7 +134,7 @@ public class Queen extends Piece {
                 while ((j != Y) && (i != X)) {
                     j--;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -142,7 +142,7 @@ public class Queen extends Piece {
                 while ((j != Y) && (i != X)) {
                     j++;
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -151,7 +151,7 @@ public class Queen extends Piece {
                 while ((j != Y) && (i != X)) {
                     j++;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -159,7 +159,7 @@ public class Queen extends Piece {
                 while ((j != Y) && (i != X)) {
                     j--;
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
