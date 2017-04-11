@@ -88,11 +88,11 @@ public class Pawn {
         return Y;
     }
 
-    public Point returnPostion() {
+    public Point returnPosition() {
         return (Point) p.clone();
     }
 
-    public boolean Inthispostion(int x, int y) {
+    public boolean Inthisposition(int x, int y) {
         if (p.x == x && p.y == y)
             return true;
         return false;
@@ -124,16 +124,16 @@ public class Pawn {
         return false;
     }
 
-    public boolean PieceInMYway(int x, int y, Point othersPostion, String typeColor) {
+    public boolean PieceInMYway(int x, int y, Point othersPosition, String typeColor) {
         if (Y - y == 2 || Y - y == -2) {
             if ((typeColor.equals("black"))) {
 
-                if ((((y - 1 == othersPostion.y) && (x == (othersPostion.x)))) && !movedBefore) {
+                if ((((y - 1 == othersPosition.y) && (x == (othersPosition.x)))) && !movedBefore) {
                     return true;
                 } else return false;
             } else if (typeColor.equals("white")) {
 
-                if (((y + 1 == othersPostion.y) && (x == (othersPostion.x)) && !movedBefore)) {
+                if (((y + 1 == othersPosition.y) && (x == (othersPosition.x)) && !movedBefore)) {
 
                     return true;
 

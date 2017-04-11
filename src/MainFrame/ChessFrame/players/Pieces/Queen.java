@@ -34,7 +34,7 @@ public class Queen {
         return PieceIcon.returnPieceIcon();
     }
 
-    public Point returnPostion() {
+    public Point returnPosition() {
         return (Point) p.clone();
     }
 
@@ -95,7 +95,7 @@ public class Queen {
         return havelife;
     }
 
-    public boolean Inthispostion(int x, int y) {
+    public boolean Inthisposition(int x, int y) {
         if (p.x == x && p.y == y)
             return true;
         return false;
@@ -122,14 +122,14 @@ public class Queen {
 
     }
 
-    public boolean PieceInMYway(int x, int y, Point othersPostion) {
+    public boolean PieceInMYway(int x, int y, Point othersPosition) {
         int j = y;
         int i = x;
         if (((y == Y) && (x > (X) || (x < (X))))) {
             if ((X < i))
                 while ((i != X + 1)) {
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i)))//there Same Color piece
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i)))//there Same Color piece
                     {
                         return true;
                     }
@@ -138,7 +138,7 @@ public class Queen {
             else if ((X > i)) {
                 while ((i != X - 1)) {
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -147,7 +147,7 @@ public class Queen {
             if ((Y < j)) {
                 while ((j != Y + 1)) {
                     j--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -155,7 +155,7 @@ public class Queen {
                 while ((j != Y - 1)) {
                     j++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -166,7 +166,7 @@ public class Queen {
                 while ((j != Y + 1) && (i != X + 1)) {
                     j--;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -177,7 +177,7 @@ public class Queen {
                     i++;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -189,7 +189,7 @@ public class Queen {
                     j++;
                     i--;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -200,7 +200,7 @@ public class Queen {
                     j--;
                     i++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -210,14 +210,14 @@ public class Queen {
         return false;
     }
 
-    public boolean checkKing(int x, int y, Point othersPostion) {
+    public boolean checkKing(int x, int y, Point othersPosition) {
         int j = y;
         int i = x;
         if (((y == Y) && (x > (X) || (x < (X))))) {
             if ((X < i))
                 while ((i != X)) {
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i)))//there Same Color piece
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i)))//there Same Color piece
                     {
                         return true;
                     }
@@ -226,7 +226,7 @@ public class Queen {
             else if ((X > i)) {
                 while ((i != X)) {
                     i++;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -235,7 +235,7 @@ public class Queen {
             if ((Y < j)) {
                 while ((j != Y)) {
                     j--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -243,7 +243,7 @@ public class Queen {
                 while ((j != Y)) {
                     j++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -254,7 +254,7 @@ public class Queen {
                 while ((j != Y) && (i != X)) {
                     j--;
                     i--;
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -265,7 +265,7 @@ public class Queen {
                     i++;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -277,7 +277,7 @@ public class Queen {
                     j++;
                     i--;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -288,7 +288,7 @@ public class Queen {
                     j--;
                     i++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }

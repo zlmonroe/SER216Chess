@@ -9,7 +9,7 @@ public class MainFrame extends JFrame {
 
     private final Chess_MainMenuBar MyChessBar;
     public final ToolPanel Toolpanel;
-    private final StatusPanel statusPanel;
+    //private final StatusPanel statusPanel;
 
     private final MainPanel Mainpanel;
     private final ChatPanel Chatpanel;
@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
 
         Toolpanel = new ToolPanel();
-        statusPanel = new StatusPanel();//Finished commenting!!
+        StatusPanel statusPanel = new StatusPanel();//Finished commenting!!
         Mainpanel = new MainPanel(Toolpanel, statusPanel);
         Chatpanel = new ChatPanel();//Chat panel has been commented!!
         contentPane = getContentPane();

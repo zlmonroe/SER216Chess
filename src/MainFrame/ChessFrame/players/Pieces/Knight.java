@@ -28,7 +28,7 @@ public class Knight {
         p.y = Y;
     }
 
-    public Point returnPostion() {
+    public Point returnPosition() {
         return (Point) p.clone();
     }
 
@@ -87,7 +87,7 @@ public class Knight {
         return havelife;
     }
 
-    public boolean Inthispostion(int x, int y) {
+    public boolean Inthisposition(int x, int y) {
         if (p.x == x && p.y == y)
             return true;
         return false;

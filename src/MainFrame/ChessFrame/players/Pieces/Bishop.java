@@ -28,7 +28,7 @@ public class Bishop {
         p.y = Y;
     }
 
-    public Point returnPostion() {
+    public Point returnPosition() {
         return (Point) p.clone();
     }
 
@@ -99,7 +99,7 @@ public class Bishop {
         return havelife;
     }
 
-    public boolean Inthispostion(int x, int y) {
+    public boolean Inthisposition(int x, int y) {
         if (p.x == x && p.y == y)
             return true;
         return false;
@@ -128,7 +128,7 @@ public class Bishop {
 
     }
 
-    public boolean PieceInMYway(int x, int y, Point othersPostion) {
+    public boolean PieceInMYway(int x, int y, Point othersPosition) {
 
         int j = y;
         int i = x;
@@ -140,7 +140,7 @@ public class Bishop {
                     j--;
                     i--;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -151,7 +151,7 @@ public class Bishop {
                     i++;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -165,7 +165,7 @@ public class Bishop {
                     i--;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
 
                         return true;
                     }
@@ -177,7 +177,7 @@ public class Bishop {
                     j--;
                     i++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -190,7 +190,7 @@ public class Bishop {
         return false;
     }
 
-    public boolean checkKing(int x, int y, Point othersPostion) {
+    public boolean checkKing(int x, int y, Point othersPosition) {
 
         int j = y;
         int i = x;
@@ -202,7 +202,7 @@ public class Bishop {
                     j--;
                     i--;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
                 }
@@ -213,7 +213,7 @@ public class Bishop {
                     i++;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
@@ -227,7 +227,7 @@ public class Bishop {
                     i--;
 
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
 
                         return true;
                     }
@@ -239,7 +239,7 @@ public class Bishop {
                     j--;
                     i++;
 
-                    if (((othersPostion.y) == j) && ((othersPostion.x == i))) {
+                    if (((othersPosition.y) == j) && ((othersPosition.x == i))) {
                         return true;
                     }
 
