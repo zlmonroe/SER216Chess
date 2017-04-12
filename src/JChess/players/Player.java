@@ -1,15 +1,14 @@
-package MainFrame.ChessFrame.players;
+package JChess.players;
+
+import JChess.players.Pieces.*;
+import java.awt.*;
 
 /**
  * Created by zachary on 4/4/2017.
  */
+public class Player {
 
-import MainFrame.ChessFrame.players.Pieces.*;
-import java.awt.*;
-
-public class player {
-
-    //Create all of the pieces for the player
+    //Create all of the pieces for the Player
     private Rook leftRook;
     private Rook rightRook;
     private Knight leftKnight;
@@ -22,14 +21,14 @@ public class player {
 
     private boolean isWhite;
     private boolean check;
-    private player enemy;
+    private Player enemy;
     private Piece inHand;
 
     /**
-     * player Constructor
-     * initializes the pieces for the player and gives them their image
+     * Player Constructor
+     * initializes the pieces for the Player and gives them their image
      */
-    public player(player enemy, boolean isWhite) {
+    public Player(Player enemy, boolean isWhite) {
         this.enemy = enemy;
         this.isWhite = isWhite;
         Piece inHand = null;
@@ -40,15 +39,16 @@ public class player {
 
         //fill array with newly initialized pieces
         char player = isWhite ? 'w':'b';
-        for(int i=0;i<=7;i++) pieces[i] = new Pawn(player+"p.gif", i + 1, 7);
-        pieces[8] = leftRook = new Rook(player+"r.gif",8,8);
-        pieces[9] = rightRook = new Rook(player+"r.gif",1,8);
-        pieces[10] = leftKnight = new Knight(player+"n.gif",2,8);
-        pieces[11] = rightKnight = new Knight(player+"n.gif",7,8);
-        pieces[12] = leftBishop  = new Bishop(player+"b.gif",3,8);
-        pieces[13] = rightBishop = new Bishop(player+"b.gif",6,8);
-        pieces[14] = queen       = new Queen(player+"q.gif",4,8);
-        pieces[15] = king        = new King(player+"k.gif",5,8);
+        for(int i=0;i<=7;i++) pieces[i] = new Pawn(player+"p.gif", i, isWhite ? 6:1);
+        int backRow = isWhite ? 7:0;
+        pieces[8] = leftRook = new Rook(player+"r.gif",7,backRow);
+        pieces[9] = rightRook = new Rook(player+"r.gif",0,backRow);
+        pieces[10] = leftKnight = new Knight(player+"n.gif",1,backRow);
+        pieces[11] = rightKnight = new Knight(player+"n.gif",6,backRow);
+        pieces[12] = leftBishop  = new Bishop(player+"b.gif",2,backRow);
+        pieces[13] = rightBishop = new Bishop(player+"b.gif",5,backRow);
+        pieces[14] = queen       = new Queen(player+"q.gif",3,backRow);
+        pieces[15] = king        = new King(player+"k.gif",4,backRow);
     }
 
     public Piece getInHand() {
