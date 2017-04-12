@@ -1,6 +1,6 @@
-package JChess.players;
+package JChess.Game;
 
-import JChess.players.Pieces.*;
+import JChess.Game.Pieces.*;
 import java.awt.*;
 
 /**

@@ -1,6 +1,6 @@
 
 
-package JChess.players.Pieces;
+package JChess.Game.Pieces;
 
 import java.awt.Point;
 import java.util.Objects;
