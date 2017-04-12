@@ -1,6 +1,6 @@
 package JChess.GUI;
 
-import JChess.ThreadTimer.Timer;
+import JChess.Game.ThreadTimer.Timer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

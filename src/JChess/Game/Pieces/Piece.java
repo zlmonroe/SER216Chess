@@ -1,4 +1,4 @@
-package JChess.players.Pieces;
+package JChess.Game.Pieces;
 
 import java.awt.*;
 import java.awt.Image;
@@ -17,7 +17,7 @@ public abstract class Piece {
 
     public Piece(String fileName, int startX,int startY) {
         String fileSeparator = System.getProperty("file.separator");
-        String location = "src" + fileSeparator + "Icons" + fileSeparator + "PlayerIcons" +fileSeparator;
+        String location = "src" + fileSeparator + "Icons" + fileSeparator;
 
         pieceIcon = Toolkit.getDefaultToolkit().getImage(location+fileName);
 

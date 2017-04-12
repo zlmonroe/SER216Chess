@@ -1,5 +1,5 @@
 
-package JChess.players.Pieces;
+package JChess.Game.Pieces;
 import java.awt.Point;
 public class Queen extends Piece {
     public Queen(String NameIcon, int startX, int startY) {
