@@ -1,4 +1,4 @@
-package MainFrame.ChessFrame;
+package JChess.GUI;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -40,7 +40,7 @@ public class ChatPanel extends JPanel {
     public ChatPanel() {
     	//Basic panel stuff
         setSize(200,300);
-        setLocation(600,350);
+        //setLocation(600,350);
         TextAreaScroll.setSize(180,190);
         TextAreaScroll.setLocation(10,0);
         setLayout(null);

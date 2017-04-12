@@ -1,4 +1,4 @@
-package MainFrame.ChessFrame.players.Pieces;
+package JChess.players.Pieces;
 
 import java.awt.*;
 import java.awt.Image;
@@ -10,7 +10,6 @@ import java.awt.Image;
 public abstract class Piece {
     protected int X, Y;
     protected int pixelX, pixelY;
-    protected Point pixelPoint = new Point();
     protected boolean haveLife = true;
     protected Image pieceIcon;
     protected Point p = new Point();
@@ -18,7 +17,7 @@ public abstract class Piece {
 
     public Piece(String fileName, int startX,int startY) {
         String fileSeparator = System.getProperty("file.separator");
-        String location = "src" + fileSeparator + "Icons" + fileSeparator + "Player1Icons" +fileSeparator;
+        String location = "src" + fileSeparator + "Icons" + fileSeparator + "PlayerIcons" +fileSeparator;
 
         pieceIcon = Toolkit.getDefaultToolkit().getImage(location+fileName);
 
@@ -31,13 +30,14 @@ public abstract class Piece {
     public Image returnPieceImage() {
         return pieceIcon;
     }
+
     public int  returnX() {
         X=p.x;
         return X;
     }
     public void setPixels(int newPixelX,int newPixelY) {
-        pixelPoint.x=newPixelX;
-        pixelPoint.y=newPixelY;
+        pixelX = newPixelX;
+        pixelY = newPixelY;
     }
     public int getPixelX() {
         return pixelX;
@@ -45,10 +45,6 @@ public abstract class Piece {
     public int getPixelY() {
         return pixelY;
     }
-    public Point getPixelPoint() {
-        return  pixelPoint;
-    }
-
 
     public int  returnY() {
         Y=p.y;
@@ -84,9 +80,7 @@ public abstract class Piece {
     }
 
     public boolean inThisPosition(int x, int y) {
-        if(p.x==x&&p.y==y)
-            return true;
-        return false;
+        return p.x == x && p.y == y;
     }
 
     public boolean hasMoves(boolean isWhite) {

@@ -1,4 +1,4 @@
-package MainFrame.ChessFrame.players.Pieces;
+package JChess.players.Pieces;
 
 import java.awt.*;
 
@@ -10,14 +10,7 @@ public class Bishop extends Piece {
     }
 
     public boolean canMove(int x, int y, String s) {
-        int j=y;
-        int i=x;
-
-        if((x-y)==(X-Y)) {
-            return true;
-        }
-        
-        else return (x + y) == (X + Y);
+        return (x - y) == (X - Y) || (x + y) == (X + Y);
     }
     public boolean PieceInMYway(int x, int y,Point othersPosition) {
         int j=y;

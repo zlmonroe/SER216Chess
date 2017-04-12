@@ -1,6 +1,6 @@
 
 
-package MainFrame.ChessFrame.players.Pieces;
+package JChess.players.Pieces;
 
 //
 

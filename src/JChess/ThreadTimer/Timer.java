@@ -1,5 +1,5 @@
 
-package MainFrame.ChessFrame.ThreadTimer;
+package JChess.ThreadTimer;
 /**
  * Created by Tim on 4/10/2017.
  */

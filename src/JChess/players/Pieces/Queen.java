@@ -1,5 +1,5 @@
 
-package MainFrame.ChessFrame.players.Pieces;
+package JChess.players.Pieces;
 import java.awt.Point;
 public class Queen extends Piece {
     public Queen(String NameIcon, int startX, int startY) {
@@ -13,11 +13,7 @@ public class Queen extends Piece {
             return true;
         } else if ((x - y) == (X - Y)) {
             return true;
-        } else if ((x + y) == (X + Y)) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return (x + y) == (X + Y);
     }
     public boolean PieceInMYway(int x, int y, Point othersPosition) {
         int j = y;

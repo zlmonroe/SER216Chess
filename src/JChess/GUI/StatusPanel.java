@@ -1,5 +1,5 @@
 
-package MainFrame.ChessFrame;
+package JChess.GUI;
 
 import java.awt.Color;
 import java.awt.Font;

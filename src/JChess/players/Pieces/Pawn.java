@@ -1,9 +1,9 @@
 
 
-package MainFrame.ChessFrame.players.Pieces;
+package JChess.players.Pieces;
 
-import java.awt.Image;
 import java.awt.Point;
+import java.util.Objects;
 
 public class Pawn extends Piece{
 
@@ -27,15 +27,10 @@ public class Pawn extends Piece{
             } else if((((y-2==Y)&&(x==(X))))&&!movedbefore ) {
                 
                 return true;
-            } else if((y-1==Y&&x+1==(X)||(y-1==Y&&x-1==(X)))&&myseen ) {
-                return true;
-            }
-            
-            
-            else  return false;
+            } else return (y - 1 == Y && x + 1 == (X) || (y - 1 == Y && x - 1 == (X))) && myseen;
         }
         
-        else if (typeColor=="white") {
+        else if (Objects.equals(typeColor, "white")) {
             if(((y+1==Y)&&(x==(X))) /*&&!Check_Solider_Sees(x,y)*/) {
                 return true;
             } else if((((y+2==Y)&&(x==(X)))) &&!movedbefore) {
@@ -75,7 +70,7 @@ public class Pawn extends Piece{
         return false;
     }
 
-    public void setMYseen(boolean newBoolean) {
+    public void setMySeen(boolean newBoolean) {
         myseen=newBoolean;
     }
     public boolean returnMyseen() {
