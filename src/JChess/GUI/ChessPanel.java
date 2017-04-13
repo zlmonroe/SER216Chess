@@ -17,6 +17,7 @@ public class ChessPanel extends JPanel {
     Player P1, P2;
 
     ChessPanel() {
+        //make new players
         P1 = new Player(P2, true);
         P2 = new Player(P1, false);
     }

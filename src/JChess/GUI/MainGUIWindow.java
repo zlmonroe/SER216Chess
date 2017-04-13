@@ -40,7 +40,6 @@ public class MainGUIWindow extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
 
-        //end GUI setup
     }
 
     public static void main(String args[]) {
