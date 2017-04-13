@@ -1,7 +1,7 @@
 package JChess.Game.Pieces;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.Image;
 
 
 /**
@@ -17,10 +17,13 @@ public abstract class Piece {
 
     public Piece(String fileName, int startX,int startY) {
         String fileSeparator = System.getProperty("file.separator");
-        String location = "src" + fileSeparator + "Icons" + fileSeparator;
-
-        pieceIcon = Toolkit.getDefaultToolkit().getImage(location+fileName);
-
+        String location = "Icons" + fileSeparator;
+        try {
+            pieceIcon = ImageIO.read(getClass().getResourceAsStream(location + fileName));
+        } catch (Exception e) {
+            System.out.println("Unable to open " + location + fileName);
+            System.out.println(e);
+        }
         X=startX;
         Y=startY;
         p.x=X;
