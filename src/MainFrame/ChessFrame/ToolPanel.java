@@ -1,6 +1,6 @@
 package MainFrame.ChessFrame;
 
-import MainFrame.ChessFrame.ThreadTimer.ThreadTimer;
+import MainFrame.ChessFrame.ThreadTimer.Timer;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,8 +24,8 @@ public class ToolPanel extends JPanel {
     private final JLabel  Screen2=new JLabel();
     private final JLabel TimDesc1=new JLabel(" Timer 1");
     private final JLabel TimDesc2=new JLabel(" Timer 2");
-    private ThreadTimer Timer1;
-    private ThreadTimer Timer2;
+    private Timer Timer1;
+    private Timer Timer2;
     
     public ToolPanel() {
         setSize(200,350);
@@ -84,30 +84,30 @@ public class ToolPanel extends JPanel {
         HistoryList.addElemen_tolist(newItem);
     }
     public void change_to_Timer1() {
-        Timer1.resume();
-        Timer2.suspend();
+        Timer1.start();
+        Timer2.pause();
     }
     public void change_to_Timer2() {
-        Timer2.resume();
-        Timer1.suspend();
+        Timer2.start();
+        Timer1.pause();
     }
     public void stop_timers() {
-        Timer1.stop();
-        Timer2.stop();
+        Timer1.pause();
+        Timer2.pause();
     }
     
     public void start_Again() {
         if(Timer1!=null) {
-            Timer1.stop();
-            Timer2.stop();
+            Timer1.pause();
+            Timer2.pause();
         }
         
-        Timer1=new ThreadTimer(Screen2);
-        Timer2=new ThreadTimer(Screen1);
+        Timer1=new Timer(500);
+        Timer2=new Timer(500);
         
         Timer1.start();
         Timer2.start();
-        Timer2.suspend();
+        Timer2.pause();
         
         HistoryList.clean_list();
         HistoryList.addElemen_tolist("Player: New Moves");
