@@ -1,14 +1,14 @@
 
-package Game.ThreadTimer;
+package Game;
 /**
  * Created by Tim on 4/10/2017.
  */
-public class Timer {
+public class ChessTimer {
     private long length;
     private long startTime;
     private boolean isRunning;
 
-    public Timer(long seconds){
+    public ChessTimer(long seconds){
         length = seconds*1000;
         isRunning = false;
     }
