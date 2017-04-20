@@ -1,25 +1,28 @@
 package Game.Pieces;
 
+import Game.BoardState;
 import javax.imageio.ImageIO;
 import java.awt.*;
-
+import java.util.LinkedList;
 
 /**
- * Created by zachary on 3/23/2017.
+ * Piece class which represents a generic piece
  */
 public abstract class Piece {
-    protected int X, Y;
+    protected Point position;
+    protected Point oldPosition;
     protected Image pieceIcon;
-    protected Point p = new Point();
-    protected Point old = new Point();
+    protected boolean isWhite;
+    protected static BoardState board;
+    protected int identifier;
 
     /**
-     *  Constructor for piece
-     *  @param fileName the Icon image name for this specific piece
-     *  @param startX the beginning location for the piece (x)
-     *  @param startY the beginning location for the piece (y)
+     * Constructor for piece
+     * @param fileName name of file to open
+     * @param start starting position point
+     * @param isWhite is the piece a white piece
      */
-    public Piece(String fileName, int startX,int startY) {
+    public Piece(String fileName, Point start, boolean isWhite) {
         String fileSeparator = System.getProperty("file.separator");
         String location = "Icons" + fileSeparator;
         try {
@@ -28,99 +31,48 @@ public abstract class Piece {
             System.out.println("Unable to open " + location + fileName);
             System.out.println(e);
         }
-        X=startX;
-        Y=startY;
-        p.x=X;
-        p.y=Y;
+        this.position = start;
     }
 
-    /**
-     * getter for image of piece
-     * @return pieceIcon piece's image
-     */
-    public Image returnPieceImage() {
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public Point getOldPosition() {
+        return oldPosition;
+    }
+
+    public void setOldPosition(Point oldPosition) {
+        this.oldPosition = oldPosition;
+    }
+
+    public Image getPieceIcon() {
         return pieceIcon;
     }
 
-    /**
-     * Set x position
-     */
-    public int  returnX() {
-        X=p.x;
-        return X;
+    public void setPieceIcon(Image pieceIcon) {
+        this.pieceIcon = pieceIcon;
     }
 
-    /**
-
-
-    /**
-     * return the chessboard Y
-     * @return Y
-     */
-    public int  returnY() {
-        Y=p.y;
-        return Y;
+    public boolean isWhite() {
+        return isWhite;
     }
 
-    /**
-     * set the old point
-     * @param Old
-     */
-    public void setOld(Point Old) {
-        p.x=Old.x;
-        p.y=Old.y;
+    public static void setBoardState(BoardState board) {
+        Piece.board = board;
     }
 
-    /**
-     * set the new point
-     * @param newPoint
-     */
-    public void setPoint(Point newPoint) {
-        old.x=p.x;
-        old.y=p.y;
-        X=p.x=newPoint.x;
-        Y=p.y=newPoint.y;
+    public int getIdentifier() {
+        return this.identifier;
     }
 
-    /**
-     * set just the x of new point
-     * @param newX
-     */
-    public void setX(int newX) {
-        X=newX;
-        p.x=newX;
+    public boolean canMove(Point newPos) {
+        return getMoves().contains(newPos);
     }
 
-    /**
-     * set just the y of new point
-     * @param newY
-     */
-    public void setY(int newY) {
-        Y=newY;
-        p.y=newY;
-    }
-
-    public Point returnOld() {
-        return old;
-    }
-    public Point returnPosition() {return (Point)p.clone();}
-    /*public boolean returnLife() {
-        return haveLife;
-    }*/
-
-    public boolean inThisPosition(int x, int y) {
-        return p.x == x && p.y == y;
-    }
-
-    public boolean hasMoves(boolean isWhite) {
-        for (int x = 0, y = 0;  x< 8 && y<8; x++, y += x/8) {
-            if (this.canMove(x,y,isWhite ? "white":"black")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public abstract String Tell_me();
-    public abstract boolean canMove(int x, int y, String s);
+    public abstract LinkedList<Point> getMoves();
 }

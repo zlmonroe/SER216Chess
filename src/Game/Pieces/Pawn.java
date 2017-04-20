@@ -3,98 +3,66 @@
 package Game.Pieces;
 
 import java.awt.Point;
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class Pawn extends Piece{
 
-    /** Creates a new instance of Pawn */
-    private boolean myseen;
-    private boolean movedbefore;
+    private boolean movedBefore;
+    private boolean jumpedTwoLast;
 
-    public Pawn(String NameIcon, int startX, int startY) {
-        super(NameIcon, startX, startY);
-        myseen=false;
-        movedbefore=false;
+    public Pawn(String nameIcon, Point start, boolean isWhite) {
+        super(nameIcon, start, isWhite);
+        this.movedBefore = false;
+        this.jumpedTwoLast = false;
+        this.identifier = 0;
     }
 
-    public boolean canMove(int x, int y,String typeColor ) {
-        System.out.println("Pawn");
-        if((typeColor.equals("black"))) {
-            if((((y-1==Y)&&(x==(X)))) /*&&!Check_Solider_Sees(x,y)*/) {
-                
-                return true;
-                
-            } else if((((y-2==Y)&&(x==(X))))&&!movedbefore ) {
-                
-                return true;
-            } else return (y - 1 == Y && x + 1 == (X) || (y - 1 == Y && x - 1 == (X))) && myseen;
+    @Override
+    public LinkedList<Point> getMoves() {
+        LinkedList<Point> moves = new LinkedList<>();
+
+        int direction = isWhite ? 1:-1;
+
+        //left attack
+        if (this.position.x > 0) {
+            Point leftAttack = new Point(this.position.x - 1, this.position.y + direction);
+            if(board.getPieceAt(leftAttack).isWhite()) moves.add(leftAttack);
         }
-        
-        else if (Objects.equals(typeColor, "white")) {
-            if(((y+1==Y)&&(x==(X))) /*&&!Check_Solider_Sees(x,y)*/) {
-                return true;
-            } else if((((y+2==Y)&&(x==(X)))) &&!movedbefore) {
-                return true;
-            } else if((y+1==Y&&x+1==(X)||(y+1==Y&&x-1==(X)))&& myseen  ) {
-                return true;
+        //right attack
+        if (this.position.x < 7) {
+            Point rightAttack = new Point(this.position.x + 1, this.position.y + direction);
+            if(board.getPieceAt(rightAttack).isWhite()) moves.add(rightAttack);
+        }
+        //forward
+        Point oneForward = new Point(this.position.x, this.position.y + direction);
+        if (!pieceInMyWay(oneForward)) {
+            moves.add(oneForward);
+        }
+        //two forward
+        if (!movedBefore) {
+            Point twoForward = new Point(this.position.x, this.position.y + direction * 2);
+            if (!pieceInMyWay(twoForward)) {
+                moves.add(twoForward);
             }
-            
-            else
-                return false;
         }
-        return false;
-        
-        
-        
+        return moves;
     }
-    public boolean PieceInMYway(int x, int y,Point othersPosition ,String typeColor ) {
-        if(Y-y==2||Y-y==-2) {
-            if((typeColor.equals("black"))) {
-                
-                if((((y-1==othersPosition.y)&&(x==(othersPosition.x))))&&!movedbefore ) {
-                    return true;
-                } else  return false;
+
+    private boolean pieceInMyWay(Point newPoint) {
+        int direction = isWhite ? 1:-1;
+
+        if(newPoint.x == this.position.x) {
+            if(newPoint.y == (this.position.y + direction)) {
+                return board.getPieceAt(newPoint) == null;
             }
-            
-            else  if (typeColor.equals("white")) {
-                
-                if(((y+1==othersPosition.y)&&(x==(othersPosition.x)) &&!movedbefore)) {
-                    
-                    return true;
-                    
-                } else
-                    return false;
+            if(newPoint.y == (this.position.y + 2 * direction)) {
+                return board.getPieceAt(newPoint) != null &&
+                        board.getPieceAt(new Point(newPoint.x, newPoint.y - direction)) != null;
             }
         }
-        
         return false;
     }
 
-    public void setMySeen(boolean newBoolean) {
-        myseen=newBoolean;
-    }
-    public boolean returnMyseen() {
-        return myseen;
-    }
-    public boolean setSeenbychecking(Point newP,String Color) {
-        myseen = false;
-        if ((Color.equals("black"))) {
-            if ((newP.y - 1 == Y && newP.x + 1 == (X) || (newP.y - 1 == Y && newP.x - 1 == (X)))) {
 
-                myseen = true;
-                return true;
-            } else return false;
-        } else if (Color.equals("white")) {
-            if ((newP.y + 1 == Y && newP.x + 1 == (X) || (newP.y + 1 == Y && newP.x - 1 == (X)))) {
-                myseen = true;
-
-                return true;
-            } else return false;
-        }
-        return false;
-    }
-    public String Tell_me() {
-        return "Soldier= ("+p.x+','+p.y+")";
-    }
-    
 }
