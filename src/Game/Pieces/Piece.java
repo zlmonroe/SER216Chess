@@ -9,8 +9,6 @@ import java.awt.*;
  */
 public abstract class Piece {
     protected int X, Y;
-    protected int pixelX, pixelY;
-    protected boolean haveLife = true;
     protected Image pieceIcon;
     protected Point p = new Point();
     protected Point old = new Point();
@@ -53,30 +51,7 @@ public abstract class Piece {
     }
 
     /**
-     * Set the position
-     * @param newPixelX the pixel coordinate of the piece (x)
-     * @param newPixelY the pixel coordinate of the piece (y)
-     */
-    public void setPixels(int newPixelX,int newPixelY) {
-        pixelX = newPixelX;
-        pixelY = newPixelY;
-    }
 
-    /**
-     * Get the pixel x position
-     * @return pixelY the y pixel location
-     */
-    public int getPixelX() {
-        return pixelX;
-    }
-
-    /**
-     * Get the pixel y position
-     * @return pixelX the x pixel location
-     */
-    public int getPixelY() {
-        return pixelY;
-    }
 
     /**
      * return the chessboard Y
@@ -129,9 +104,9 @@ public abstract class Piece {
         return old;
     }
     public Point returnPosition() {return (Point)p.clone();}
-    public boolean returnLife() {
+    /*public boolean returnLife() {
         return haveLife;
-    }
+    }*/
 
     public boolean inThisPosition(int x, int y) {
         return p.x == x && p.y == y;
