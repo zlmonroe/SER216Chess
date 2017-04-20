@@ -12,7 +12,7 @@ public class King extends Piece {
                 || (((y == Y + 1) && x == (X - 1))) || ((y == Y) && (x == (X + 1)))
                 || ((y == Y - 1) && x == ((X))) || ((y == Y + 1) && (x == (X)));
     }
-    
+    //Tell where last move was
     public String Tell_me()
     {
         return "King= ("+p.x+','+p.y+")";
