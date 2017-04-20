@@ -1,11 +1,11 @@
-package JChess.GUI;
+package GUI;
 
 import javax.swing.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.*;
 
-import JChess.Game.Player;
-import JChess.Game.Pieces.*;
+import Game.Player;
+import Game.Pieces.*;
 
 
 /**
@@ -30,11 +30,11 @@ public class ChessPanel extends JPanel {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i+j)%2==1) {
-                    g2.setColor(Color.BLUE);
+                    g2.setColor(Color.WHITE);
                     g2.fillRect(i * (boardSize / 8), j * (boardSize / 8), boardSize / 8, boardSize / 8);
                 }
                 else {
-                    g2.setColor(Color.WHITE);
+                    g2.setColor(Color.BLUE);
                     g2.fillRect(i * (boardSize / 8), j * (boardSize / 8), boardSize / 8, boardSize / 8);
                 }
             }

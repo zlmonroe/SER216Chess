@@ -1,4 +1,4 @@
-package JChess.Game.Pieces;
+package Game.Pieces;
 
 public class King extends Piece {
     public King(String NameIcon, int startX, int startY)

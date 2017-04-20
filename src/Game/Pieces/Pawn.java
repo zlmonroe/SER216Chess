@@ -1,6 +1,6 @@
 
 
-package JChess.Game.Pieces;
+package Game.Pieces;
 
 import java.awt.Point;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class Pawn extends Piece{
     }
 
     public boolean canMove(int x, int y,String typeColor ) {
-        
+        System.out.println("Pawn");
         if((typeColor.equals("black"))) {
             if((((y-1==Y)&&(x==(X)))) /*&&!Check_Solider_Sees(x,y)*/) {
                 
