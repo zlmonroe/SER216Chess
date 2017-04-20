@@ -1,5 +1,5 @@
 
-package JChess.Game.ThreadTimer;
+package Game.ThreadTimer;
 /**
  * Created by Tim on 4/10/2017.
  */

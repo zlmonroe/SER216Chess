@@ -1,4 +1,4 @@
-package JChess.Game.Pieces;
+package Game.Pieces;
 
 import java.awt.*;
 

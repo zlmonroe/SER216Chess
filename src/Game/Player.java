@@ -1,6 +1,6 @@
-package JChess.Game;
+package Game;
 
-import JChess.Game.Pieces.*;
+import Game.Pieces.*;
 import java.awt.*;
 
 /**
@@ -9,14 +9,14 @@ import java.awt.*;
 public class Player {
 
     //Create all of the pieces for the Player
-    private Rook leftRook;
-    private Rook rightRook;
-    private Knight leftKnight;
-    private Knight rightKnight;
-    private Queen queen;
-    private Bishop leftBishop;
-    private Bishop rightBishop;
-    private King king;
+    public Rook leftRook;
+    public Rook rightRook;
+    public Knight leftKnight;
+    public Knight rightKnight;
+    public Queen queen;
+    public Bishop leftBishop;
+    public Bishop rightBishop;
+    public King king;
     public final Piece[] pieces;
 
     private boolean isWhite;
@@ -74,8 +74,8 @@ public class Player {
             }
         }
         return true;
-
     }
+
     public boolean kingInCheck() {
         for (Piece enemyPiece : enemy.pieces) {
             if (enemyPiece.canMove(king.returnX(),king.returnY(),isWhite ? "white":"black")) {

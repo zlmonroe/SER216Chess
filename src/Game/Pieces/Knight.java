@@ -1,6 +1,6 @@
 
 
-package JChess.Game.Pieces;
+package Game.Pieces;
 
 //
 

@@ -1,12 +1,11 @@
 
-package JChess.Game.Pieces;
+package Game.Pieces;
 import java.awt.Point;
 public class Queen extends Piece {
     public Queen(String NameIcon, int startX, int startY) {
         super(NameIcon, startX, startY);
     }
     public boolean canMove(int x, int y, String s) {
-        
         if (((y == Y) && (x > (X) || (x < X)))) {
             return true;
         } else if ((((y > Y) || (y < Y)) && (x == (X)))) {
