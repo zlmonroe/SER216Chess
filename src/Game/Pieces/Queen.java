@@ -24,4 +24,9 @@ public class Queen extends Piece {
         movesB.addAll(movesR);
         return movesB;
     }
+
+    @Override
+    public Piece clone() {
+        return new Queen(new Point(this.getPosition()), this.isWhite);
+    }
 }
