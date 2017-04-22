@@ -66,5 +66,9 @@ public class Pawn extends Piece{
         return false;
     }
 
+    @Override
+    public Piece clone() {
+        return new Pawn(new Point(this.getPosition()), this.isWhite);
+    }
 
 }

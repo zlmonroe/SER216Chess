@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.*;
 
-import Game.OldPlayerClass;
 import Game.Pieces.*;
 
 
