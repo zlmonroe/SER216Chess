@@ -4,21 +4,29 @@ package Game.Pieces;
 
 //
 
+import java.awt.*;
+import java.util.LinkedList;
+
 public class Knight extends Piece {
 
-    public Knight(String NameIcon, int startX, int startY) {
-        super(NameIcon, startX, startY);
+    public Knight(String nameIcon, Point start, boolean isWhite) {
+        super(nameIcon, start, isWhite);
+        this.identifier = 1;
     }
 
-    public boolean canMove(int x, int y, String s) {
+    public LinkedList<Point> getMoves() {
+        LinkedList<Point> moves = new LinkedList<>();
 
-        return (x + 1 == X) && (y + 2 == Y) || (x + 1 == X) && (y - 2 == Y) || (x - 1 == X) && (y + 2 == Y)
-                || (x - 1 == X) && (y - 2 == Y) || (x + 2 == X) && (y + 1 == Y) || (x + 2 == X) && (y - 1 == Y)
-                || (x - 2 == X) && (y + 1 == Y) || (x - 2 == X) && (y - 1 == Y);
+        int[][] possibleMoves = {{-2,-1}, {-2,1}, {-1,-2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
 
-    }
+        for(int[] move : possibleMoves) {
+            Point possibleMove = new Point(move[0], move[1]);
+            Piece pieceAtMove = board.getPieceAt(possibleMove);
+            if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
+                moves.add(possibleMove);
+            }
+        }
 
-    public String Tell_me() {
-        return "Knight= ("+p.x+','+p.y+")";
+        return moves;
     }
 }

@@ -14,6 +14,9 @@ public abstract class Piece {
     protected Image pieceIcon;
     protected boolean isWhite;
     protected static BoardState board;
+    /* Indentifier
+     *  Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5
+     */
     protected int identifier;
 
     /**
