@@ -1,5 +1,7 @@
 package Game.Pieces;
 
+import Game.BoardState;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -10,6 +12,7 @@ public class King extends Piece {
         this.identifier = 5;
     }
 
+    @Override
     public LinkedList<Point> getMoves() {
         LinkedList<Point> moves = new LinkedList<>();
 

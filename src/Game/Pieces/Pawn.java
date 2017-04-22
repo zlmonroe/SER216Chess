@@ -2,6 +2,8 @@
 
 package Game.Pieces;
 
+import Game.BoardState;
+
 import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Objects;

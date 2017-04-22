@@ -2,8 +2,7 @@
 
 package Game.Pieces;
 
-//
-
+import Game.BoardState;
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -14,6 +13,7 @@ public class Knight extends Piece {
         this.identifier = 1;
     }
 
+    @Override
     public LinkedList<Point> getMoves() {
         LinkedList<Point> moves = new LinkedList<>();
 

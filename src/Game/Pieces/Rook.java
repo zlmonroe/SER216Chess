@@ -1,5 +1,7 @@
 package Game.Pieces;
 
+import Game.BoardState;
+
 import java.awt.*;
 import java.util.LinkedList;
 
