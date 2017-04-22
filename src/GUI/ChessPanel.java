@@ -1,4 +1,4 @@
-package GUI;
+/*package GUI;
 
 import javax.swing.*;
 import java.awt.geom.Rectangle2D;
@@ -6,11 +6,6 @@ import java.awt.*;
 
 import Game.Player;
 import Game.Pieces.*;
-
-
-/**
- * Created by zachary on 4/11/2017.
- */
 
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
@@ -54,3 +49,4 @@ public class ChessPanel extends JPanel {
         }
     }
 }
+*/
