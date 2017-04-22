@@ -22,10 +22,7 @@ public class TestPlayer {
 	Player player1;
 	@Before
 	public void setUp() throws Exception {
-		createMock1();
-
 		player1 = new Player(false);
-		Player.state = mockState1;
 	}
 	
 	/*This creates the first mock board state
@@ -65,7 +62,14 @@ public class TestPlayer {
 
 	@Test
 	public void testInCheck() {
-		assertTrue(player1.inCheck(mockState1));
+		createMock1();
+		Player.state = mockState1;//testing inCheck for mockState1
+		assertTrue(player1.inCheck(mockState1)); //The king is in check if the queen can attack him
+	}
+	
+	public void testInCheckMate(){
+		Player.state = mockState1;//testing inCheck for mockState1
+		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can geet the queen
 	}
 
 }
