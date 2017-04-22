@@ -1,12 +1,14 @@
 package Game.Pieces;
 
+import Game.BoardState;
+
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Rook extends Piece {
 
-    public Rook(Point start, boolean isWhite) {
-        super(start, isWhite);
+    public Rook(Point start, boolean isWhite, BoardState board) {
+        super(start, isWhite, board);
         this.identifier = 3;
     }
 
