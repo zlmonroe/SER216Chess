@@ -1,12 +1,11 @@
-package JChess.Game;
+package Game;
 
 import java.awt.Point;
 import java.util.LinkedList;
+import Game.Pieces.*;
 
-import JChess.Game.Pieces.Piece;
-
-public class MyPlayer {
-	public static ChessboardState state;
+public class Player {
+	public static BoardState state;
 	private MyPlayer enemy;
 	private boolean isWhite;
 	private LinkedList<Piece> piecesAttackingKing;
@@ -18,7 +17,7 @@ public class MyPlayer {
 		Piece king = getKing();
 		piecesAttackingKing = new LinkedList<Piece>();
         for (Piece enemyPiece : tmp.getPieces(!isWhite) {
-            if (enemyPiece.canMove(king.getPoint().x,king.getPoint().y)) {
+            if (enemyPiece.canMove(king.getPosition())) {
                 piecesAttackingKing.add(enemyPiece);
             }
         }
@@ -30,15 +29,15 @@ public class MyPlayer {
 			return false;
 		}
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
-		LinkedList<Piece> ePieces = state.getPieces(!isWhite);
-		for(Piece ePiece : piecesAttackingKing){
-			for(Piece piece: pieces){
-				if(piece.getMoves().contains(ePiece.getPoint())){
-					return false;
+		for(Piece piece : piecesAttackingKing){
+			for(Point move: piece.getMoves()){
+				BoardState tmp = state.move(piece.getPosition(), move);
+				if(!inCheck(tmp)){
+					return true;
 				}
 			}
 		}
-		
+		return false;
 	}
 	public boolean move(Point start, Point end){
 		Piece piece = state.getPieceAt(start);
@@ -55,10 +54,11 @@ public class MyPlayer {
 		return true;
 	}
 	
-	private int getKing(){
+	private Piece getKing(){
+		LinkedList<Piece> pieces = state.getPieces(isWhite);
 		for(int i = 0; i < pieces.size(); i++){
 			if(PieceID.KING == pieces.get(i).getID()){
-				return i;
+				return pieces.get(i);
 			}
 		}
 	}
