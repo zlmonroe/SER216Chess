@@ -60,4 +60,6 @@ public abstract class Piece {
     }
 
     public abstract LinkedList<Point> getMoves();
+
+    public abstract Piece copyOf();
 }
