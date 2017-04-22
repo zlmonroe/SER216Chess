@@ -12,7 +12,7 @@ public abstract class Piece {
     protected Point position;
     protected Point oldPosition;
     protected boolean isWhite;
-    protected static BoardState board;
+    protected BoardState board;
     /* Indentifier
      *  Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5
      */
@@ -42,9 +42,7 @@ public abstract class Piece {
         return isWhite;
     }
 
-    public static void setBoardState(BoardState board) {
-        Piece.board = board;
-    }
+    public void setBoardState(BoardState board) {this.board = board;}
 
     public int getIdentifier() {
         return this.identifier;

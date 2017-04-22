@@ -1,8 +1,12 @@
 package Test;
 
+import Game.BoardState;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import Game.Pieces.*;
 
@@ -14,28 +18,15 @@ import java.util.LinkedList;
  * Created by zachary on 4/17/2017.
  */
 public class TestPiece {
-    private Bishop bishop;
-    private King king;
-    private Knight knight;
-    private Pawn pawn;
-    private Queen queen;
-    private Rook rook;
-    private Pawn piece;
-
-    @After
-    public void tearDown(){
-        bishop = null;
-        king = null;
-        knight = null;
-        pawn = null;
-        queen = null;
-        rook = null;
-        piece = null;
-    }
 
     @Test
     public void testGetMoves() {
-        bishop = new Bishop(new Point(2, 3), true);
+        BoardState mockState = mock(BoardState.class);
+        when(mockState.getPieceAt(any(Point.class))).thenReturn(null);
+
+        Bishop bishop = new Bishop(new Point(2, 3), true);
+        bishop.setBoardState(mockState);
+
         LinkedList<Point> moves = new LinkedList<>();
         //down left
         moves.add(new Point(1, 2));
