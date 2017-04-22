@@ -2,15 +2,13 @@
 
 package Game.Pieces;
 
-import Game.BoardState;
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Knight extends Piece {
 
     public Knight(Point start, boolean isWhite) {
-        super(start, isWhite);
-        this.identifier = 1;
+        super(start, isWhite, 1);
     }
 
     @Override
