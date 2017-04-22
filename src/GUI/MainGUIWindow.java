@@ -1,10 +1,8 @@
-package GUI;
+/*package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by zachary on 4/6/2017.
- */
+
 public class MainGUIWindow extends JFrame {
     ToolPanel tools;
     StatusPanel status;
@@ -46,3 +44,4 @@ public class MainGUIWindow extends JFrame {
         new MainGUIWindow();
     }
 }
+*/
