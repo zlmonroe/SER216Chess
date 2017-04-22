@@ -1,18 +1,17 @@
-package Test;
+
 
 import Game.BoardState;
-import org.junit.After;
+import Game.Pieces.Bishop;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import Game.Pieces.*;
 
 import java.awt.*;
 import java.util.HashSet;
 import java.util.LinkedList;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by zachary on 4/17/2017.
