@@ -13,8 +13,8 @@ public class Pawn extends Piece{
     private boolean movedBefore;
     private boolean jumpedTwoLast;
 
-    public Pawn(Point start, boolean isWhite, BoardState board) {
-        super(start, isWhite, board);
+    public Pawn(Point start, boolean isWhite) {
+        super(start, isWhite);
         this.movedBefore = false;
         this.jumpedTwoLast = false;
         this.identifier = 0;

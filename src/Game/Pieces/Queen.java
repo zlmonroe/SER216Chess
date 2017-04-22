@@ -9,10 +9,10 @@ public class Queen extends Piece {
     private Bishop bishop;
     private Rook rook;
 
-    public Queen(Point start, boolean isWhite, BoardState board) {
-        super(start, isWhite, board);
-        bishop = new Bishop(start, isWhite, board);
-        rook = new Rook(start, isWhite, board);
+    public Queen(Point start, boolean isWhite) {
+        super(start, isWhite);
+        bishop = new Bishop(start, isWhite);
+        rook = new Rook(start, isWhite);
 
         this.identifier = 4;
     }

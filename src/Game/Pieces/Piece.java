@@ -22,7 +22,7 @@ public abstract class Piece {
      * @param start starting position point
      * @param isWhite is the piece a white piece
      */
-    public Piece(Point start, boolean isWhite, BoardState board) {
+    public Piece(Point start, boolean isWhite) {
         this.position = start;
         this.board = board;
     }
