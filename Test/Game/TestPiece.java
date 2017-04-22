@@ -132,4 +132,33 @@ public class TestPiece {
 
         assertEquals("Wrong move set when Piece is in its way", moveSet, kingMoveSet);
     }
+
+    @Test
+    public void testGetMovesPawn() {
+        BoardState mockState = mock(BoardState.class);
+
+        Pawn pawn = new Pawn(new Point(2, 2), true);
+        pawn.setBoardState(mockState);
+
+        LinkedList<Point> moves = new LinkedList<>();
+
+        //one forward
+        moves.add(new Point(2,3));
+        //two forward
+        moves.add(new Point(2,4));
+
+
+        HashSet pawnMoveSet = new HashSet<>(pawn.getMoves());
+        HashSet moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when nothing is in its way", moveSet, pawnMoveSet);
+
+        when(mockState.getPieceAt(new Point(1, 3))).thenReturn(new Bishop(new Point(), true));
+        moves.remove(new Point(1, 3));
+
+        pawnMoveSet = new HashSet<>(pawn.getMoves());
+        moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when Piece is in its way", moveSet, pawnMoveSet);
+    }
 }
