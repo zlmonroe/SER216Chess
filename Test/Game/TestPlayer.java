@@ -1,4 +1,4 @@
-package Test;
+package Game;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -32,7 +32,7 @@ public class TestPlayer {
 		whitePieces.add(new Queen(queenPoint, true));
 		when(mockState1.getPieceAt(kingPoint)).thenReturn(blackPieces.get(0));
 		when(mockState1.getPieceAt(queenPoint)).thenReturn(whitePieces.get(0));
-		when(mockState1.getPieceAt(bishopPoint)).thenReturn(whitePieces.get(1));
+		//when(mockState1.getPieceAt(bishopPoint)).thenReturn(whitePieces.get(1));
 		when(mockState1.getPieces(false)).thenReturn(blackPieces);
 		when(mockState1.getPieces(true)).thenReturn(blackPieces);
 		
