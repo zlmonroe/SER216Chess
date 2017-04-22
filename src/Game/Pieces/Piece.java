@@ -11,7 +11,6 @@ import java.util.LinkedList;
 public abstract class Piece {
     protected Point position;
     protected Point oldPosition;
-    protected Image pieceIcon;
     protected boolean isWhite;
     protected static BoardState board;
     /* Indentifier
@@ -21,19 +20,10 @@ public abstract class Piece {
 
     /**
      * Constructor for piece
-     * @param fileName name of file to open
      * @param start starting position point
      * @param isWhite is the piece a white piece
      */
-    public Piece(String fileName, Point start, boolean isWhite) {
-        String fileSeparator = System.getProperty("file.separator");
-        String location = "Icons" + fileSeparator;
-        try {
-            pieceIcon = ImageIO.read(getClass().getResourceAsStream(location + fileName));
-        } catch (Exception e) {
-            System.out.println("Unable to open " + location + fileName);
-            System.out.println(e);
-        }
+    public Piece(Point start, boolean isWhite) {
         this.position = start;
     }
 
@@ -51,14 +41,6 @@ public abstract class Piece {
 
     public void setOldPosition(Point oldPosition) {
         this.oldPosition = oldPosition;
-    }
-
-    public Image getPieceIcon() {
-        return pieceIcon;
-    }
-
-    public void setPieceIcon(Image pieceIcon) {
-        this.pieceIcon = pieceIcon;
     }
 
     public boolean isWhite() {
