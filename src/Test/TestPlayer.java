@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.awt.Point;
+import java.util.Collection;
 import java.util.LinkedList;
 
 import org.junit.After;
@@ -23,27 +24,19 @@ public class TestPlayer {
 	@Before
 	public void setUp() throws Exception {
 		player1 = new Player(false);
+		
+		mockKing = mock(King.class); //creates mock king
+		mockQueen = mock(Queen.class); //creates mock queen
+		
+		mockState1 = mock(BoardState.class);//creates mock board
 	}
 	
 	/*This creates the first mock board state
 	 * It creates a mock board with a mock black king 
 	 * at b7 and a mock white queen at b6 
 	 */
-	private void createMock1(){		
-		mockKing = mock(King.class); //creates mock king
-		mockQueen = mock(Queen.class); //creates mock queen
-		
-		Point kingPoint = new Point(1, 7); //this is the point, b7, that the king is at
-		Point queenPoint = new Point(1, 6); //this is the point, b6, that the queen is at
-		
-		when(mockKing.isWhite()).thenReturn(false); //the king is black
-		when(mockQueen.isWhite()).thenReturn(true); //the queen is white
-		when(mockKing.getPosition()).thenReturn(kingPoint); //the kings position should return a point 1, 7 (b7)
-		when(mockQueen.getPosition()).thenReturn(queenPoint); //the queens position should return a point 1, 6 (b6)
-		when(mockKing.getIdentifier()).thenReturn(5); //the king should return the number that identifies it as a king
-		when(mockQueen.canMove(kingPoint)).thenReturn(true);// the queen has the ability to move forward one, as is chess rules
-		
-		mockState1 = mock(BoardState.class);//creates mock board
+	private void createMock1(){
+		//Creating mock fncs for mockState1
 		
 		LinkedList<Piece> blackPieces = new LinkedList(); //linked list with all of black pieces
 		blackPieces.add(mockKing);
@@ -54,6 +47,33 @@ public class TestPlayer {
 		when(mockState1.getPieceAt(queenPoint)).thenReturn(whitePieces.get(0)); //when we ask for the piece at the queen's point, we should get the queen
 		when(mockState1.getPieces(false)).thenReturn(blackPieces); //when we ask for black pieces, we should get black pieces
 		when(mockState1.getPieces(true)).thenReturn(whitePieces); //when we ask for white pieces, we should get white pieces
+	}
+	
+	private void createMockKing(){
+		Point kingPoint = new Point(1, 7); //this is the point, b7, that the king is at
+		//list of all moves possible by the king (according to chess rules)
+		LinkedList<Point> kingMoves = new LinkedList();
+		Point[] tmpPoints = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(2,6), new Point(2,7)};
+		for(Point p: tmpPoints){
+			kingMoves.add(p);
+		}
+		when(mockKing.isWhite()).thenReturn(false); //the king is black
+		when(mockKing.getPosition()).thenReturn(kingPoint); //the kings position should return a point 1, 7 (b7)
+		when(mockKing.getIdentifier()).thenReturn(5); //the king should return the number that identifies it as a king
+		when(mockKing.getMoves()).thenReturn(kingMoves);// the king has the ability to move forward one, as is chess rules
+	}
+	
+	private void createMockQueen(){
+		Point queenPoint = new Point(1, 6); //this is the point, b6, that the queen is at
+		//list of all moves possible by the king (according to chess rules)
+		LinkedList<Point> queenMoves = new LinkedList();
+		Point[] tmpPoints = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(2,6), new Point(2,7)};
+		for(Point p: tmpPoints){
+			queenMoves.add(p);
+		
+		when(mockQueen.isWhite()).thenReturn(true); //the queen is white
+		when(mockQueen.getPosition()).thenReturn(queenPoint); //the queens position should return a point 1, 6 (b6)
+		when(mockQueen.canMove(kingPoint)).thenReturn(true);// the queen has the ability to move forward, as is chess rules
 	}
 
 	@After
@@ -69,7 +89,7 @@ public class TestPlayer {
 	
 	public void testInCheckMate(){
 		Player.state = mockState1;//testing inCheck for mockState1
-		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can geet the queen
+		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can get the queen
 	}
 
 }
