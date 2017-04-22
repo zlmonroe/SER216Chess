@@ -10,6 +10,8 @@ public class Bishop extends Piece {
         this.identifier = 2;
     }
 
+    @Override
+    @SuppressWarnings("Duplicates")
     public LinkedList<Point> getMoves() {
         LinkedList<Point> moves = new LinkedList<>();
 

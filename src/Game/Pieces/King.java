@@ -10,6 +10,7 @@ public class King extends Piece {
         this.identifier = 5;
     }
 
+    @Override
     public LinkedList<Point> getMoves() {
         LinkedList<Point> moves = new LinkedList<>();
 
