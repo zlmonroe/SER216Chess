@@ -61,6 +61,7 @@ public class Player {
 				return pieces.get(i);
 			}
 		}
+		return null;
 	}
 
 }
