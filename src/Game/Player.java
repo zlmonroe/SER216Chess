@@ -6,22 +6,21 @@ import Game.Pieces.*;
 
 public class Player {
 	public static BoardState state;
-	private MyPlayer enemy;
 	private boolean isWhite;
-	private LinkedList<Piece> piecesAttackingKing;
-	public enum PieceID{
-		PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING;
+	
+	public Player(boolean w, BoardState s){
+		isWhite = w;
+		state = s;
 	}
 	
 	public boolean inCheck(BoardState tmp){
 		Piece king = getKing();
-		piecesAttackingKing = new LinkedList<Piece>();
-        for (Piece enemyPiece : tmp.getPieces(!isWhite) {
+        for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
             if (enemyPiece.canMove(king.getPosition())) {
-                piecesAttackingKing.add(enemyPiece);
+                return true;
             }
         }
-        return !piecesAttackingKing.isEmpty();
+        return false;
 	}
 	
 	public boolean inCheckMate(){
@@ -29,7 +28,7 @@ public class Player {
 			return false;
 		}
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
-		for(Piece piece : piecesAttackingKing){
+		for(Piece piece : pieces){
 			for(Point move: piece.getMoves()){
 				BoardState tmp = state.move(piece.getPosition(), move);
 				if(!inCheck(tmp)){
@@ -50,14 +49,15 @@ public class Player {
 			return false;
 		}
 		state = tmp;
-		piece.setPoint(end);
+		piece = state.getPieceAt(start);
+		piece.setPosition(end);
 		return true;
 	}
 	
 	private Piece getKing(){
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
 		for(int i = 0; i < pieces.size(); i++){
-			if(PieceID.KING == pieces.get(i).getID()){
+			if(5 == pieces.get(i).getIdentifier()){//5 is the identifier for king, we check if this piece is the king
 				return pieces.get(i);
 			}
 		}

@@ -3,15 +3,35 @@ package Game;
 import Game.Pieces.*;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 /**
  * Created by tjcup on 4/19/2017.
  */
 public class BoardState {
     private final Piece[][] board;
+    private LinkedList<Piece> blackPieces;
+    private LinkedList<Piece> whitePieces;
 
     private BoardState(Piece[][] board) {
         this.board = board;
+        initLists();
+    }
+
+    private void initLists() {
+        blackPieces = new LinkedList<>();
+        whitePieces = new LinkedList<>();
+        for (Piece[] pieces : board) {
+            for (Piece piece : pieces) {
+                if (piece != null) {
+                    if (piece.isWhite()) {
+                        whitePieces.add(piece);
+                    } else {
+                        blackPieces.add(piece);
+                    }
+                }
+            }
+        }
     }
 
     public BoardState() {
@@ -22,10 +42,24 @@ public class BoardState {
             board[1][i] = new Pawn(new Point(i, 1), true);
             board[6][i] = new Pawn(new Point(i, 6), false);
         }
+        initLists();
     }
 
     public Piece getPieceAt(Point p){
         return board[p.x][p.y];
+    }
+
+    /**
+     * Gets pieces of white or black player
+     * @param whitePlayer true for white, false for black
+     * @return the list of pieces
+     */
+    public LinkedList<Piece> getPieces(boolean whitePlayer) {
+        LinkedList<Piece> pieces = new LinkedList<>();
+        for( Piece p : whitePlayer ? whitePieces : blackPieces) {
+            pieces.add(p.copyOf());
+        }
+        return pieces;
     }
 
     public BoardState move(Point moveStart, Point moveEnd){
