@@ -15,7 +15,7 @@ public class Player {
 	
 	public boolean inCheck(BoardState tmp){
 		Piece king = getKing();
-        for (Piece enemyPiece : tmp.getPieces(!isWhite) {
+        for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
             if (enemyPiece.canMove(king.getPosition())) {
                 return true;
             }
