@@ -1,15 +1,12 @@
 package Game.Pieces;
 
-import Game.BoardState;
-
 import java.awt.*;
 import java.util.LinkedList;
 
 public class King extends Piece {
 
     public King(Point start, boolean isWhite) {
-        super(start, isWhite);
-        this.identifier = 5;
+        super(start, isWhite, 5);
     }
 
     @Override

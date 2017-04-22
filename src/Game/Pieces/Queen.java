@@ -1,8 +1,6 @@
 
 package Game.Pieces;
-import Game.BoardState;
-
-import java.awt.Point;
+import java.awt.*;
 import java.util.LinkedList;
 
 public class Queen extends Piece {
@@ -10,11 +8,9 @@ public class Queen extends Piece {
     private Rook rook;
 
     public Queen(Point start, boolean isWhite) {
-        super(start, isWhite);
+        super(start, isWhite, 4);
         bishop = new Bishop(start, isWhite);
         rook = new Rook(start, isWhite);
-
-        this.identifier = 4;
     }
 
     @Override
