@@ -28,6 +28,13 @@ public abstract class Piece {
         this.isWhite = isWhite;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Piece)) return false;
+        Piece p = (Piece) o;
+        return this.position.equals(p.position) && this.isWhite == p.isWhite && this.identifier == p.identifier;
+    }
+
     //Mutators
 
     public Point getPosition() {

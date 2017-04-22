@@ -3,7 +3,9 @@ package Game;
 import Game.Pieces.*;
 
 import java.awt.*;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * Created by tjcup on 4/19/2017.
@@ -86,5 +88,27 @@ public class BoardState {
         newBoard[moveEnd.x][moveEnd.y].setPosition(moveEnd);
         newBoard[moveStart.x][moveStart.y] = null;
         return new BoardState(board);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof BoardState)) {
+            return false;   // if other is not a BoardState
+        }
+        BoardState b = (BoardState)other;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (board[i][j] == null) {
+                    if (b.board[i][j] != null) return false;    // if there is a piece in the wrong place
+                } else {
+                    if (!board[i][j].equals(b.board[i][j])) return false;   // if there is a different piece
+                }
+            }
+        }
+        Set<Piece> thisWhite = new HashSet<>(whitePieces);
+        Set<Piece> thisBlack = new HashSet<>(blackPieces);
+        Set<Piece> otherWhite = new HashSet<>(b.whitePieces);
+        Set<Piece> otherBlack = new HashSet<>(b.blackPieces);
+        return thisWhite.equals(otherWhite) && thisBlack.equals(otherBlack);
     }
 }
