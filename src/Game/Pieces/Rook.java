@@ -7,8 +7,8 @@ import java.util.LinkedList;
 
 public class Rook extends Piece {
 
-    public Rook(Point start, boolean isWhite, BoardState board) {
-        super(start, isWhite, board);
+    public Rook(Point start, boolean isWhite) {
+        super(start, isWhite);
         this.identifier = 3;
     }
 
