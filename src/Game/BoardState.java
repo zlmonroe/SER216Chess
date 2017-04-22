@@ -24,6 +24,7 @@ public class BoardState {
         for (Piece[] pieces : board) {
             for (Piece piece : pieces) {
                 if (piece != null) {
+                    piece.setBoardState(this);
                     if (piece.isWhite()) {
                         whitePieces.add(piece);
                     } else {
