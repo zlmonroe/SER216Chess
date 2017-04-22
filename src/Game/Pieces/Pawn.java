@@ -11,8 +11,8 @@ public class Pawn extends Piece{
     private boolean movedBefore;
     private boolean jumpedTwoLast;
 
-    public Pawn(String nameIcon, Point start, boolean isWhite) {
-        super(nameIcon, start, isWhite);
+    public Pawn(Point start, boolean isWhite) {
+        super(start, isWhite);
         this.movedBefore = false;
         this.jumpedTwoLast = false;
         this.identifier = 0;

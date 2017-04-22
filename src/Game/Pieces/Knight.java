@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 public class Knight extends Piece {
 
-    public Knight(String nameIcon, Point start, boolean isWhite) {
-        super(nameIcon, start, isWhite);
+    public Knight(Point start, boolean isWhite) {
+        super(start, isWhite);
         this.identifier = 1;
     }
 
