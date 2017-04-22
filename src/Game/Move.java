@@ -1,11 +1,12 @@
 package Game;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by tjcup on 4/19/2017.
  */
-public class Move {
+public class Move implements Serializable {
     public Point oldPoint,newPoint;
 
     /**
