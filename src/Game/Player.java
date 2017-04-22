@@ -17,7 +17,8 @@ public class Player {
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
             if (enemyPiece.canMove(king.getPosition())) {
                 return true;
-            }D
+            }
+        }
         return false;
 	}
 	
