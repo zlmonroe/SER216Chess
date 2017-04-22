@@ -1,20 +1,30 @@
 package Game.Pieces;
 
+import java.awt.*;
+import java.util.LinkedList;
+
 public class King extends Piece {
-    public King(String NameIcon, int startX, int startY)
-    {
-        super(NameIcon, startX, startY);
+
+    public King(String nameIcon, Point start, boolean isWhite) {
+        super(nameIcon, start, isWhite);
+        this.identifier = 5;
     }
 
-    public boolean canMove(int x, int y, String s) {
-        return ((y == Y) && (x == (X - 1))) || ((y == Y - 1) && (x == (X + 1)))
-                || ((y == Y - 1) && (x == (X - 1))) || ((y == Y + 1) && (x == (X + 1)))
-                || (((y == Y + 1) && x == (X - 1))) || ((y == Y) && (x == (X + 1)))
-                || ((y == Y - 1) && x == ((X))) || ((y == Y + 1) && (x == (X)));
-    }
-    //Tell where last move was
-    public String Tell_me()
-    {
-        return "King= ("+p.x+','+p.y+")";
+    public LinkedList<Point> getMoves() {
+        LinkedList<Point> moves = new LinkedList<>();
+
+        for(int xOffset = -1; xOffset <= 1; xOffset++) {
+            for(int yOffset = -1; yOffset <= 1; yOffset++) {
+                if(xOffset != 0 && yOffset != 0) {
+                    Point currentMove = new Point(this.position.x + xOffset, this.position.y + yOffset);
+                    Piece pieceAtMove = board.getPieceAt(currentMove);
+
+                    if(pieceAtMove != null && pieceAtMove.isWhite() != this.isWhite) {
+                        moves.add(currentMove);
+                    }
+                }
+            }
+        }
+        return moves;
     }
 }
