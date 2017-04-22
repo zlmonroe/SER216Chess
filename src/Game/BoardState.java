@@ -84,12 +84,16 @@ public class BoardState {
     public BoardState move(Point moveStart, Point moveEnd){
         Piece[][] newBoard = new Piece[8][8];
         for (int i = 0; i < 8; i++) {
-            System.arraycopy(board[i], 0, newBoard[i], 0, 8);
+            for (int j = 0; j < 8; j++) {
+                if (null != board[i][j])
+                    newBoard[i][j] = board[i][j].clone();
+            }
         }
         newBoard[moveEnd.x][moveEnd.y] = newBoard[moveStart.x][moveStart.y];
         newBoard[moveEnd.x][moveEnd.y].setPosition(moveEnd);
-        newBoard[moveStart.x][moveStart.y] = null;
-        return new BoardState(board);
+        if (!moveStart.equals(moveEnd))
+            newBoard[moveStart.x][moveStart.y] = null;
+        return new BoardState(newBoard);
     }
 
     @Override
