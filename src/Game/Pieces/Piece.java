@@ -16,16 +16,17 @@ public abstract class Piece {
     /* Indentifier
      *  Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5
      */
-    protected int identifier;
+    public final int identifier;
 
     /**
      * Constructor for piece
      * @param start starting position point
      * @param isWhite is the piece a white piece
      */
-    public Piece(Point start, boolean isWhite) {
+    public Piece(Point start, boolean isWhite, int identifier) {
         this.position = start;
         this.isWhite = isWhite;
+        this.identifier = identifier;
     }
 
     @Override

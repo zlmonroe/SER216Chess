@@ -2,11 +2,8 @@
 
 package Game.Pieces;
 
-import Game.BoardState;
-
-import java.awt.Point;
+import java.awt.*;
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class Pawn extends Piece{
 
@@ -14,10 +11,9 @@ public class Pawn extends Piece{
     private boolean jumpedTwoLast;
 
     public Pawn(Point start, boolean isWhite) {
-        super(start, isWhite);
+        super(start, isWhite,0);
         this.movedBefore = false;
         this.jumpedTwoLast = false;
-        this.identifier = 0;
     }
 
     @Override
