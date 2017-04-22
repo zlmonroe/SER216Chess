@@ -27,6 +27,8 @@ public abstract class Piece {
         this.position = start;
     }
 
+    //Mutators
+
     public Point getPosition() {
         return position;
     }
