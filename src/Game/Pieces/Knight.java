@@ -14,6 +14,7 @@ public class Knight extends Piece {
         this.identifier = 1;
     }
 
+    @Override
     public LinkedList<Point> getMoves() {
         LinkedList<Point> moves = new LinkedList<>();
 

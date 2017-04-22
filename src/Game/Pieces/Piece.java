@@ -10,7 +10,6 @@ import java.util.LinkedList;
  */
 public abstract class Piece {
     protected Point position;
-    protected Point oldPosition;
     protected boolean isWhite;
     protected static BoardState board;
     /* Indentifier
@@ -33,14 +32,6 @@ public abstract class Piece {
 
     public void setPosition(Point position) {
         this.position = position;
-    }
-
-    public Point getOldPosition() {
-        return oldPosition;
-    }
-
-    public void setOldPosition(Point oldPosition) {
-        this.oldPosition = oldPosition;
     }
 
     public boolean isWhite() {
