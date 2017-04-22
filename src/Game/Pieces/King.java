@@ -7,8 +7,8 @@ import java.util.LinkedList;
 
 public class King extends Piece {
 
-    public King(Point start, boolean isWhite, BoardState board) {
-        super(start, isWhite, board);
+    public King(Point start, boolean isWhite) {
+        super(start, isWhite);
         this.identifier = 5;
     }
 
