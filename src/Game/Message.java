@@ -1,9 +1,11 @@
 package Game;
 
+import java.io.Serializable;
+
 /**
  * Created by tjcup on 4/19/2017.
  */
-public class Message {
+public class Message implements Serializable {
     public boolean isWhite;
     public Move newMove;
     public String newMessage;
