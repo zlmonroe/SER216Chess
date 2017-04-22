@@ -1,7 +1,7 @@
 package Game.Pieces;
 
 import Game.BoardState;
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -10,9 +10,9 @@ import java.util.LinkedList;
  */
 public abstract class Piece {
     protected Point position;
-    protected Point oldPosition;
+    //protected Point oldPosition;
     protected boolean isWhite;
-    protected static BoardState board;
+    protected BoardState board;
     /* Indentifier
      *  Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5
      */
@@ -35,20 +35,20 @@ public abstract class Piece {
         this.position = position;
     }
 
-    public Point getOldPosition() {
+    /*public Point getOldPosition() {
         return oldPosition;
     }
 
     public void setOldPosition(Point oldPosition) {
         this.oldPosition = oldPosition;
-    }
+    }*/
 
     public boolean isWhite() {
         return isWhite;
     }
 
-    public static void setBoardState(BoardState board) {
-        Piece.board = board;
+    public void setBoardState(BoardState board) {
+        this.board = board;
     }
 
     public int getIdentifier() {
@@ -60,4 +60,6 @@ public abstract class Piece {
     }
 
     public abstract LinkedList<Point> getMoves();
+
+    public abstract Piece copyOf();
 }
