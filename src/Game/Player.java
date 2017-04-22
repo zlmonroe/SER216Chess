@@ -8,9 +8,8 @@ public class Player {
 	public static BoardState state;
 	private boolean isWhite;
 	
-	public Player(boolean w, BoardState s){
+	public Player(boolean w){
 		isWhite = w;
-		state = s;
 	}
 	
 	public boolean inCheck(BoardState tmp){
@@ -61,6 +60,7 @@ public class Player {
 				return pieces.get(i);
 			}
 		}
+		return null;
 	}
 
 }

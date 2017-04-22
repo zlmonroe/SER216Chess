@@ -25,7 +25,10 @@ public abstract class Piece {
      */
     public Piece(Point start, boolean isWhite) {
         this.position = start;
+        this.isWhite = isWhite;
     }
+
+    //Mutators
 
     public Point getPosition() {
         return position;
@@ -33,14 +36,6 @@ public abstract class Piece {
 
     public void setPosition(Point position) {
         this.position = position;
-    }
-
-    public Point getOldPosition() {
-        return oldPosition;
-    }
-
-    public void setOldPosition(Point oldPosition) {
-        this.oldPosition = oldPosition;
     }
 
     public boolean isWhite() {
@@ -61,5 +56,5 @@ public abstract class Piece {
 
     public abstract LinkedList<Point> getMoves();
 
-    public abstract Piece copyOf();
+    public abstract Piece clone();
 }

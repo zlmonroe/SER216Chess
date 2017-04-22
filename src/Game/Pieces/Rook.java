@@ -34,4 +34,9 @@ public class Rook extends Piece {
 
         return moves;
     }
+
+    @Override
+    public Piece clone() {
+        return new Rook(new Point(this.getPosition()), this.isWhite);
+    }
 }

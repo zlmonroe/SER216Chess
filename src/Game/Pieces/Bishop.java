@@ -34,4 +34,9 @@ public class Bishop extends Piece {
 
         return moves;
     }
+
+    @Override
+    public Piece clone() {
+        return new Bishop(new Point(this.getPosition()), this.isWhite);
+    }
 }
