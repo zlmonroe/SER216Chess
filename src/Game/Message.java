@@ -8,9 +8,17 @@ public class Message {
     public Move newMove;
     public String newMessage;
     public String newGameInfo;
-    public Long timeLeft;
+    public long timeLeft;
 
-    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, Long timeLeft) {
+    /**
+     * Creates a new message to be passed between the server and client
+     * @param isWhite True if it is the white player's turn
+     * @param newMove Representation of an attempted move
+     * @param newMessage New message to send out
+     * @param newGameInfo New information about the game
+     * @param timeLeft Amount of time remaining for the current player, in ms
+     */
+    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, long timeLeft) {
         this.isWhite = isWhite;
         this.newMove = newMove;
         this.newMessage = newMessage;
