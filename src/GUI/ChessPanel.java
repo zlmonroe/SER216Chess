@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.*;
 
+import Game.Player;
 import Game.Pieces.*;
 
 
@@ -13,12 +14,12 @@ import Game.Pieces.*;
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
     private final int boardSize = 600;
-    OldPlayerClass P1, P2;
+    Player P1, P2;
 
     ChessPanel() {
         //make new players
-        P1 = new OldPlayerClass(P2, true);
-        P2 = new OldPlayerClass(P1, false);
+        P1 = new Player(true);
+        P2 = new Player(false);
     }
 
     @Override
@@ -43,8 +44,8 @@ public class ChessPanel extends JPanel {
         drawPieces(P2, g2);
     }
 
-    public void drawPieces(OldPlayerClass oldPlayerClass, Graphics2D g2) {
-        for (Piece p : oldPlayerClass.pieces) {
+    public void drawPieces(Player Player, Graphics2D g2) {
+        for (Piece p : Player.pieces) {
             p.setPixels(boardSize / 8 * p.returnX(), boardSize / 8 * p.returnY());
             int x = p.getPixelX(), y = p.getPixelY();
             Image img = p.returnPieceImage();

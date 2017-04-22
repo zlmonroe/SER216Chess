@@ -12,6 +12,11 @@ public class Player {
 		isWhite = w;
 	}
 	
+	/**
+	 * Returns true if the player would be in check with the temporary board state provided
+	 * @param tmp - temporary board state 
+	 * @return 
+	 */
 	public boolean inCheck(BoardState tmp){
 		Piece king = getKing();
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
@@ -21,6 +26,11 @@ public class Player {
         }
         return false;
 	}
+	
+	/**
+	 * Returns true if there is no possible move that the player can make to move them out of check
+	 * @return
+	 */
 	
 	public boolean inCheckMate(){
 		if(!inCheck(state)){
@@ -37,6 +47,13 @@ public class Player {
 		}
 		return false;
 	}
+	
+	/**
+	 * Attempts to move the piece at point start to point end. Returns true if the move is successful, false if the move would result in check
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public boolean move(Point start, Point end){
 		Piece piece = state.getPieceAt(start);
 		LinkedList<Point> pieceMoves = piece.getMoves();
