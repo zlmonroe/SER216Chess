@@ -8,9 +8,8 @@ public class Player {
 	public static BoardState state;
 	private boolean isWhite;
 	
-	public Player(boolean w, BoardState s){
+	public Player(boolean w){
 		isWhite = w;
-		state = s;
 	}
 	
 	public boolean inCheck(BoardState tmp){
@@ -18,8 +17,7 @@ public class Player {
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
             if (enemyPiece.canMove(king.getPosition())) {
                 return true;
-            }
-        }
+            }D
         return false;
 	}
 	
