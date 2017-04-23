@@ -35,17 +35,10 @@ public class ChessPanel extends JPanel {
             }
         }
 
-        drawPieces(P1, g2);
-        drawPieces(P2, g2);
     }
 
-    public void drawPieces(Player Player, Graphics2D g2) {
-        for (Piece p : Player.pieces) {
-            p.setPixels(boardSize / 8 * p.returnX(), boardSize / 8 * p.returnY());
-            int x = p.getPixelX(), y = p.getPixelY();
-            Image img = p.returnPieceImage();
-            g2.drawImage(img, x + boardSize / 40, y, boardSize / 13, boardSize / 10, this);
-        }
+    public void drawPieces(int[][] pieceLocations, Graphics2D g2) {
+
     }
 }
 */
