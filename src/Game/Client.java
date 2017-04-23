@@ -9,19 +9,21 @@ import java.net.Socket;
 /**
  * Created by tjcup on 4/22/2017.
  */
-public class Client {
+public class Client extends JFrame {
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private Message message;
-    JFrame testFrame;
+    protected Message message;
     private boolean isWhite;
 
-    public Client(int portNum) {
+    public Client() {
+
+    }
+    public void startClient(String host, int port){
         try {
-            Socket client = new Socket("127.0.0.1", portNum);
+            Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
-            //client2.setSoTimeout(500);
+            client.setSoTimeout(500);
         } catch (IOException e) {
             System.out.println("No Server Found");
         }
@@ -39,17 +41,16 @@ public class Client {
                 out.writeObject(new Message(true, null, chatMessage, "", System.currentTimeMillis()));
             } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("Try starting the server first!!!");
             }
         }
     }
-    public Message recieve(){
+    public void recieve(){
         try {
             message = (Message)in.readObject();
         } catch (IOException e) {
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
-        return message;
     }
+
 }

@@ -19,6 +19,7 @@ public class ChatPanel extends JPanel{
         sendButton = new JButton();
         textAreaScroll = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         textArea.setBorder(new TitledBorder("Chat History"));
+        textArea.setEnabled(false);
         setSize(200, 300);
         sendButton.setSize(80,30);
         sendButton.setLocation(50,230);

@@ -25,7 +25,11 @@ public class GameServer {
     private ObjectInputStream blackIn;
 
     public static void main(String[] args){
-        new GameServer(Integer.parseInt(args[0]));
+        if(args.length>0){
+            new GameServer(Integer.parseInt(args[0]));
+        }
+        else
+            new GameServer(5000);
     }
     public GameServer(int portNum){
         whiteConnected = false;
