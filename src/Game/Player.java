@@ -18,6 +18,7 @@ public class Player {
 	 * @return 
 	 */
 	public boolean inCheck(BoardState tmp){
+		if(tmp == null) return false; //added for testing
 		Piece king = getKing();
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
             if (enemyPiece.canMove(king.getPosition())) {
@@ -41,11 +42,11 @@ public class Player {
 			for(Point move: piece.getMoves()){
 				BoardState tmp = state.move(piece.getPosition(), move);
 				if(!inCheck(tmp)){
-					return true;
+					return false;
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**
