@@ -43,7 +43,8 @@ public class TestPlayerMocks {
 		Piece mockKing = createMockKing(kingPoint, kingMoves);
 		Piece mockQueen = createMockQueen(queenPoint, queenMoves);
 		
-		//Creating mock fncs for mockState1
+		//Creating mock fncs for mockState1ds
+		//f
 		if(countBases > 0){
 			blackPieces.add(mockKing);
 			whitePieces.add(mockQueen);

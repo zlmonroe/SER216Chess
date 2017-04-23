@@ -47,7 +47,7 @@ public class TestPlayer {
 		Player.state = mocks.mockState1;//testing inCheck for mockState1
 		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can get the queen
 		Player.state = mocks.mockState2;
-		assertTrue(player1.inCheckMate());
+		assertTrue(player1.inCheckMate()); //d
 	}
 
 	
