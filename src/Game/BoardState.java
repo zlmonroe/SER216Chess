@@ -56,9 +56,11 @@ public class BoardState {
     /**
      * Get the piece at a particular location on in the board
      * @param p The point at which to get the piece
-     * @return The piece at p, or null if none
+     * @return The piece at p, or null if none or out of bounds
      */
     public Piece getPieceAt(Point p){
+        if (p.x < 0 || p.x > 7 || p.y < 0 || p.y > 7)
+            return null;
         return board[p.x][p.y];
     }
 

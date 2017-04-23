@@ -6,11 +6,11 @@ import java.io.Serializable;
  * Created by tjcup on 4/19/2017.
  */
 public class Message implements Serializable {
-    public boolean isWhite;
-    public Move newMove;
-    public String newMessage;
-    public String newGameInfo;
-    public long timeLeft;
+    public final boolean isWhite;
+    public final Move newMove;
+    public final String newMessage;
+    public final String newGameInfo;
+    public final long timeLeft;
 
     /**
      * Creates a new message to be passed between the server and client
