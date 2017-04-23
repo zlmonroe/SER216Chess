@@ -1,4 +1,4 @@
-/*package GUI;
+package GUI;
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,4 +44,3 @@ public class MainGUIWindow extends JFrame {
         new MainGUIWindow();
     }
 }
-*/

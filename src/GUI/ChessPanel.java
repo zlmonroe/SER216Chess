@@ -1,4 +1,4 @@
-/*package GUI;
+package GUI;
 
 import Game.Player;
 
@@ -41,4 +41,3 @@ public class ChessPanel extends JPanel {
 
     }
 }
-*/
