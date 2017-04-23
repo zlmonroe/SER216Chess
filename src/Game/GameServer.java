@@ -11,6 +11,11 @@ import java.net.Socket;
 public class GameServer {
     private Player whitePlayer;
     private Player blackPlayer;
+    private Socket whiteSocket;
+    private Socket blackSocket;
+    private boolean whiteConnected;
+    private boolean blackConnected;
+    private Message message;
     private ObjectOutputStream whiteOut;
     private ObjectInputStream whiteIn;
     private ObjectOutputStream blackOut;
@@ -24,15 +29,15 @@ public class GameServer {
             new GameServer(5000);
     }
     public GameServer(int portNum){
-        boolean whiteConnected = false;
-        boolean blackConnected = false;
+        whiteConnected = false;
+        blackConnected = false;
         whitePlayer = new Player(true);
         blackPlayer = new Player(false);
         try{
             ServerSocket serverSocket = new ServerSocket(portNum);
-            Socket whiteSocket = serverSocket.accept();
+            whiteSocket = serverSocket.accept();
             whiteConnected = true;
-            Socket blackSocket = serverSocket.accept();
+            blackSocket = serverSocket.accept();
             blackConnected = true;
             System.out.println("All Connected");
 
@@ -41,8 +46,8 @@ public class GameServer {
 
             blackOut = new ObjectOutputStream(blackSocket.getOutputStream());
             blackIn =  new ObjectInputStream(blackSocket.getInputStream());
-            whiteOut.writeObject(new Message(true,null,"","",0, null));
-            blackOut.writeObject(new Message(false,null,"","",0,null));
+            whiteOut.writeObject(new Message(true,null,null,null,0));
+            blackOut.writeObject(new Message(false,null,null,null,0));
             blackSocket.setSoTimeout(500);
             whiteSocket.setSoTimeout(500);
 
@@ -51,7 +56,6 @@ public class GameServer {
 
         }
         while(whiteConnected && blackConnected) {
-            Message message;
             try {
                 message = (Message) whiteIn.readObject();
                 System.out.println("White sent: " + message.newMessage);

@@ -37,7 +37,7 @@ public class Client implements Runnable{
         if (chatMessage != null) {
             System.out.println("Message Sent: " + chatMessage.trim());
             try {
-                out.writeObject(new Message(true, null, chatMessage, "", System.currentTimeMillis(), null));
+                out.writeObject(new Message(true, null, chatMessage, null, System.currentTimeMillis()));
                 out.reset();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -50,9 +50,7 @@ public class Client implements Runnable{
                 try {
                     messages.add((Message) in.readObject());
                     Thread.sleep(100);
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | InterruptedException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
