@@ -75,20 +75,20 @@ public class ChatPanel extends JPanel {
         
         //Action listener for "enter" key
         textField.addKeyListener(new KeyListener() {
-            public void keyPressed(KeyEvent e) {
-            	if( e.getKeyChar()=='\n') {//if the key pressed is te enter key, ie new line, do this
-            		//adds whatever was in the text field to the text area
-                    textArea.append("\n"+textField.getText());
-                    if(I_am_What) {//If it is the server
-                        Send_text_server();
-                        textField.setText(null);
-                    } else {//if it is the client
-                        Send_text_chat();
-                        textField.setText(null);
+                public void keyPressed(KeyEvent e) {
+                    if( e.getKeyChar()=='\n') {//if the key pressed is te enter key, ie new line, do this
+                        //adds whatever was in the text field to the text area
+                        textArea.append("\n"+textField.getText());
+                        if(I_am_What) {//If it is the server
+                            Send_text_server();
+                            textField.setText(null);
+                        } else {//if it is the client
+                            Send_text_chat();
+                            textField.setText(null);
+                        }
+
                     }
-                    
                 }
-            }
             //useless fncs that are part of the interface
             public void keyReleased(KeyEvent e) {
             }
