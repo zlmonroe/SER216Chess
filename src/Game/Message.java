@@ -13,6 +13,7 @@ public class Message implements Serializable {
     public final String newMessage;
     public final String newGameInfo;
     public final long timeLeft;
+    public int[][] boardLayout;
 
     /**
      * Creates a new message to be passed between the server and client
@@ -21,12 +22,14 @@ public class Message implements Serializable {
      * @param newMessage New message to send out
      * @param newGameInfo New information about the game
      * @param timeLeft Amount of time remaining for the current player, in ms
+     * @param boardLayout 8x8 int array representing layout of chessboard 0,0 corresponds to A8, 0,7 to H8
      */
-    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, long timeLeft) {
+    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, long timeLeft, int[][] boardLayout) {
         this.isWhite = isWhite;
         this.newMove = newMove;
         this.newMessage = newMessage;
         this.newGameInfo = newGameInfo;
         this.timeLeft = timeLeft;
+        this.boardLayout = boardLayout;
     }
 }

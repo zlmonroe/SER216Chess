@@ -1,5 +1,6 @@
 package GUI;
 
+import Game.ChessTimer;
 import Game.Client;
 import Game.Message;
 
@@ -12,13 +13,14 @@ import java.awt.event.KeyListener;
 
 
 public class MainGUIWindow extends JFrame {
-    ToolPanel tools;
-    StatusPanel status;
-    ChatPanel chat;
-    ChessPanel chess;
-    StartPanel start;
-    Client client;
+    private ToolPanel tools;
+    private StatusPanel status;
+    private ChatPanel chat;
+    private ChessPanel chess;
+    private StartPanel start;
+    private Client client;
     private Timer timer;
+    private ChessTimer chessTimer;
 
 
     MainGUIWindow() {
@@ -36,7 +38,7 @@ public class MainGUIWindow extends JFrame {
         chat = new ChatPanel();
         chess = new ChessPanel();
         start = new StartPanel();
-        chess.setSize(600,600);
+        chessTimer = new ChessTimer(5*60);
 
         chat.sendButton.addActionListener(new ActionListener() {
             @Override
@@ -92,7 +94,7 @@ public class MainGUIWindow extends JFrame {
 
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
-        pane.add(start, c);
+        pane.add(chess, c);
         c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 3; c.weightx = .3; c.weighty = .05;
         pane.add(status, c);
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
