@@ -35,11 +35,9 @@ public class ChessPanel extends JPanel {
             }
         }
 
-        drawPieces(P1, g2);
-        drawPieces(P2, g2);
     }
 
-    public void drawPieces(Player Player, Graphics2D g2) {
+    public void drawPieces(int[][] pieceLocations, Graphics2D g2) {
 
     }
 }
