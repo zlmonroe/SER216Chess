@@ -9,10 +9,10 @@ import java.net.Socket;
 /**
  * Created by tjcup on 4/22/2017.
  */
-public class Client extends JFrame {
+public class Client implements Runnable{
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    protected Message message;
+    public Message message;
     private boolean isWhite;
 
     public Client() {
@@ -23,7 +23,7 @@ public class Client extends JFrame {
             Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
-            client.setSoTimeout(500);
+            //client.setSoTimeout(500);
         } catch (IOException e) {
             System.out.println("No Server Found");
         }
@@ -45,12 +45,17 @@ public class Client extends JFrame {
             }
         }
     }
-    public void recieve(){
-        try {
-            message = (Message)in.readObject();
-        } catch (IOException e) {
-        } catch (ClassNotFoundException e) {
+        public void run(){
+            while(true) {
+                try {
+                    message = (Message) in.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
-    }
 
 }

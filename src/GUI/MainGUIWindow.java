@@ -12,17 +12,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
-public class MainGUIWindow extends Client {
+public class MainGUIWindow extends JFrame {
     ToolPanel tools;
     StatusPanel status;
     ChatPanel chat;
     ChessPanel chess;
     StartPanel start;
+    Client client;
 
 
     MainGUIWindow() {
 
         //Begin GUI setup
+        client = new Client();
         Container pane = this.getContentPane();
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -40,7 +42,7 @@ public class MainGUIWindow extends Client {
             @Override
             public void actionPerformed(ActionEvent e) {
                 chat.textArea.append(chat.textField.getText()+"\n");
-                send(chat.textField.getText());
+                client.send(chat.textField.getText());
                 chat.textField.setText(null);
             }
         });
@@ -54,7 +56,7 @@ public class MainGUIWindow extends Client {
             public void keyPressed(KeyEvent e) {
                 if( e.getKeyChar()=='\n') {
                     chat.textArea.append(chat.textField.getText()+"\n");
-                    send(chat.textField.getText());
+                    client.send(chat.textField.getText());
                     chat.textField.setText(null);
                 }
             }
@@ -66,12 +68,12 @@ public class MainGUIWindow extends Client {
         start.startClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainGUIWindow.super.startClient(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
+                client.startClient(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
                 pane.remove(start);
                 c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
                 pane.add(chess, c);
                 paint();
-                //loop();
+                loop();
             }
         });
 
@@ -100,25 +102,21 @@ public class MainGUIWindow extends Client {
 
     public void loop(){
         while (true){
-            super.recieve();
-            if(message!= null)
-                chat.append(message.newMessage);
+            if(client.message!= null) {
+                if (client.message.newMessage != null)
+                    chat.append(client.message.newMessage);
+            }
             paint();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     private void paint(){
         for(Component c: getComponents())
             c.repaint();
-        while(true) {
-            super.recieve();
-            chess.repaint();
-            if (message != null) {
-                if (message.newMessage != null)
-                    chat.append(message.newMessage);
 
-            }
-            for(Component c: getComponents())
-                c.repaint();
-        }
     }
 }
