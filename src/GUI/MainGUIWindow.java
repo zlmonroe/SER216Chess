@@ -34,7 +34,7 @@ public class MainGUIWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
 
-        this.setSize(800, 700);
+        this.setSize(835, 680);
         this.setResizable(false);
         this.setVisible(true);
 

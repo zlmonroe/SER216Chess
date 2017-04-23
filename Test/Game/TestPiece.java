@@ -204,7 +204,7 @@ public class TestPiece {
 
         LinkedList<Point> moves = new LinkedList<>();
 
-        //kings moves
+        //knight moves
         moves.add(new Point(0,5));
         moves.add(new Point(2,5));
         moves.add(new Point(3,4));
