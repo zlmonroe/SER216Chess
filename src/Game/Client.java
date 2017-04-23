@@ -15,15 +15,11 @@ public class Client implements Runnable{
     public Message message;
     private boolean isWhite;
 
-    public Client() {
-
-    }
-    public void startClient(String host, int port){
+    public Client(String host, int port) {
         try {
             Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
-            (new Thread(this)).start();
             //client.setSoTimeout(500);
         } catch (IOException e) {
             System.out.println("No Server Found");

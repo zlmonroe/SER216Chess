@@ -24,7 +24,7 @@ public class MainGUIWindow extends JFrame {
     MainGUIWindow() {
 
         //Begin GUI setup
-        client = new Client();
+        //client = new Client();
         Container pane = this.getContentPane();
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -68,11 +68,17 @@ public class MainGUIWindow extends JFrame {
         start.startClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.startClient(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
+                client= new Client(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
+                (new Thread(client)).start();
                 pane.remove(start);
                 c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
                 pane.add(chess, c);
                 paint();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
                 loop();
             }
         });
