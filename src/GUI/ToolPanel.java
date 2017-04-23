@@ -14,64 +14,29 @@ import javax.swing.JTextField;
 
 public class ToolPanel extends JPanel {
 
+    //the panel with the history of piece moves in it
     private final HistoryList historyList = new HistoryList();
+    //the two chess timer objects that need to be replaced
     private ChessTimer chessTimer1;
     private ChessTimer chessTimer2;
 
     public ToolPanel() {
-
-        setSize(200, 350);
-        setLocation(600, 0);
         setLayout(null);
 
-        JTextField JLturn1 = new JTextField(" P2  Turn ");
-        JLturn1.setSize(60, 25);
-        JLturn1.setLocation(20, 10);
-        JLabel Screen1 = new JLabel();
-        Screen1.setSize(100, 25);
-        Screen1.setLocation(90, 25);
-
-        JTextField JLblack = new JTextField("  Black ");
+        JLabel JLblack = new JLabel("  Black ");
         JLblack.setSize(60, 25);
         JLblack.setLocation(20, 34);
-
-        JLturn1.setEnabled(false);
-        JLturn1.setBackground(Color.ORANGE);
-        JLturn1.setDisabledTextColor(Color.BLACK);
-        JLturn1.setFont(new Font("Arial", Font.BOLD, 12));
-
-        JLblack.setEnabled(false);
         JLblack.setBackground(new Color(230, 12, 0));
-        JLblack.setFont(new Font("Arial", Font.BOLD, 12));
-        JLblack.setDisabledTextColor(Color.BLACK);
+        JLblack.setOpaque(true);
 
-        JTextField JLturn2 = new JTextField(" P1  Turn ");
-        JLturn2.setSize(60, 25);
-        JLturn2.setLocation(20, 254);
-        JLabel Screen2 = new JLabel();
-        Screen2.setSize(100, 25);
-        Screen2.setLocation(90, 254);
-
-        JTextField JLwhite = new JTextField("  White ");
+        JLabel JLwhite = new JLabel("  White ");
         JLwhite.setSize(60, 25);
         JLwhite.setLocation(20, 230);
-
-        JLturn2.setEnabled(false);
-        JLturn2.setBackground(Color.ORANGE);
-        JLturn2.setDisabledTextColor(Color.BLACK);
-        JLturn2.setFont(new Font("Arial", Font.BOLD, 12));
-
-        JLwhite.setEnabled(false);
         JLwhite.setBackground(new Color(230, 12, 0));
-        JLwhite.setFont(new Font("Arial", Font.BOLD, 12));
-        JLwhite.setDisabledTextColor(Color.BLACK);
+        JLwhite.setOpaque(true);
 
-        add(JLturn1);
         add(JLblack);
-        add(JLturn2);
         add(JLwhite);
-        add(Screen1);
-        add(Screen2);
 
         JScrollPane historyScroll = new JScrollPane(historyList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         historyScroll.setSize(150, 150);
@@ -80,7 +45,7 @@ public class ToolPanel extends JPanel {
     }
 
     public void add_to_History(Object newItem) {
-        historyList.addElemen_tolist(newItem);
+        historyList.addToList(newItem);
     }
 
     public void start_Again() {
@@ -91,8 +56,8 @@ public class ToolPanel extends JPanel {
         chessTimer2.start();
         chessTimer2.pause();
 
-        historyList.clean_list();
-        historyList.addElemen_tolist("OldPlayerClass: New Moves");
+        historyList.cleanList();
+        historyList.addToList("Move History:");
 
     }
 
@@ -101,20 +66,21 @@ public class ToolPanel extends JPanel {
     }
 
     private class HistoryList extends JList {
+        private DefaultListModel listModel;
+
         HistoryList() {
+            listModel = new DefaultListModel();
             this.setBackground(Color.ORANGE);
             setModel(listModel);
-            listModel.addElement("OldPlayerClass: New Moves");
+            listModel.addElement("Move History:");
         }
 
-        public void clean_list() {
+        public void cleanList() {
             listModel.clear();
         }
 
-        public void addElemen_tolist(Object newItem) {
+        public void addToList(Object newItem) {
             listModel.addElement(newItem);
         }
-
-        private DefaultListModel listModel = new DefaultListModel();
     }
 }
