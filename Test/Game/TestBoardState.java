@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 /**
  * Created by jon on 4/22/2017.
  */
-class BoardStateTest {
+class TestBoardState {
     BoardState bs;
 
     @BeforeEach

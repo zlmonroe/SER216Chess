@@ -5,7 +5,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestPiece.class
+        TestBoardState.class,
+        TestPiece.class,
+        TestPlayer.class
 })
 
 public class TestSuite {

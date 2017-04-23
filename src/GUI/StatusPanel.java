@@ -25,7 +25,7 @@ public class StatusPanel extends JPanel {
         statusLabel.setLocation(5,5);
         statusLabel.setText(" Start New Game ");
         statusLabel.setBackground(Color.lightGray);
-        statusLabel.setFont(new Font("Aril",Font.BOLD,11));
+        statusLabel.setFont(new Font("Ariel",Font.BOLD,11));
         statusLabel.setForeground(Color.RED.brighter());
         statusLabel.setBorder(LabelBorder);
         add(statusLabel);
