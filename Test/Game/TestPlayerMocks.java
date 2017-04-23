@@ -15,9 +15,9 @@ public class TestPlayerMocks {
 	public BoardState mockState2x1;
 	
 	public TestPlayerMocks(){
-		mockState1 = createMock1(createMockBase());
 		mockState1x2 = createMock1x2();
 		mockState1x3 = createMock1x3();
+		mockState1 = createMock1(createMockBase());
 		mockState2 = createMock2(createMockBase());
 
 	}

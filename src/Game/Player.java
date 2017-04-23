@@ -65,8 +65,6 @@ public class Player {
 			return false;
 		}
 		state = tmp;
-		piece = state.getPieceAt(start);
-		piece.setPosition(end);
 		return true;
 	}
 	
