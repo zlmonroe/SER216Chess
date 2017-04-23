@@ -24,9 +24,6 @@ public class ToolPanel extends JPanel {
         setLocation(600, 0);
         setLayout(null);
 
-        JLabel TimDesc1 = new JLabel(" ChessTimer 1");
-        JLabel TimDesc2 = new JLabel(" ChessTimer 2");
-
         JTextField JLturn1 = new JTextField(" P2  Turn ");
         JLturn1.setSize(60, 25);
         JLturn1.setLocation(20, 10);
