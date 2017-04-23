@@ -17,7 +17,9 @@ public class StartPanel extends JPanel {
         label1 = new JLabel("Server IP Address");
         label2 = new JLabel("Port Number");
         IPAddressField = new JTextField();
+        IPAddressField.setText("localhost");
         PortNumField = new JTextField();
+        PortNumField.setText("5000");
         startClient = new JButton("Start Client");
         //this.setSize(300,300);
 
