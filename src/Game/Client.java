@@ -23,6 +23,7 @@ public class Client implements Runnable{
             Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
+            (new Thread(this)).start();
             //client.setSoTimeout(500);
         } catch (IOException e) {
             System.out.println("No Server Found");
