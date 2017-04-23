@@ -7,26 +7,18 @@ import Game.Pieces.*;
 import static org.mockito.Mockito.*;
 
 public class TestPlayerMocks {
-	
-	Piece mockKing; //creates mock king
-	Piece mockQueen;//creates mock queen;
-	Piece mockBiship;
 
-	BoardState mockState1;
-	BoardState mockState1x2;
-	BoardState mockState1x3;
-	BoardState mockState2;
-	BoardState mockState2x1;
+	public BoardState mockState1;
+	public BoardState mockState1x2;
+	public BoardState mockState1x3;
+	public BoardState mockState2;
+	public BoardState mockState2x1;
 	
 	public TestPlayerMocks(){
 		mockState1 = createMock1(createMockBase());
 		mockState1x2 = createMock1x2();
 		mockState1x3 = createMock1x3();
 		mockState2 = createMock2(createMockBase());
-		//mockState2x1;
-		mockKing = mock(King.class); //creates mock king
-		mockQueen = mock(Queen.class); //creates mock queen;
-		mockBiship = mock(Bishop.class);
 
 	}
 
@@ -43,8 +35,8 @@ public class TestPlayerMocks {
 		//list of all relevant moves possible by the queen (according to chess rules)
 		Point[] queenMoves = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,6), new Point(2,7)};
 		
-		createMockKing(kingPoint, kingMoves);
-		createMockQueen(queenPoint, queenMoves);
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		Piece mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//Creating mock fncs for mockState1
 		LinkedList<Piece> blackPieces = new LinkedList(); //linked list with all of black pieces
@@ -77,8 +69,7 @@ public class TestPlayerMocks {
 		Point kingPoint = new Point(1, 6);
 		//list of all moves possible by the king (according to chess rules)
 		Point[] kingMoves = {new Point(0,7), new Point(0,6), new Point(0,5), new Point(1,7), new Point(1,5),new Point(2,5), new Point(2,6), new Point(2,7)};
-		createMockKing(kingPoint, kingMoves);
-		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
 		//Creating mock fncs for mockState1
 		LinkedList<Piece> blackPieces = new LinkedList(); //linked list with all of black pieces
 		blackPieces.add(mockKing);
@@ -100,8 +91,8 @@ public class TestPlayerMocks {
 		//list of all relevant moves possible by the queen (according to chess rules)
 		Point[] queenMoves = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,6), new Point(2,7)};
 		
-		createMockKing(kingPoint, kingMoves);
-		createMockQueen(queenPoint, queenMoves);
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		Piece mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//Creating mock fncs for mockState1
 		LinkedList<Piece> blackPieces = new LinkedList(); //linked list with all of black pieces
@@ -116,29 +107,33 @@ public class TestPlayerMocks {
 		return tmpState;
 	}
 	
-	private void createMockKing(Point kingPoint, Point[] tmpPoints){
+	private King createMockKing(Point kingPoint, Point[] tmpPoints){
+		King tmpPiece= mock(King.class);
 		 //this is the point, b7, that the king is at
 		LinkedList<Point> kingMoves = new LinkedList();
 		for(Point p: tmpPoints){
 			kingMoves.add(p);
 		}
-		when(mockKing.isWhite()).thenReturn(false); //the king is black
-		when(mockKing.getPosition()).thenReturn(kingPoint); //the kings position should return a point 1, 7 (b7)
-		when(mockKing.getIdentifier()).thenReturn(5); //the king should return the number that identifies it as a king
-		when(mockKing.getMoves()).thenReturn(kingMoves);
+		when(tmpPiece.isWhite()).thenReturn(false); //the king is black
+		when(tmpPiece.getPosition()).thenReturn(kingPoint); //the kings position should return a point 1, 7 (b7)
+		when(tmpPiece.getIdentifier()).thenReturn(5); //the king should return the number that identifies it as a king
+		when(tmpPiece.getMoves()).thenReturn(kingMoves);
+		return tmpPiece;
 	}
 	
-	private void createMockQueen(Point queenPoint, Point[] tmpPoints){
+	private Queen createMockQueen(Point queenPoint, Point[] tmpPoints){
+		Queen tmpPiece= mock(Queen.class);
 		 //this is the point, b6, that the queen is at
 		LinkedList<Point> queenMoves = new LinkedList();
 		//only includes points that the king can move to
 		for(Point p: tmpPoints){
 			queenMoves.add(p);
 		}
-		when(mockQueen.isWhite()).thenReturn(true); //the queen is white
-		when(mockQueen.getPosition()).thenReturn(queenPoint); //the queens position should return a point 1, 6 (b6)
-		when(mockQueen.getMoves()).thenReturn(queenMoves);
-		when(mockQueen.canMove(new Point(1, 7))).thenReturn(true);// the queen has the ability to move forward, as is chess rules
+		when(tmpPiece.isWhite()).thenReturn(true); //the queen is white
+		when(tmpPiece.getPosition()).thenReturn(queenPoint); //the queens position should return a point 1, 6 (b6)
+		when(tmpPiece.getMoves()).thenReturn(queenMoves);
+		when(tmpPiece.canMove(new Point(1, 7))).thenReturn(true);// the queen has the ability to move forward, as is chess rules
+		return tmpPiece;
 	}
 	
 	private void createMockBishop(Point bishPoint, Point[] tmpPoints){
