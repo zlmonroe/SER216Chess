@@ -18,9 +18,9 @@ public class Player {
 	 * @return 
 	 */
 	public boolean inCheck(BoardState tmp){
-		Piece king = getKing();
+		Piece king = getKing(tmp);
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
-            if (enemyPiece.canMove(king.getPosition())) {
+            if (enemyPiece.getMoves().contains(king.getPosition())) {
                 return true;
             }
         }
@@ -70,8 +70,8 @@ public class Player {
 		return true;
 	}
 	
-	private Piece getKing(){
-		LinkedList<Piece> pieces = state.getPieces(isWhite);
+	private Piece getKing(BoardState board){
+		LinkedList<Piece> pieces = board.getPieces(isWhite);
 		for(int i = 0; i < pieces.size(); i++){
 			if(5 == pieces.get(i).getIdentifier()){//5 is the identifier for king, we check if this piece is the king
 				return pieces.get(i);
