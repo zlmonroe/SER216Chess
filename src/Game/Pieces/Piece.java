@@ -38,7 +38,7 @@ public abstract class Piece {
 
     @Override
     public int hashCode() {
-        return 7+ 67 * identifier + 31 * position.hashCode() + (isWhite ? 1:0);
+        return 7+ 67 * identifier + 31 * position.hashCode() + (isWhite ? 1231 : 1237);
     }
 
     //Mutators
