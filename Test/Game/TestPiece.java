@@ -135,30 +135,95 @@ public class TestPiece {
 
     @Test
     public void testGetMovesPawn() {
+        /*
+        Setup for the test
+         */
         BoardState mockState = mock(BoardState.class);
-
         Pawn pawn = new Pawn(new Point(2, 2), true);
         pawn.setBoardState(mockState);
-
         LinkedList<Point> moves = new LinkedList<>();
+
+        /*
+        Test the pawn for first move without collisions
+         */
 
         //one forward
         moves.add(new Point(2,3));
         //two forward
         moves.add(new Point(2,4));
 
-
         HashSet pawnMoveSet = new HashSet<>(pawn.getMoves());
         HashSet moveSet = new HashSet<>(moves);
 
-        assertEquals("Wrong move set when nothing is in its way", moveSet, pawnMoveSet);
+        assertEquals("Wrong move set when nothing is in its way and has not moved before", moveSet, pawnMoveSet);
 
-        when(mockState.getPieceAt(new Point(1, 3))).thenReturn(new Bishop(new Point(), true));
-        moves.remove(new Point(1, 3));
+        /*
+        Test the pawn for first move with collision
+         */
+
+        when(mockState.getPieceAt(new Point(2, 3))).thenReturn(new Bishop(new Point(), true));
+        moves.remove(new Point(2, 3));
+        moves.remove(new Point(2, 4));
 
         pawnMoveSet = new HashSet<>(pawn.getMoves());
         moveSet = new HashSet<>(moves);
 
-        assertEquals("Wrong move set when Piece is in its way", moveSet, pawnMoveSet);
+        assertEquals("Wrong move set when Piece is in its way and has not moved before", moveSet, pawnMoveSet);
+
+        /*
+        Test the pawn after moving no collision
+         */
+
+        when(mockState.getPieceAt(new Point(2, 3))).thenReturn(null);
+        pawn.setPosition(new Point(2, 4));
+
+        //one forward
+        moves.add(new Point(2,5));
+
+        pawnMoveSet = new HashSet<>(pawn.getMoves());
+        moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when it has moved and there is no Piece in the way", moveSet, pawnMoveSet);
+
+        moves.remove(new Point(2, 5));
+
+        when(mockState.getPieceAt(new Point(2, 5))).thenReturn(new Bishop(new Point(), true));
+
+        pawnMoveSet = new HashSet<>(pawn.getMoves());
+        moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when it has moved and there is a Piece in the way", moveSet, pawnMoveSet);
     }
+
+    @Test
+    public void testGetMovesKnight() {
+        BoardState mockState = mock(BoardState.class);
+
+        Knight knight = new Knight(new Point(1, 3), true);
+        knight.setBoardState(mockState);
+
+        LinkedList<Point> moves = new LinkedList<>();
+
+        //kings moves
+        moves.add(new Point(0,5));
+        moves.add(new Point(2,5));
+        moves.add(new Point(3,4));
+        moves.add(new Point(3,2));
+        moves.add(new Point(0,1));
+        moves.add(new Point(2,1));
+
+        HashSet knightMoveSet = new HashSet<>(knight.getMoves());
+        HashSet moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when nothing is in its way", moveSet, knightMoveSet);
+
+        when(mockState.getPieceAt(new Point(0, 5))).thenReturn(new Bishop(new Point(), true));
+        moves.remove(new Point(0, 5));
+
+        knightMoveSet = new HashSet<>(knight.getMoves());
+        moveSet = new HashSet<>(moves);
+
+        assertEquals("Wrong move set when Piece is in its way", moveSet, knightMoveSet);
+    }
+
 }
