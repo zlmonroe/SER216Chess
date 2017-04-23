@@ -1,15 +1,12 @@
 package Game.Pieces;
 
-import Game.BoardState;
-
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Rook extends Piece {
 
     public Rook(Point start, boolean isWhite) {
-        super(start, isWhite);
-        this.identifier = 3;
+        super(start, isWhite, 3);
     }
 
     @Override
@@ -23,12 +20,13 @@ public class Rook extends Piece {
         int[][] offsets = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
 
         for(int[] offset : offsets) {
-            for (int x = originX, y = originY; x < 8 && y < 8; x += offset[0], y += offset[1]) {
+            for (int x = originX + offset[0], y = originY + offset[1]; x < 8 && y < 8 && x >= 0 && y >= 0; x += offset[0], y += offset[1]) {
                 Point move = new Point(x, y);
                 Piece pieceAtMove = board.getPieceAt(move);
                 if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
                     moves.add(move);
                 }
+                else break;
             }
         }
 

@@ -2,11 +2,8 @@
 
 package Game.Pieces;
 
-import Game.BoardState;
-
-import java.awt.Point;
+import java.awt.*;
 import java.util.LinkedList;
-import java.util.Objects;
 
 public class Pawn extends Piece{
 
@@ -14,10 +11,9 @@ public class Pawn extends Piece{
     private boolean jumpedTwoLast;
 
     public Pawn(Point start, boolean isWhite) {
-        super(start, isWhite);
+        super(start, isWhite,0);
         this.movedBefore = false;
         this.jumpedTwoLast = false;
-        this.identifier = 0;
     }
 
     @Override
@@ -29,23 +25,25 @@ public class Pawn extends Piece{
         //left attack
         if (this.position.x > 0) {
             Point leftAttack = new Point(this.position.x - 1, this.position.y + direction);
-            if(board.getPieceAt(leftAttack).isWhite()) moves.add(leftAttack);
+            Piece piece = board.getPieceAt(leftAttack);
+            if(piece != null && piece.isWhite != isWhite) moves.add(leftAttack);
         }
         //right attack
         if (this.position.x < 7) {
             Point rightAttack = new Point(this.position.x + 1, this.position.y + direction);
-            if(board.getPieceAt(rightAttack).isWhite()) moves.add(rightAttack);
+            Piece piece = board.getPieceAt(rightAttack);
+            if(piece != null && piece.isWhite != isWhite) moves.add(rightAttack);
         }
         //forward
         Point oneForward = new Point(this.position.x, this.position.y + direction);
         if (!pieceInMyWay(oneForward)) {
             moves.add(oneForward);
-        }
-        //two forward
-        if (!movedBefore) {
-            Point twoForward = new Point(this.position.x, this.position.y + direction * 2);
-            if (!pieceInMyWay(twoForward)) {
-                moves.add(twoForward);
+            //two forward
+            if (!movedBefore) {
+                Point twoForward = new Point(this.position.x, this.position.y + direction * 2);
+                if (!pieceInMyWay(twoForward)) {
+                    moves.add(twoForward);
+                }
             }
         }
         return moves;
@@ -56,7 +54,7 @@ public class Pawn extends Piece{
 
         if(newPoint.x == this.position.x) {
             if(newPoint.y == (this.position.y + direction)) {
-                return board.getPieceAt(newPoint) == null;
+                return board.getPieceAt(newPoint) != null;
             }
             if(newPoint.y == (this.position.y + 2 * direction)) {
                 return board.getPieceAt(newPoint) != null &&
@@ -71,4 +69,10 @@ public class Pawn extends Piece{
         return new Pawn(new Point(this.getPosition()), this.isWhite);
     }
 
+    @Override
+    public void setPosition(Point position) {
+        this.position = position;
+        this.movedBefore = true;
+        this.jumpedTwoLast = (position.y == this.position.y + 2) && (position.x == this.position.x);
+    }
 }

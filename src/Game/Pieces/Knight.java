@@ -2,15 +2,13 @@
 
 package Game.Pieces;
 
-import Game.BoardState;
 import java.awt.*;
 import java.util.LinkedList;
 
 public class Knight extends Piece {
 
     public Knight(Point start, boolean isWhite) {
-        super(start, isWhite);
-        this.identifier = 1;
+        super(start, isWhite, 1);
     }
 
     @Override
@@ -20,10 +18,12 @@ public class Knight extends Piece {
         int[][] possibleMoves = {{-2,-1}, {-2,1}, {-1,-2}, {-1, 2}, {1, -2}, {1, 2}, {2, -1}, {2, 1}};
 
         for(int[] move : possibleMoves) {
-            Point possibleMove = new Point(move[0], move[1]);
-            Piece pieceAtMove = board.getPieceAt(possibleMove);
-            if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
-                moves.add(possibleMove);
+            Point possibleMove = new Point(this.position.x + move[0], this.position.y + move[1]);
+            if(possibleMove.x < 7 && possibleMove.x >= 0 && possibleMove.y < 7 && possibleMove.y >= 0) {
+                Piece pieceAtMove = board.getPieceAt(possibleMove);
+                if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
+                    moves.add(possibleMove);
+                }
             }
         }
 

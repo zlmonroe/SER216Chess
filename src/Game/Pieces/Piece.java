@@ -12,20 +12,33 @@ public abstract class Piece {
     protected Point position;
     protected Point oldPosition;
     protected boolean isWhite;
-    protected static BoardState board;
+    protected BoardState board;
     /* Indentifier
      *  Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5
      */
-    protected int identifier;
+    public final int identifier;
 
     /**
      * Constructor for piece
      * @param start starting position point
      * @param isWhite is the piece a white piece
      */
-    public Piece(Point start, boolean isWhite) {
+    public Piece(Point start, boolean isWhite, int identifier) {
         this.position = start;
         this.isWhite = isWhite;
+        this.identifier = identifier;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Piece)) return false;
+        Piece p = (Piece) o;
+        return this.position.equals(p.position) && this.isWhite == p.isWhite && this.identifier == p.identifier;
+    }
+
+    @Override
+    public int hashCode() {
+        return 7+ 67 * identifier + 31 * position.hashCode() + (isWhite ? 1231 : 1237);
     }
 
     //Mutators
@@ -42,9 +55,7 @@ public abstract class Piece {
         return isWhite;
     }
 
-    public static void setBoardState(BoardState board) {
-        Piece.board = board;
-    }
+    public void setBoardState(BoardState board) {this.board = board;}
 
     public int getIdentifier() {
         return this.identifier;

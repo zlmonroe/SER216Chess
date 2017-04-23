@@ -1,15 +1,12 @@
 package Game.Pieces;
 
-import Game.BoardState;
-
 import java.awt.*;
 import java.util.LinkedList;
 
 public class King extends Piece {
 
     public King(Point start, boolean isWhite) {
-        super(start, isWhite);
-        this.identifier = 5;
+        super(start, isWhite, 5);
     }
 
     @Override
@@ -18,11 +15,11 @@ public class King extends Piece {
 
         for(int xOffset = -1; xOffset <= 1; xOffset++) {
             for(int yOffset = -1; yOffset <= 1; yOffset++) {
-                if(xOffset != 0 && yOffset != 0) {
+                if(xOffset != 0 || yOffset != 0) {
                     Point currentMove = new Point(this.position.x + xOffset, this.position.y + yOffset);
                     Piece pieceAtMove = board.getPieceAt(currentMove);
 
-                    if(pieceAtMove != null && pieceAtMove.isWhite() != this.isWhite) {
+                    if(pieceAtMove == null || pieceAtMove.isWhite() != this.isWhite) {
                         moves.add(currentMove);
                     }
                 }
