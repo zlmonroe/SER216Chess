@@ -6,6 +6,8 @@ import java.io.Serializable;
  * Created by tjcup on 4/19/2017.
  */
 public class Message implements Serializable {
+
+    private static final long serialVersionUID = -6694558632548688228L;
     public final boolean isWhite;
     public final Move newMove;
     public final String newMessage;

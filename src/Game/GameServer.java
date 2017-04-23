@@ -1,8 +1,5 @@
 package Game;
 
-import Game.Message;
-import Game.Player;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -43,10 +40,12 @@ public class GameServer {
             blackSocket = serverSocket.accept();
             blackConnected = true;
             System.out.println("All Connected");
-            whiteIn = new ObjectInputStream(whiteSocket.getInputStream());
+
             whiteOut =  new ObjectOutputStream(whiteSocket.getOutputStream());
-            blackIn =  new ObjectInputStream(blackSocket.getInputStream());
+            whiteIn = new ObjectInputStream(whiteSocket.getInputStream());
+
             blackOut = new ObjectOutputStream(blackSocket.getOutputStream());
+            blackIn =  new ObjectInputStream(blackSocket.getInputStream());
             whiteOut.writeObject(new Message(true,null,"","",0));
             blackOut.writeObject(new Message(false,null,"","",0));
             blackSocket.setSoTimeout(500);
@@ -61,12 +60,14 @@ public class GameServer {
                 message = (Message) whiteIn.readObject();
                 System.out.println("White sent: " + message.newMessage);
                 blackOut.writeObject(message);
+                blackOut.reset();
             } catch (Exception e) {
             }
             try {
                 message = (Message) blackIn.readObject();
                 System.out.println("Black sent: " + message.newMessage);
                 whiteOut.writeObject(message);
+                whiteOut.reset();
             } catch (Exception e) {
             }
 

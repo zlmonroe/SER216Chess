@@ -1,4 +1,5 @@
 package GUI;
+
 import Game.Client;
 import Game.Message;
 
@@ -8,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 
 public class MainGUIWindow extends JFrame {
@@ -19,6 +18,7 @@ public class MainGUIWindow extends JFrame {
     ChessPanel chess;
     StartPanel start;
     Client client;
+    private Timer timer;
 
 
     MainGUIWindow() {
@@ -73,15 +73,23 @@ public class MainGUIWindow extends JFrame {
                 pane.remove(start);
                 c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
                 pane.add(chess, c);
-                paint();
+                repaint();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-                loop();
+                timer = new Timer(100, new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        loop();
+                    }
+                });
+                timer.start();
+                //loop();
             }
         });
+
+
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
         pane.add(start, c);
@@ -107,10 +115,11 @@ public class MainGUIWindow extends JFrame {
     }
 
     public void loop(){
-        while (true){
-            if(client.message!= null) {
-                if (client.message.newMessage != null)
-                    chat.append(client.message.newMessage);
+        //while (true){
+            if(!client.messages.isEmpty()) {
+                Message msg = client.messages.removeFirst();
+                if (msg.newMessage != null)
+                    chat.append(msg.newMessage);
             }
             paint();
             try {
@@ -118,9 +127,10 @@ public class MainGUIWindow extends JFrame {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        //}
     }
     private void paint(){
+        this.repaint();
         for(Component c: getComponents())
             c.repaint();
 
