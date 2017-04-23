@@ -36,6 +36,11 @@ public abstract class Piece {
         return this.position.equals(p.position) && this.isWhite == p.isWhite && this.identifier == p.identifier;
     }
 
+    @Override
+    public int hashCode() {
+        return 7+ 67 * identifier + 31 * position.hashCode() + (isWhite ? 1:0);
+    }
+
     //Mutators
 
     public Point getPosition() {
