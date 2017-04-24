@@ -72,6 +72,10 @@ public class Player {
 		return true;
 	}
 	
+	/**
+	 * Checks to see if the player has any possible moves
+	 * @return
+	 */
 	public boolean hasMoves(){
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
 		for (Piece piece : pieces) {
