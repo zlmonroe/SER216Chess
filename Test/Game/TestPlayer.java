@@ -43,7 +43,12 @@ public class TestPlayer {
 		Player.state = mocks.mockState1;
 		assertTrue(player1.move(new Point(1, 7), new Point(1, 6)));//king can kill the queen to get out of check
 		Player.state = mocks.mockState1;
-		Player.state = mocks.mockState1;assertFalse(player1.move(new Point(1, 7), new Point(1, 0)));
+		assertFalse(player1.move(new Point(1, 7), new Point(1, 0)));
+		
+		Player.state = mocks.mockState3;
+		assertFalse(player1.move(new Point(3, 3), new Point(3, 2)));
+		Player.state = mocks.mockState3;
+		assertTrue(player1.move(new Point(3, 3), new Point(3, 4)));
 	}
 	@Test	
 	public void testInCheckMate(){
