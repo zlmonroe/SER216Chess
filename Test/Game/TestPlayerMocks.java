@@ -43,7 +43,7 @@ public class TestPlayerMocks {
 		mockState3x2 = createMock3x2();//fnc begins at line 260
 		mockState3x3 = createMock3x3();
 		mockState3 = createMock3();//fnc begins at line 32 (createMockBase) and 224 (createMock3)
-		
+		//Mock state 4 tests a situation where the king is not in check
 		mockState4 = createMock4();
 	}
 
@@ -396,7 +396,10 @@ public class TestPlayerMocks {
 		return tmpState;
 		
 	}
-	
+	/*
+	 * Mock4 is a state with the king at 0,7, and the other players queen at 2, 6 . 
+	 * The king is not in check, as the other player is not direcly attacking him
+	 */
 	private BoardState createMock4(){
 		BoardState tmpState = mock(BoardState.class);
 		//king's position
