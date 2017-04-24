@@ -34,6 +34,10 @@ public class TestPlayer {
 	public void testInCheck() {
 		Player.state = mocks.mockState1;//testing inCheck for mockState1
 		assertTrue(player1.inCheck(mocks.mockState1)); //The king is in check if the queen can attack him
+		Player.state = mocks.mockState2;
+		assertTrue(player1.inCheck(mocks.mockState2)); //This will test to see if a white bishop behind the white queen will pu
+		Player.state = mocks.mockState4;
+		assertFalse(player1.inCheck(mocks.mockState4)); //This will test to see if a white bishop behind the white queen will pu
 	}
 	
 	@Test
@@ -56,6 +60,10 @@ public class TestPlayer {
 		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can get the queen
 		Player.state = mocks.mockState2;
 		assertTrue(player1.inCheckMate()); //This will test to see if a white bishop behind the white queen will pu
+		Player.state = mocks.mockState3;
+		assertFalse(player1.inCheckMate());
+		Player.state = mocks.mockState4;
+		assertFalse(player1.inCheckMate()); //This will test to see if a white bishop behind the white queen will pu
 	}
 
 	
