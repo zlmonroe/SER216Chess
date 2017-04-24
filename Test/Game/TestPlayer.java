@@ -54,6 +54,19 @@ public class TestPlayer {
 		Player.state = mocks.mockState3;
 		assertTrue(player1.move(new Point(3, 3), new Point(3, 4)));
 	}
+	
+	@Test
+	public void testHasMoves(){
+		Player.state = mocks.mockState1;//testing move for mockState1
+		assertTrue(player1.hasMoves());
+		Player.state = mocks.mockState2;//testing move for mockState1
+		assertFalse(player1.hasMoves());
+		Player.state = mocks.mockState3;//testing move for mockState1
+		assertTrue(player1.hasMoves());
+		Player.state = mocks.mockState4;//testing move for mockState1
+		assertFalse(player1.hasMoves());
+	}
+	
 	@Test	
 	public void testInCheckMate(){
 		Player.state = mocks.mockState1;//testing inCheck for mockState1
