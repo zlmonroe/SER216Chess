@@ -51,6 +51,7 @@ public class Client implements Runnable{
     public void sendMove(Move move){
         try {
             out.writeObject(new Message(isWhite, move, null, null, System.currentTimeMillis()));
+            out.reset();
             System.out.println((isWhite ? "white":"black") + " sent the server: " + move.oldPoint + " to " + move.newPoint);
         } catch (IOException e) {
             //e.printStackTrace();
