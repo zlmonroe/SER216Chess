@@ -56,10 +56,10 @@ public class ChessPanel extends JPanel {
         pieceLocations[2][7] = 5;
         pieceLocations[5][7] = 5;
 
-        pieceLocations[3][0] = 12;
-        pieceLocations[4][0] = 10;
-        pieceLocations[3][7] = 11;
-        pieceLocations[4][7] = 9;
+        pieceLocations[3][0] = 10;
+        pieceLocations[4][0] = 12;
+        pieceLocations[3][7] = 9;
+        pieceLocations[4][7] = 11;
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -114,7 +114,7 @@ public class ChessPanel extends JPanel {
 
             }
         });
-        updatePieces(pieceLocations);
+        updatePieces();
     }
 
     @Override
@@ -123,11 +123,11 @@ public class ChessPanel extends JPanel {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i+j)%2==1) {
-                    g2.setColor(Color.WHITE);
+                    g2.setColor(Color.BLUE);
                     g2.fillRect(i * (boardSize / 8), j * (boardSize / 8), boardSize / 8, boardSize / 8);
                 }
                 else {
-                    g2.setColor(Color.BLUE);
+                    g2.setColor(Color.WHITE);
                     g2.fillRect(i * (boardSize / 8), j * (boardSize / 8), boardSize / 8, boardSize / 8);
                 }
             }
@@ -141,7 +141,7 @@ public class ChessPanel extends JPanel {
         }
     }
 
-    public void updatePieces(int[][] pieceLocations) {
+    public void updatePieces() {
         Graphics2D g2 = (Graphics2D)getGraphics();
         int pieceType;
         Image img;
@@ -178,7 +178,7 @@ public class ChessPanel extends JPanel {
     public void movePiece(Move move) {
         pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
         pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
-        updatePieces(pieceLocations);
+        updatePieces();
         isTurn = !isTurn;
     }
 

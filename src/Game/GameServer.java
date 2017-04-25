@@ -109,6 +109,10 @@ public class GameServer {
                         informMoveUpdate(message);
                         return true;
                     }
+                    else{
+                        whiteOut.writeObject(new Message(true,null,null,"Invalid Move",0));
+                        whiteOut.reset();
+                    }
                 } else {
                     if (blackPlayer.move(move.oldPoint, move.newPoint)) {
                         if (whitePlayer.inCheck()) {
@@ -117,6 +121,10 @@ public class GameServer {
                         }
                         informMoveUpdate(message);
                         return true;
+                    }
+                    else{
+                        blackOut.writeObject(new Message(false,null,null,"Invalid Move",0));
+                        blackOut.reset();
                     }
                 }
             }

@@ -75,6 +75,7 @@ public class MainGUIWindow extends JFrame {
                     (new Thread(client)).start();
                     chess.client = client;
                     chess.isTurn = client.isWhite;
+                    setTitle(client.isWhite?"You are White":"You are Black");
                     pane.remove(start);
                     c.gridx = 0;
                     c.gridy = 0;
@@ -134,6 +135,11 @@ public class MainGUIWindow extends JFrame {
                 if (msg.newMove != null){
                     chess.movePiece(msg.newMove);
                     repaint();
+                }
+                if (msg.newGameInfo!=null){
+                    chess.updatePieces();
+                    chess.repaint();
+
                 }
 
             }
