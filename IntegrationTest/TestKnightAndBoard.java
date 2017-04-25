@@ -25,7 +25,7 @@ public class TestKnightAndBoard {
 	}
 
 	/*
-	 * fnc tests the knight moving in both directions, killing enemies, and not moving on its own color
+	 * fnc tests the knight moving in all directions, killing enemies, and not moving on its own color
 	 */
 	@Test
 	public void testKnightBasicMoves() { 
@@ -40,7 +40,41 @@ public class TestKnightAndBoard {
 		
 		assertEquals(new HashSet(moves), new HashSet(knightWhite.getMoves()));
 		
-		board1.move(new Point(1, 0),new Point(2, 2));
+		board1 = board1.move(new Point(1, 0),new Point(2, 2));
+		knightWhite = board1.getPieceAt(new Point(2, 2));
+		assertTrue(knightWhite.getIdentifier() ==1);
+		assertTrue(knightWhite.isWhite());
+		
+		moves = new LinkedList();
+		moves.add(new Point(0, 3));
+		moves.add(new Point(1, 0));
+		moves.add(new Point(1, 4));
+		moves.add(new Point(3, 4));
+		moves.add(new Point(4, 3));
+		
+		assertEquals(new HashSet(moves), new HashSet(knightWhite.getMoves()));
+		
+		board1 = board1.move(new Point(2, 2),new Point(3, 4));
+		knightWhite = board1.getPieceAt(new Point(3, 4));
+		assertTrue(knightWhite.getIdentifier() ==1);
+		assertTrue(knightWhite.isWhite());
+		
+		moves = new LinkedList();
+		moves.add(new Point(2, 2));
+		moves.add(new Point(1, 3));
+		moves.add(new Point(1, 5));
+		moves.add(new Point(2, 6));
+		moves.add(new Point(4, 6));
+		moves.add(new Point(5, 5));
+		moves.add(new Point(5, 3));
+		moves.add(new Point(4, 2));
+		
+		assertEquals(new HashSet(moves), new HashSet(knightWhite.getMoves()));
+		
+		board1 = board1.move(new Point(3, 4), new Point(4, 6));
+		knightWhite = board1.getPieceAt(new Point(4, 6));
+		assertTrue(knightWhite.getIdentifier() ==1);
+		assertTrue(knightWhite.isWhite());
 	}
 
 }
