@@ -13,7 +13,7 @@ public class Client implements Runnable{
     private ObjectInputStream in;
     private ObjectOutputStream out;
     public LinkedList<Message> messages;
-    //public Message message;
+    public boolean isConected;
     private boolean isWhite;
 
     public Client(String host, int port) {
@@ -22,15 +22,18 @@ public class Client implements Runnable{
             Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
-            //client.setSoTimeout(500);
+            isConected = true;
         } catch (IOException e) {
             System.out.println("No Server Found");
+            isConected = false;
         }
-        try {
-            Message message = (Message)in.readObject();
-            isWhite = message.isWhite;
-            System.out.println(isWhite);
-        } catch (Exception e) {
+        if (isConected) {
+            try {
+                Message message = (Message) in.readObject();
+                isWhite = message.isWhite;
+                System.out.println(isWhite);
+            } catch (Exception e) {
+            }
         }
     }
     public void sendChat(String chatMessage) {

@@ -70,27 +70,33 @@ public class MainGUIWindow extends JFrame {
         start.startClient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client= new Client(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
-                (new Thread(client)).start();
-                chess.client = client;
-                pane.remove(start);
-                c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
-                pane.add(chess, c);
-                repaint();
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-                timer = new Timer(100, new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        checkMessage();
-                        chess.drawPieces();
+                client = new Client(start.IPAddressField.getText(), Integer.parseInt(start.PortNumField.getText()));
+                if (client.isConected) {
+                    (new Thread(client)).start();
+                    chess.client = client;
+                    pane.remove(start);
+                    c.gridx = 0;
+                    c.gridy = 0;
+                    c.gridheight = 2;
+                    c.gridwidth = 1;
+                    c.weightx = 1;
+                    c.weighty = 1;
+                    pane.add(chess, c);
+                    repaint();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
                     }
-                });
-                timer.start();
-                chess.drawPieces();
+                    timer = new Timer(100, new ActionListener() {
+                        public void actionPerformed(ActionEvent evt) {
+                            checkMessage();
+                            chess.drawPieces();
+                        }
+                    });
+                    timer.start();
+                    chess.drawPieces();
+                }
             }
         });
 

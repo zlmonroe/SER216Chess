@@ -99,26 +99,27 @@ public class GameServer {
         } else {
             //move contains info to be processed
             Move move = message.newMove;
-            if (message.isWhite) {
-                if (whitePlayer.move(move.oldPoint, move.newPoint)) {
-                    if(blackPlayer.inCheck()) {
-                        //the move has happened and the black player is now in check
-                        message = message.setNewGameInfo("Black is now in check!");
+                if (message.isWhite) {
+                    if (whitePlayer.move(move.oldPoint, move.newPoint)) {
+                        if (blackPlayer.inCheck()) {
+                            //the move has happened and the black player is now in check
+                            message = message.setNewGameInfo("Black is now in check!");
+                        }
+                        informMoveUpdate(message);
+                        return true;
                     }
-                    informMoveUpdate(message);
-                    return true;
-                }
-            } else {
-                if (blackPlayer.move(move.oldPoint, move.newPoint)) {
-                    if(whitePlayer.inCheck()) {
-                        //the move has happened and the white player is now in check
-                        message = message.setNewGameInfo("White is now in check!");
+                } else {
+                    if (blackPlayer.move(move.oldPoint, move.newPoint)) {
+                        if (whitePlayer.inCheck()) {
+                            //the move has happened and the white player is now in check
+                            message = message.setNewGameInfo("White is now in check!");
+                        }
+                        informMoveUpdate(message);
+                        return true;
                     }
-                    informMoveUpdate(message);
-                    return true;
                 }
             }
-        }
+
         return false;
     }
 
