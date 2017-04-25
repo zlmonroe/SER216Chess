@@ -93,7 +93,8 @@ public class ChessPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 dragImage.setPos(e.getX()-35,e.getY()-35);
                 dragImage.paint(getGraphics());
-                paintComponent(getGraphics());
+                repaint();
+                //paintComponent(getGraphics());
 
             }
 
