@@ -13,7 +13,7 @@ public class Client implements Runnable{
     private ObjectInputStream in;
     private ObjectOutputStream out;
     public LinkedList<Message> messages;
-    public boolean isConected;
+    public boolean isConnected;
     public boolean isWhite;
 
     public Client(String host, int port) {
@@ -22,12 +22,12 @@ public class Client implements Runnable{
             Socket client = new Socket(host, port);
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
-            isConected = true;
+            isConnected = true;
         } catch (IOException e) {
             System.out.println("No Server Found");
-            isConected = false;
+            isConnected = false;
         }
-        if (isConected) {
+        if (isConnected) {
             try {
                 Message message = (Message) in.readObject();
                 isWhite = message.isWhite;
@@ -51,8 +51,9 @@ public class Client implements Runnable{
     public void sendMove(Move move){
         try {
             out.writeObject(new Message(isWhite, move, null, null, System.currentTimeMillis()));
+            System.out.println((isWhite ? "white":"black") + " sent the server: " + move.oldPoint + " to " + move.newPoint);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -62,7 +63,7 @@ public class Client implements Runnable{
                     messages.add((Message) in.readObject());
                     Thread.sleep(100);
                 } catch (IOException | InterruptedException | ClassNotFoundException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
 

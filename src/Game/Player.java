@@ -64,6 +64,7 @@ public class Player {
 	 */
 	public boolean move(Point start, Point end){
 		Piece piece = state.getPieceAt(start);
+		System.out.println("Trying to move piece at " + start.x + " " + start.y);
 		LinkedList<Point> pieceMoves = piece.getMoves();
 		if(!pieceMoves.contains(end)){
 			return false;
@@ -73,6 +74,7 @@ public class Player {
 			return false;
 		}
 		state = tmp;
+        System.out.println(this.state);
 		return true;
 	}
 	

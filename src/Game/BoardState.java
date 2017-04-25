@@ -123,7 +123,7 @@ public class BoardState {
         if (!(other instanceof BoardState)) {
             return false;   // if other is not a BoardState
         }
-        BoardState b = (BoardState)other;
+        BoardState b = (BoardState) other;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (board[i][j] == null) {
@@ -138,5 +138,23 @@ public class BoardState {
         Set<Piece> otherWhite = new HashSet<>(b.whitePieces);
         Set<Piece> otherBlack = new HashSet<>(b.blackPieces);
         return thisWhite.equals(otherWhite) && thisBlack.equals(otherBlack);
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for(int r = 7; r >= 0; r--) {
+            for(int c = 0; c < 7; c++) {
+                Piece p = getPieceAt(new Point(c, r));
+                if(p!=null) {
+                    s += "[" +r + ", " + c + ", " + (p.isWhite() ? "white" : "black") + ", " + p.getIdentifier() + "] ";
+                }
+                else {
+                    s += "[" + r + ", " + c + ",      , x] ";
+                }
+            }
+            s += "\n";
+        }
+        return s;
     }
 }

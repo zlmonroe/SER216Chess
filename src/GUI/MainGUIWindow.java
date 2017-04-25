@@ -71,7 +71,7 @@ public class MainGUIWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 client = new Client(start.IPAddressField.getText(), Integer.parseInt(start.PortNumField.getText()));
-                if (client.isConected) {
+                if (client.isConnected) {
                     (new Thread(client)).start();
                     chess.client = client;
                     chess.isTurn = client.isWhite;

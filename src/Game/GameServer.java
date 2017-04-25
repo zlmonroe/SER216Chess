@@ -66,6 +66,7 @@ public class GameServer {
 
             try {
                 if (whiteMessage != null) {
+                    System.out.println("The move in the new message says: " + whiteMessage.newMove.oldPoint + " to " + whiteMessage.newMove.newPoint);
                     if (processMove(whiteMessage)) {
                         isWhiteTurn = !isWhiteTurn;
                         gameState = checkGameState(isWhiteTurn);
@@ -149,7 +150,9 @@ public class GameServer {
             hasMoves = blackPlayer.hasMoves() ? 1:0;
         }
 
-        return State.values()[player << 2 & checkMate << 1 << hasMoves];
+        int stateValue = (player << 2) | (checkMate << 1) | hasMoves;
+        if(stateValue > 0b011 && stateValue != 0b110) stateValue &= 0b011;
+        return State.values()[stateValue];
     }
 
     private void informMoveUpdate(Message message) {
