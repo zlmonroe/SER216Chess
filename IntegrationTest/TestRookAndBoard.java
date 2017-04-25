@@ -82,6 +82,10 @@ public class TestRookAndBoard {
 		moves.add(new Point(4, 5));
 		moves.add(new Point(4, 6));
 		
+		Piece pawnBlack = board1.getPieceAt(new Point(4, 6));
+		assertTrue(pawnBlack.getIdentifier() == 0);
+		assertFalse(pawnBlack.isWhite());
+		
 		Piece kingBlack = board1.getPieceAt(new Point(4, 7));
 		assertTrue(kingBlack.getIdentifier() == 5);
 		assertFalse(kingBlack.isWhite());
