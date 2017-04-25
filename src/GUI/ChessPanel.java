@@ -25,6 +25,7 @@ public class ChessPanel extends JPanel {
     pieceIcon dragImage;
 
     ChessPanel() {
+        setDoubleBuffered(true);
         //make new players
         P1 = new Player(true);
         P2 = new Player(false);
@@ -107,7 +108,6 @@ public class ChessPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-
         Graphics2D g2 = (Graphics2D) g;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -121,7 +121,13 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
-        drawPieces();
+        for(int i = 0;i<8;i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pieces[i][j] != null) {
+                    pieces[i][j].paint(g);
+                }
+            }
+        }
     }
 
     public void updatePieces(int[][] pieceLocations) {
@@ -143,10 +149,12 @@ public class ChessPanel extends JPanel {
         }
     }
     public void drawPieces(){
-        for(int i = 0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if (pieces[i][j]!=null){
-                    pieces[i][j].paint(getGraphics());
+        setIgnoreRepaint(true);
+        Graphics g = getGraphics();
+        for(int i = 0;i<8;i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pieces[i][j] != null) {
+                    pieces[i][j].paint(g);
                 }
             }
         }
@@ -163,6 +171,7 @@ public class ChessPanel extends JPanel {
     }
 
     private class pieceIcon extends JComponent{
+        private static final long serialVersionUID = -100287822141330157L;
         Image img;
         int x;
         int y;
