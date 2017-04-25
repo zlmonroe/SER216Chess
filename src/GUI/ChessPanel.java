@@ -12,7 +12,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
@@ -74,6 +73,7 @@ public class ChessPanel extends JPanel {
                 endPoint.setLocation(e.getX()/75,e.getY()/75);
                 dragImage.setPos((int)endPoint.getX()*75+2,(int)endPoint.getY()*75+2);
                 paintComponent(getGraphics());
+                drawPieces();
                 System.out.println(endPoint.getX()+"\t"+endPoint.getY());
             }
 
@@ -91,6 +91,7 @@ public class ChessPanel extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 dragImage.setPos(e.getX()-35,e.getY()-35);
+                dragImage.paint(getGraphics());
                 paintComponent(getGraphics());
 
             }
@@ -100,7 +101,7 @@ public class ChessPanel extends JPanel {
 
             }
         });
-        drawPieces(pieceLocations);
+        updatePieces(pieceLocations);
         //paintComponent(getGraphics());
     }
 
@@ -120,16 +121,10 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
-        for(int i = 0;i<8;i++){
-            for(int j=0;j<8;j++){
-                if (pieces[i][j]!=null){
-                    pieces[i][j].paint(getGraphics());
-                }
-            }
-        }
+        drawPieces();
     }
 
-    public void drawPieces(int[][] pieceLocations) {
+    public void updatePieces(int[][] pieceLocations) {
         Graphics2D g2 = (Graphics2D)getGraphics();
         int pieceType;
         Image img;
@@ -147,6 +142,15 @@ public class ChessPanel extends JPanel {
             }
         }
     }
+    public void drawPieces(){
+        for(int i = 0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if (pieces[i][j]!=null){
+                    pieces[i][j].paint(getGraphics());
+                }
+            }
+        }
+    }
 
     /**
      * Perform the move
@@ -155,7 +159,9 @@ public class ChessPanel extends JPanel {
     public void movePiece(Move move) {
         pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
         pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
+        updatePieces(pieceLocations);
     }
+
     private class pieceIcon extends JComponent{
         Image img;
         int x;

@@ -38,10 +38,10 @@ public class MainGUIWindow extends JFrame {
         chat = new ChatPanel();
         chess = new ChessPanel();
         start = new StartPanel();
+        chess.setSize(600,600);
         chessTimer = new ChessTimer(5*60);
 
         chat.sendButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 chat.textArea.append(chat.textField.getText()+"\n");
                 client.send(chat.textField.getText());
@@ -76,6 +76,7 @@ public class MainGUIWindow extends JFrame {
                 c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
                 pane.add(chess, c);
                 repaint();
+                chess.drawPieces();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
