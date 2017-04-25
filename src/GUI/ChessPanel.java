@@ -1,6 +1,5 @@
 package GUI;
 
-import Game.Move;
 import Game.Player;
 
 import javax.imageio.ImageIO;
@@ -82,15 +81,6 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
-    }
-
-    /**
-     * Perform the move
-     * @param move The move to perform
-     */
-    public void movePiece(Move move) {
-        pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
-        pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
     }
 
 }
