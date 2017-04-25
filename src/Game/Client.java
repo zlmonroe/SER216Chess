@@ -14,7 +14,7 @@ public class Client implements Runnable{
     private ObjectOutputStream out;
     public LinkedList<Message> messages;
     public boolean isConected;
-    private boolean isWhite;
+    public boolean isWhite;
 
     public Client(String host, int port) {
         messages = new LinkedList<>();

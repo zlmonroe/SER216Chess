@@ -26,10 +26,12 @@ public class ChessPanel extends JPanel {
     private pieceIcon[][] pieces;
     pieceIcon dragImage;
     Client client;
+    boolean isTurn;
 
     ChessPanel() {
         setDoubleBuffered(true);
         //make new players
+
         P1 = new Player(true);
         P2 = new Player(false);
         pieceLocations = new int[8][8];
@@ -67,15 +69,19 @@ public class ChessPanel extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                startPoint.setLocation(e.getX()/75,e.getY()/75);
-                dragImage = pieces[(int)startPoint.getX()][(int)startPoint.getY()];
-                if(dragImage!= null){
-                    System.out.println("\nMove\n"+startPoint.getX()+"\t"+startPoint.getY());
+                if(isTurn) {
+                    startPoint.setLocation(e.getX() / 75, e.getY() / 75);
+                    if((pieceLocations[(int) startPoint.getX()][(int) startPoint.getY()]%2==1&&client.isWhite)||(pieceLocations[(int) startPoint.getX()][(int) startPoint.getY()]%2==0&&!client.isWhite)) {
+                        dragImage = pieces[(int) startPoint.getX()][(int) startPoint.getY()];
+                    }else dragImage = null;
+                    if (dragImage!=null) {
+                        System.out.println("\nMove\n" + startPoint.getX() + "\t" + startPoint.getY());
+                    }
                 }
             }
 
             public void mouseReleased(MouseEvent e) {
-                if(dragImage!=null) {
+                if(dragImage!=null&&isTurn) {
                     endPoint.setLocation(e.getX() / 75, e.getY() / 75);
                     dragImage.setPos((int) endPoint.getX() * 75 + 2, (int) endPoint.getY() * 75 + 2);
                     paintComponent(getGraphics());
@@ -97,7 +103,7 @@ public class ChessPanel extends JPanel {
         });
         addMouseMotionListener(new MouseMotionListener() {
             public void mouseDragged(MouseEvent e) {
-                if(dragImage!=null) {
+                if(dragImage!=null&& isTurn) {
                     dragImage.setPos(e.getX() - 35, e.getY() - 35);
                     dragImage.paint(getGraphics());
                     repaint();
@@ -172,6 +178,7 @@ public class ChessPanel extends JPanel {
         pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
         pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
         updatePieces(pieceLocations);
+        isTurn = !isTurn;
     }
 
     private class pieceIcon extends JComponent{

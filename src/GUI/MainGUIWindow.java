@@ -74,6 +74,7 @@ public class MainGUIWindow extends JFrame {
                 if (client.isConected) {
                     (new Thread(client)).start();
                     chess.client = client;
+                    chess.isTurn = client.isWhite;
                     pane.remove(start);
                     c.gridx = 0;
                     c.gridy = 0;
