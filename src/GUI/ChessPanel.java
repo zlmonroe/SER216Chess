@@ -91,13 +91,7 @@ public class ChessPanel extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 dragImage.setPos(e.getX()-35,e.getY()-35);
-                for(int i = 0;i<8;i++){
-                    for(int j=0;j<8;j++){
-                        if (pieces[i][j]!=null){
-                            pieces[i][j].paint(getGraphics());
-                        }
-                    }
-                }
+                paintComponent(getGraphics());
 
             }
 
