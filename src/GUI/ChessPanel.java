@@ -1,16 +1,14 @@
 package GUI;
 
+import Game.Move;
 import Game.Player;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
@@ -84,6 +82,15 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
+    }
+
+    /**
+     * Perform the move
+     * @param move The move to perform
+     */
+    public void movePiece(Move move) {
+        pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
+        pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
     }
 
 }

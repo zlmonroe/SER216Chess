@@ -122,6 +122,8 @@ public class MainGUIWindow extends JFrame {
                 Message msg = client.messages.removeFirst();
                 if (msg.newMessage != null)
                     chat.append(msg.newMessage);
+                if (msg.newMove != null)
+                    chess.movePiece(msg.newMove);
             }
             paint();
             try {
