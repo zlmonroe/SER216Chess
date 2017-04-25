@@ -1,7 +1,6 @@
 package GUI;
 
 import Game.Client;
-import Game.Message;
 import Game.Move;
 import Game.Player;
 
@@ -87,6 +86,8 @@ public class ChessPanel extends JPanel {
                     paintComponent(getGraphics());
                     drawPieces();
                     System.out.println(endPoint.getX() + "\t" + endPoint.getY());
+                    startPoint.y = 7 - startPoint.y;
+                    endPoint.y = 7 - endPoint.y;
                     client.sendMove(new Move(startPoint, endPoint));
                 }
             }

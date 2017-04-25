@@ -84,8 +84,9 @@ public class BoardState {
     public LinkedList<Piece> getPieces(boolean whitePlayer) {
         LinkedList<Piece> pieces = new LinkedList<>();
         for( Piece p : whitePlayer ? whitePieces : blackPieces) {
-            pieces.add(p.clone());
-            p.setBoardState(this);
+            Piece pc = p.clone();
+            pc.setBoardState(this);
+            pieces.add(pc);
         }
         return pieces;
     }
