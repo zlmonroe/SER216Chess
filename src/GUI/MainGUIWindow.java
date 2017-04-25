@@ -44,7 +44,7 @@ public class MainGUIWindow extends JFrame {
         chat.sendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 chat.textArea.append(chat.textField.getText()+"\n");
-                client.send(chat.textField.getText());
+                client.sendChat(chat.textField.getText());
                 chat.textField.setText(null);
             }
         });
@@ -58,7 +58,7 @@ public class MainGUIWindow extends JFrame {
             public void keyPressed(KeyEvent e) {
                 if( e.getKeyChar()=='\n') {
                     chat.textArea.append(chat.textField.getText()+"\n");
-                    client.send(chat.textField.getText());
+                    client.sendChat(chat.textField.getText());
                     chat.textField.setText(null);
                 }
             }
@@ -72,22 +72,25 @@ public class MainGUIWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 client= new Client(start.IPAddressField.getText(),Integer.parseInt(start.PortNumField.getText()));
                 (new Thread(client)).start();
+                chess.client = client;
                 pane.remove(start);
                 c.gridx = 0; c.gridy = 0; c.gridheight = 2;c.gridwidth = 1; c.weightx=1; c.weighty=1;
                 pane.add(chess, c);
                 repaint();
-                chess.drawPieces();
+
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-                timer = new Timer(500, new ActionListener() {
+                timer = new Timer(100, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         checkMessage();
+                        chess.drawPieces();
                     }
                 });
                 timer.start();
+                chess.drawPieces();
             }
         });
 

@@ -33,7 +33,7 @@ public class Client implements Runnable{
         } catch (Exception e) {
         }
     }
-    public void send(String chatMessage) {
+    public void sendChat(String chatMessage) {
         if (chatMessage != null) {
             System.out.println("Message Sent: " + chatMessage.trim());
             try {
@@ -45,6 +45,14 @@ public class Client implements Runnable{
             }
         }
     }
+    public void sendMove(Move move){
+        try {
+            out.writeObject(new Message(isWhite, move, null, null, System.currentTimeMillis()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
         public void run(){
             while(true) {
                 try {

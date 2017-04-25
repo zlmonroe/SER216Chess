@@ -18,7 +18,7 @@ public class Message implements Serializable {
      * Creates a new message to be passed between the server and client
      * @param isWhite True if it is the white player's turn
      * @param newMove Representation of an attempted move
-     * @param newMessage New message to send out
+     * @param newMessage New message to sendChat out
      * @param newGameInfo New information about the game
      * @param timeLeft Amount of time remaining for the current player, in ms
      */

@@ -1,5 +1,7 @@
 package GUI;
 
+import Game.Client;
+import Game.Message;
 import Game.Move;
 import Game.Player;
 
@@ -23,6 +25,7 @@ public class ChessPanel extends JPanel {
     private Point endPoint;
     private pieceIcon[][] pieces;
     pieceIcon dragImage;
+    Client client;
 
     ChessPanel() {
         setDoubleBuffered(true);
@@ -69,13 +72,13 @@ public class ChessPanel extends JPanel {
                     dragImage = pieces[(int)startPoint.getX()][(int)startPoint.getY()];
             }
 
-            @Override
             public void mouseReleased(MouseEvent e) {
                 endPoint.setLocation(e.getX()/75,e.getY()/75);
                 dragImage.setPos((int)endPoint.getX()*75+2,(int)endPoint.getY()*75+2);
                 paintComponent(getGraphics());
                 drawPieces();
                 System.out.println(endPoint.getX()+"\t"+endPoint.getY());
+                client.sendMove(new Move(startPoint,endPoint));
             }
 
             @Override
@@ -89,7 +92,6 @@ public class ChessPanel extends JPanel {
             }
         });
         addMouseMotionListener(new MouseMotionListener() {
-            @Override
             public void mouseDragged(MouseEvent e) {
                 dragImage.setPos(e.getX()-35,e.getY()-35);
                 dragImage.paint(getGraphics());
@@ -97,14 +99,11 @@ public class ChessPanel extends JPanel {
                 //paintComponent(getGraphics());
 
             }
-
-            @Override
             public void mouseMoved(MouseEvent e) {
 
             }
         });
         updatePieces(pieceLocations);
-        //paintComponent(getGraphics());
     }
 
     @Override
