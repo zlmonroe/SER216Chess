@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.awt.Point;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.junit.After;
@@ -28,10 +29,18 @@ public class TestKnightAndBoard {
 	 */
 	@Test
 	public void testKnightBasicMoves() { 
-		Piece knight = board1.getPieceAt(new Point(1, 0));
+		//Unlike pawn, we don't have to go back and forth between the players because there is nothing like en passant, which is turn dependent
+		Piece knightWhite = board1.getPieceAt(new Point(1, 0));
+		assertTrue(knightWhite.getIdentifier() ==1);
+		assertTrue(knightWhite.isWhite());
 		
 		LinkedList<Point> moves = new LinkedList();
+		moves.add(new Point(0, 2));
+		moves.add(new Point(2, 2));
 		
+		assertEquals(new HashSet(moves), new HashSet(knightWhite.getMoves()));
+		
+		board1.move(new Point(1, 0),new Point(2, 2));
 	}
 
 }
