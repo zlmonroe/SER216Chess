@@ -18,8 +18,13 @@ public class BoardState {
      * Indicates how many moves have happened since a pawn was last moved
      */
     public final int movesSincePawn;
+    /**
+     * Total number of moves completed thus far
+     */
+    public final int totalNumMoves;
 
-    private BoardState(Piece[][] board, int movesSincePawn) {
+    private BoardState(Piece[][] board, int movesSincePawn, int totalNumMoves) {
+        this.totalNumMoves = totalNumMoves;
         this.board = board;
         this.movesSincePawn = movesSincePawn;
         initLists();
@@ -46,6 +51,7 @@ public class BoardState {
      * Creates a new BoardState with the initial chess setup
      */
     public BoardState() {
+        totalNumMoves = 0;
         movesSincePawn = 0;
         board = new Piece[8][8];
         Piece[] whites = new Piece[]{new Rook(new Point(0,0), true), new Knight(new Point(1,0), true), new Bishop(new Point(2, 0), true), new King(new Point(3, 0), true), new Queen(new Point(4,0),true), new Bishop(new Point(5,0),true), new Knight(new Point(6, 0), true), new Rook(new Point(7, 0), true)};
@@ -107,7 +113,7 @@ public class BoardState {
         newBoard[moveEnd.x][moveEnd.y].setPosition(moveEnd);
         if (!moveStart.equals(moveEnd))
             newBoard[moveStart.x][moveStart.y] = null;
-        return new BoardState(newBoard, pawnMoves);
+        return new BoardState(newBoard, pawnMoves, totalNumMoves + 1);
     }
 
     @Override
