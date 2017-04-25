@@ -81,9 +81,9 @@ public class MainGUIWindow extends JFrame {
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-                timer = new Timer(100, new ActionListener() {
+                timer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        loop();
+                        checkMessage();
                     }
                 });
                 timer.start();
@@ -93,7 +93,7 @@ public class MainGUIWindow extends JFrame {
 
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
-        pane.add(chess, c);
+        pane.add(start, c);
         c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 3; c.weightx = .3; c.weighty = .05;
         pane.add(status, c);
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
@@ -115,26 +115,16 @@ public class MainGUIWindow extends JFrame {
         new MainGUIWindow();
     }
 
-    public void loop(){
-        //while (true){
+    public void checkMessage(){
             if(!client.messages.isEmpty()) {
                 Message msg = client.messages.removeFirst();
                 if (msg.newMessage != null)
                     chat.append(msg.newMessage);
-                if (msg.newMove != null)
+                if (msg.newMove != null){
                     chess.movePiece(msg.newMove);
+                    repaint();
+                }
+
             }
-            paint();
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        //}
-    }
-    private void paint(){
-        this.repaint();
-        for(Component c: getComponents())
-            c.repaint();
     }
 }
