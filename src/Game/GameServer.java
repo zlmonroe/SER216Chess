@@ -9,13 +9,6 @@ import java.net.Socket;
  * Created by tjcup on 4/21/2017.
  */
 public class GameServer {
-    private Player whitePlayer;
-    private Player blackPlayer;
-    private Socket whiteSocket;
-    private Socket blackSocket;
-    private boolean whiteConnected;
-    private boolean blackConnected;
-    private Message message;
     private ObjectOutputStream whiteOut;
     private ObjectInputStream whiteIn;
     private ObjectOutputStream blackOut;
@@ -29,15 +22,15 @@ public class GameServer {
             new GameServer(5000);
     }
     public GameServer(int portNum){
-        whiteConnected = false;
-        blackConnected = false;
-        whitePlayer = new Player(true);
-        blackPlayer = new Player(false);
+        boolean whiteConnected = false;
+        boolean blackConnected = false;
+        Player whitePlayer = new Player(true);
+        Player blackPlayer = new Player(false);
         try{
             ServerSocket serverSocket = new ServerSocket(portNum);
-            whiteSocket = serverSocket.accept();
+            Socket whiteSocket = serverSocket.accept();
             whiteConnected = true;
-            blackSocket = serverSocket.accept();
+            Socket blackSocket = serverSocket.accept();
             blackConnected = true;
             System.out.println("All Connected");
 
@@ -50,26 +43,32 @@ public class GameServer {
             blackOut.writeObject(new Message(false,null,null,null,0));
             blackSocket.setSoTimeout(500);
             whiteSocket.setSoTimeout(500);
+            boolean turn = true;
 
         }
         catch (Throwable e) {
 
         }
         while(whiteConnected && blackConnected) {
+            Message whiteMessage;
+            Message blackMessage;
+
             try {
-                message = (Message) whiteIn.readObject();
-                System.out.println("White sent: " + message.newMessage);
-                blackOut.writeObject(message);
+                whiteMessage = (Message) whiteIn.readObject();
+                System.out.println("White sent: " + whiteMessage.newMessage);
+                blackOut.writeObject(whiteMessage);
                 blackOut.reset();
             } catch (Exception e) {
             }
+
             try {
-                message = (Message) blackIn.readObject();
-                System.out.println("Black sent: " + message.newMessage);
-                whiteOut.writeObject(message);
+                blackMessage = (Message) blackIn.readObject();
+                System.out.println("Black sent: " + blackMessage.newMessage);
+                whiteOut.writeObject(blackMessage);
                 whiteOut.reset();
             } catch (Exception e) {
             }
+
 
         }
     }

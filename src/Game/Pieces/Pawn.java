@@ -66,7 +66,10 @@ public class Pawn extends Piece{
 
     @Override
     public Piece clone() {
-        return new Pawn(new Point(this.getPosition()), this.isWhite);// clone does NOT take into consideration the booleans "movedBefore" or "jumpedTwoLast" -Vatricia
+        Pawn pawn = new Pawn(new Point(this.getPosition()), this.isWhite);
+        pawn.jumpedTwoLast = this.jumpedTwoLast;
+        pawn.movedBefore = this.movedBefore;
+        return pawn;
     }
 
     @Override
