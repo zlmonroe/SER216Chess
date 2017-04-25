@@ -5,9 +5,13 @@ import Game.Player;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
@@ -15,12 +19,17 @@ public class ChessPanel extends JPanel {
     Player P1, P2;
     private int[][] pieceLocations;
     private final String[] pieceExtentions = {null,"wp","bp","wn","bn","wb","bb","wr","br","wq","bq","wk","bk"};
+    private Point startPoint;
+    private Point endPoint;
+    Image dragImage;
 
     ChessPanel() {
         //make new players
         P1 = new Player(true);
         P2 = new Player(false);
         pieceLocations = new int[8][8];
+        startPoint = new Point();
+        endPoint = new Point();
         for(int i=0;i<8;i++){
             pieceLocations[i][1] = 2;
             pieceLocations[i][6] = 1;
@@ -44,6 +53,53 @@ public class ChessPanel extends JPanel {
         pieceLocations[4][0] = 10;
         pieceLocations[3][7] = 11;
         pieceLocations[4][7] = 9;
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                startPoint.setLocation(e.getX()/75,e.getY()/75);
+                System.out.println(startPoint.getX()+"\t"+startPoint.getY());
+                try {
+                    dragImage = ImageIO.read(new File("src/Game/Pieces/Icons/"+pieceExtentions[pieceLocations[(int)startPoint.getX()][(int)startPoint.getY()]]+".gif"));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                endPoint.setLocation(e.getX()/75,e.getY()/75);
+                paint(getGraphics());
+                getGraphics().drawImage(dragImage,(int)endPoint.getX()*75+2,(int)endPoint.getY()*75+2,null);
+                System.out.println(endPoint.getX()+"\t"+endPoint.getY());
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                getGraphics().drawImage(dragImage,e.getX()-35,e.getY()-35,null);
+                repaint();
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+
+            }
+        });
     }
 
     @Override
