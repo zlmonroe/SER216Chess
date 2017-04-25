@@ -8,7 +8,7 @@ public class Bishop extends Piece {
     public Bishop(Point start, boolean isWhite) {
         super(start, isWhite, 2);
     }
-
+//
     @Override
     @SuppressWarnings("Duplicates")
     public LinkedList<Point> getMoves() {
