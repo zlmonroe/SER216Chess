@@ -24,8 +24,8 @@ public class TestPlayerMocks {
 	private int countBases;
 	
 	//these lists are instance varibles so that multiple mocks can have access to them
-	LinkedList<Piece> blackPieces = new LinkedList();
-	LinkedList<Piece> whitePieces = new LinkedList();
+	LinkedList<Piece> blackPieces = new LinkedList<>();
+	LinkedList<Piece> whitePieces = new LinkedList<>();
 	
 	public TestPlayerMocks(){
 		countBases = 0;
@@ -121,7 +121,7 @@ public class TestPlayerMocks {
 			Piece mockKing = createMockKing(kingPoint, kingMoves);
 			
 			//linked list with all of black pieces (updated for this specific board)
-			LinkedList<Piece> myBlackPieces = new LinkedList(); 
+			LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 			myBlackPieces.add(mockKing);
 			
 			//Creating mock fncs
@@ -151,10 +151,10 @@ public class TestPlayerMocks {
 			Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 			
 			//linked list with all of black pieces
-			LinkedList<Piece> myBlackPieces = new LinkedList(); 
+			LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 			myBlackPieces.add(mockKing);
 			//linked list with all of white pieces
-			LinkedList<Piece> myWhitePieces = new LinkedList(); 
+			LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 			myWhitePieces.add(mockQueen);
 			
 			//Creating mock fncs 
@@ -175,7 +175,7 @@ public class TestPlayerMocks {
 		 */
 	private BoardState createMock2(BoardState tmpState){
 		//linked list with all of white pieces. This mock has an extra white piece
-		LinkedList<Piece> myWhitePieces = new LinkedList();
+		LinkedList<Piece> myWhitePieces = new LinkedList<>();
 		
 		//list of all relevant moves possible by the bishop (according to chess rules)
 		//(Relevant moves is defined as the moves that the bishop can make around the king to kill him)
@@ -206,7 +206,7 @@ public class TestPlayerMocks {
 		Point[] kingMoves = {new Point(0,7), new Point(0,6), new Point(0,5), new Point(1,7), new Point(1,5),new Point(2,5), new Point(2,6), new Point(2,7)};
 		Piece mockKing = createMockKing(kingPoint, kingMoves);
 		//Creating mock fncs for mockState1
-		LinkedList<Piece> myBlackPieces = new LinkedList(); //linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); //linked list with all of black pieces
 		myBlackPieces.add(mockKing);
 		
 		//list of all relevant moves possible by the bishop (according to chess rules)
@@ -217,7 +217,7 @@ public class TestPlayerMocks {
 		//creating a bishop piece
 		Bishop mockBishop = createMockBishop(bishopPoint, bishopMoves);
 		//add the bishop to our list (the queen is dead)
-		LinkedList<Piece> myWhitePieces = new LinkedList();
+		LinkedList<Piece> myWhitePieces = new LinkedList<>();
 		myWhitePieces.add(mockBishop);
 		
 		//when we ask for the piece at the king's point, we should get the king
@@ -250,10 +250,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 		
 		//list of all relevant moves possible by the bishop (according to chess rules)
@@ -312,10 +312,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 		
 		//list of all relevant moves possible by the bishop (according to chess rules)
@@ -366,10 +366,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 		
 		
@@ -423,10 +423,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 	
 		//mock functions for make state
@@ -462,10 +462,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 	
 		//mock functions for make state
@@ -497,10 +497,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 	
 		//mock functions for make state
@@ -532,10 +532,10 @@ public class TestPlayerMocks {
 		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 		
 		//linked list with all of black pieces
-		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		LinkedList<Piece> myBlackPieces = new LinkedList<>(); 
 		myBlackPieces.add(mockKing);
 		//linked list with all of white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		LinkedList<Piece> myWhitePieces = new LinkedList<>(); 
 		myWhitePieces.add(mockQueen);
 	
 		//mock functions for make state
@@ -553,7 +553,7 @@ public class TestPlayerMocks {
 	
 	private King createMockKing(Point kingPoint, Point[] tmpPoints){
 		King tmpPiece= mock(King.class);
-		LinkedList<Point> kingMoves = new LinkedList();
+		LinkedList<Point> kingMoves = new LinkedList<>();
 		for(Point p: tmpPoints){
 			kingMoves.add(p);
 		}
@@ -572,7 +572,7 @@ public class TestPlayerMocks {
 	//creates a queen at the point queenPoint and a list of moves out of tmpPoints
 	private Queen createMockQueen(Point queenPoint, Point[] tmpPoints){
 		Queen tmpPiece= mock(Queen.class);
-		LinkedList<Point> queenMoves = new LinkedList();
+		LinkedList<Point> queenMoves = new LinkedList<>();
 		for(Point p: tmpPoints){
 			queenMoves.add(p);
 		}
@@ -590,7 +590,7 @@ public class TestPlayerMocks {
 	private Bishop createMockBishop(Point bishPoint, Point[] tmpPoints){
 		Bishop tmpPiece= mock(Bishop.class);
 		 //this is the point, b6, that the Bishop is at
-		LinkedList<Point> bishopMoves = new LinkedList();
+		LinkedList<Point> bishopMoves = new LinkedList<>();
 		//only includes points that the king can move to
 		for(Point p: tmpPoints){
 			bishopMoves.add(p);
@@ -609,7 +609,7 @@ public class TestPlayerMocks {
 	private Rook createMockRook(Point rookPoint, Point[] tmpPoints){
 		Rook tmpPiece= mock(Rook.class);
 		 //this is the point, b6, that the Bishop is at
-		LinkedList<Point> rookMoves = new LinkedList();
+		LinkedList<Point> rookMoves = new LinkedList<>();
 		//only includes points that the king can move to
 		for(Point p: tmpPoints){
 			rookMoves.add(p);

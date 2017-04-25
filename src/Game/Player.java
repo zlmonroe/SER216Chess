@@ -10,6 +10,7 @@ public class Player {
 	
 	public Player(boolean w){
 		isWhite = w;
+		state = new BoardState();
 	}
 	
 	/**
@@ -59,7 +60,6 @@ public class Player {
 	 * false if the move would result in check. Does not change th board state if realMove is false
 	 * @param start
 	 * @param end
-	 * @param realMove
 	 * @return
 	 */
 	public boolean move(Point start, Point end){

@@ -10,7 +10,9 @@ public class Queen extends Piece {
     public Queen(Point start, boolean isWhite) {
         super(start, isWhite, 4);
         bishop = new Bishop(start, isWhite);
+        bishop.setBoardState(this.board);
         rook = new Rook(start, isWhite);
+        rook.setBoardState(this.board);
     }
 
     @Override
