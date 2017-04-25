@@ -11,7 +11,7 @@ import org.junit.Test;
 import Game.BoardState;
 import Game.Pieces.*;
 
-public class TestPieceAndBoard {
+public class TestPawnAndBoard {
 	
 	BoardState board1;
 	BoardState board2;

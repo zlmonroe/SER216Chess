@@ -27,6 +27,10 @@ public class Player {
         return false;
 	}
 	
+	public boolean inCheck(){
+		return inCheck(state);
+	}
+	
 	/**
 	 * Returns true if there is no possible move that the player can make to move them out of check
 	 * @return
