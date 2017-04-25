@@ -70,6 +70,7 @@ public class TestRookAndBoard {
 		assertTrue(rookWhite.isWhite());
 		
 		moves = new LinkedList<Point>();
+		moves.add(new Point(0, 2));
 		moves.add(new Point(1, 2));
 		moves.add(new Point(2, 2));
 		moves.add(new Point(3, 2));
