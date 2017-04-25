@@ -135,6 +135,5 @@ public class MainGUIWindow extends JFrame {
         this.repaint();
         for(Component c: getComponents())
             c.repaint();
-
     }
 }

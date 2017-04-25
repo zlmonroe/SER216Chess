@@ -13,7 +13,6 @@ public class Message implements Serializable {
     public final String newMessage;
     public final String newGameInfo;
     public final long timeLeft;
-    public int[][] boardLayout;
 
     /**
      * Creates a new message to be passed between the server and client
@@ -29,6 +28,5 @@ public class Message implements Serializable {
         this.newMessage = newMessage;
         this.newGameInfo = newGameInfo;
         this.timeLeft = timeLeft;
-        this.boardLayout = boardLayout;
     }
 }
