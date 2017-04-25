@@ -87,7 +87,6 @@ public class MainGUIWindow extends JFrame {
                     }
                 });
                 timer.start();
-                //loop();
             }
         });
 

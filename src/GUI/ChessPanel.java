@@ -22,13 +22,15 @@ public class ChessPanel extends JPanel {
     private final String[] pieceExtentions = {null,"wp","bp","wn","bn","wb","bb","wr","br","wq","bq","wk","bk"};
     private Point startPoint;
     private Point endPoint;
-    Image dragImage;
+    private pieceIcon[][] pieces;
+    pieceIcon dragImage;
 
     ChessPanel() {
         //make new players
         P1 = new Player(true);
         P2 = new Player(false);
         pieceLocations = new int[8][8];
+        pieces = new pieceIcon[8][8];
         startPoint = new Point();
         endPoint = new Point();
         for(int i=0;i<8;i++){
@@ -63,19 +65,15 @@ public class ChessPanel extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 startPoint.setLocation(e.getX()/75,e.getY()/75);
-                System.out.println(startPoint.getX()+"\t"+startPoint.getY());
-                try {
-                    dragImage = ImageIO.read(new File("src/Game/Pieces/Icons/"+pieceExtentions[pieceLocations[(int)startPoint.getX()][(int)startPoint.getY()]]+".gif"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                System.out.println("\nMove\n"+startPoint.getX()+"\t"+startPoint.getY());
+                    dragImage = pieces[(int)startPoint.getX()][(int)startPoint.getY()];
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 endPoint.setLocation(e.getX()/75,e.getY()/75);
-                paint(getGraphics());
-                getGraphics().drawImage(dragImage,(int)endPoint.getX()*75+2,(int)endPoint.getY()*75+2,null);
+                dragImage.setPos((int)endPoint.getX()*75+2,(int)endPoint.getY()*75+2);
+                paintComponent(getGraphics());
                 System.out.println(endPoint.getX()+"\t"+endPoint.getY());
             }
 
@@ -92,8 +90,15 @@ public class ChessPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                getGraphics().drawImage(dragImage,e.getX()-35,e.getY()-35,null);
-                repaint();
+                dragImage.setPos(e.getX()-35,e.getY()-35);
+                for(int i = 0;i<8;i++){
+                    for(int j=0;j<8;j++){
+                        if (pieces[i][j]!=null){
+                            pieces[i][j].paint(getGraphics());
+                        }
+                    }
+                }
+
             }
 
             @Override
@@ -101,6 +106,8 @@ public class ChessPanel extends JPanel {
 
             }
         });
+        drawPieces(pieceLocations);
+        //paintComponent(getGraphics());
     }
 
     @Override
@@ -119,23 +126,30 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
-        drawPieces(pieceLocations,g2);
+        for(int i = 0;i<8;i++){
+            for(int j=0;j<8;j++){
+                if (pieces[i][j]!=null){
+                    pieces[i][j].paint(getGraphics());
+                }
+            }
+        }
     }
 
-    public void drawPieces(int[][] pieceLocations, Graphics2D g2) {
+    public void drawPieces(int[][] pieceLocations) {
+        Graphics2D g2 = (Graphics2D)getGraphics();
         int pieceType;
+        Image img;
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 pieceType = pieceLocations[i][j];
-                if (pieceType!=0){
                     try {
-                        Image img = ImageIO.read(new File("src/Game/Pieces/Icons/"+pieceExtentions[pieceType]+".gif"));
-                        //add(new draggablePic(img,i,j));//.paint(g2);
-                        g2.drawImage(img,600/8*i+2,600/8*j+2,null);
+                        img = ImageIO.read(new File("src/Game/Pieces/Icons/"+pieceExtentions[pieceType]+".gif"));
+                        pieces[i][j] = new pieceIcon(img,i,j);
+                        add(pieces[i][j]);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        pieces[i][j] = null;
                     }
-                }
+
             }
         }
     }
@@ -148,5 +162,24 @@ public class ChessPanel extends JPanel {
         pieceLocations[move.newPoint.x][7-move.newPoint.y] = pieceLocations[move.oldPoint.x][7-move.oldPoint.y];
         pieceLocations[move.oldPoint.x][7-move.oldPoint.y] = 0;
     }
+    private class pieceIcon extends JComponent{
+        Image img;
+        int x;
+        int y;
+        public void setPos(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
 
+        pieceIcon(Image image, int x, int y){
+            img = image;
+            this.x = 75*x+2;
+            this.y = 75*y+2;
+
+        }
+        public void paint(Graphics g){
+            if(img!=null)
+                g.drawImage(img,x,y,null);
+        }
+    }
 }
