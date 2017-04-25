@@ -29,4 +29,13 @@ public class Message implements Serializable {
         this.newGameInfo = newGameInfo;
         this.timeLeft = timeLeft;
     }
+
+    /**
+     * Creates a new Message with an updated value for newGameInfo
+     * @param newGameInfo updated value
+     * @return new Message
+     */
+    public Message setNewGameInfo(String newGameInfo) {
+        return new Message(this.isWhite, this.newMove, this.newMessage, newGameInfo, this.timeLeft);
+    }
 }
