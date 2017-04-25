@@ -61,7 +61,5 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
-
-
     }
 }
