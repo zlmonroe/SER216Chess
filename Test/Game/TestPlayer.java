@@ -34,6 +34,10 @@ public class TestPlayer {
 	public void testInCheck() {
 		Player.state = mocks.mockState1;//testing inCheck for mockState1
 		assertTrue(player1.inCheck(mocks.mockState1)); //The king is in check if the queen can attack him
+		Player.state = mocks.mockState2;
+		assertTrue(player1.inCheck(mocks.mockState2)); //This will test to see if a white bishop behind the white queen will pu
+		Player.state = mocks.mockState4;
+		assertFalse(player1.inCheck(mocks.mockState4)); //This will test to see if a white bishop behind the white queen will pu
 	}
 	
 	@Test
@@ -43,14 +47,36 @@ public class TestPlayer {
 		Player.state = mocks.mockState1;
 		assertTrue(player1.move(new Point(1, 7), new Point(1, 6)));//king can kill the queen to get out of check
 		Player.state = mocks.mockState1;
-		Player.state = mocks.mockState1;assertFalse(player1.move(new Point(1, 7), new Point(1, 0)));
+		assertFalse(player1.move(new Point(1, 7), new Point(1, 0)));
+		
+		Player.state = mocks.mockState3;
+		assertFalse(player1.move(new Point(3, 3), new Point(3, 2)));
+		Player.state = mocks.mockState3;
+		assertTrue(player1.move(new Point(3, 3), new Point(3, 4)));
 	}
+	
+	@Test
+	public void testHasMoves(){
+		Player.state = mocks.mockState1;//testing move for mockState1
+		assertTrue(player1.hasMoves());
+		Player.state = mocks.mockState2;//testing move for mockState1
+		assertFalse(player1.hasMoves());
+		Player.state = mocks.mockState3;//testing move for mockState1
+		assertTrue(player1.hasMoves());
+		Player.state = mocks.mockState4;//testing move for mockState1
+		assertFalse(player1.hasMoves());
+	}
+	
 	@Test	
 	public void testInCheckMate(){
 		Player.state = mocks.mockState1;//testing inCheck for mockState1
 		assertFalse(player1.inCheckMate());//the king is not in checkmate because he can get the queen
 		Player.state = mocks.mockState2;
 		assertTrue(player1.inCheckMate()); //This will test to see if a white bishop behind the white queen will pu
+		Player.state = mocks.mockState3;
+		assertFalse(player1.inCheckMate());
+		Player.state = mocks.mockState4;
+		assertFalse(player1.inCheckMate()); //This will test to see if a white bishop behind the white queen will pu
 	}
 
 	

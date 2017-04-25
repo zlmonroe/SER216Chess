@@ -183,6 +183,9 @@ public class TestPiece {
         pawnMoveSet = new HashSet<>(pawn.getMoves());
         moveSet = new HashSet<>(moves);
 
+        //this test does not correctly test the pawn when it has moved because it does not take into consideration the clone fnc
+        //the clone fnc means that we will have a "new" set of pieces everytime someone moves
+        //-vatricia
         assertEquals("Wrong move set when it has moved and there is no Piece in the way", moveSet, pawnMoveSet);
 
         moves.remove(new Point(2, 5));

@@ -15,6 +15,12 @@ public class TestPlayerMocks {
 	public BoardState mockState2x2;
 	public BoardState mockState3;
 	public BoardState mockState3x2;
+	public BoardState mockState3x3;
+	public BoardState mockState4;
+	public BoardState mockState4x2;
+	public BoardState mockState4x3;
+	public BoardState mockState4x4;
+	
 	private int countBases;
 	
 	//these lists are instance varibles so that multiple mocks can have access to them
@@ -38,9 +44,14 @@ public class TestPlayerMocks {
 		/*Mock state group 3 tests a situation where the king can get out of check if
 		 * a piece moves in front off an attacking piece
 		 */
-		mockState3x2 = createMock2x2();//fnc begins at line 162
-		mockState3 = createMock2(createMockBase());//fnc begins at line 32 (createMockBase) and 149 (createMock2)
-		
+		mockState3x2 = createMock3x2();//fnc begins at line 260
+		mockState3x3 = createMock3x3();
+		mockState3 = createMock3();//fnc begins at line 32 (createMockBase) and 224 (createMock3)
+		//Mock state 4 tests a situation where the king is not in check or chackmate, but cannot move, resulting in stalemate
+		mockState4x2 = createMock4x2();
+		mockState4x3 = createMock4x3();
+		mockState4x4 = createMock4x4();
+		mockState4 = createMock4();
 	}
 
 	/*This creates the base mock board state
@@ -57,13 +68,12 @@ public class TestPlayerMocks {
 		//Point the queen is at
 		Point queenPoint = new Point(1, 6);	
 		//list of all relevant moves possible by the queen (according to chess rules)
-		Point[] queenMoves = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,6), new Point(2,7)};
-		
-		if(countBases == 0){
-			//make sure we dont add these pieces twice
-			Piece mockKing = createMockKing(kingPoint, kingMoves);
-			Piece mockQueen = createMockQueen(queenPoint, queenMoves);
-			
+		Point[] queenMoves = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,6), new Point(2,7)};			//make sure we dont add these pieces twice
+
+		if(countBases==0){
+			King mockKing = createMockKing(kingPoint, kingMoves);
+			Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+				
 			blackPieces.add(mockKing);
 			whitePieces.add(mockQueen);
 		}
@@ -132,14 +142,13 @@ public class TestPlayerMocks {
 			//list of all moves possible by the king (according to chess rules)
 			Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(1,6)};
 			
-			//queen's position
+			Piece mockKing = createMockKing(kingPoint, kingMoves);
+			
 			Point queenPoint = new Point(1, 6);	
 			//list of all relevant moves possible by the queen (according to chess rules)
-			//(Relevant moves is defined as the moves that the queen can make around the king to kill him)
 			Point[] queenMoves = {new Point(0,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,6), new Point(2,7)};
-			
-			Piece mockKing = createMockKing(kingPoint, kingMoves);
-			Piece mockQueen = createMockQueen(queenPoint, queenMoves);
+				
+			Queen mockQueen = createMockQueen(queenPoint, queenMoves);
 			
 			//linked list with all of black pieces
 			LinkedList<Piece> myBlackPieces = new LinkedList(); 
@@ -220,39 +229,325 @@ public class TestPlayerMocks {
 		
 		return tmpState;
 	}
-	
-	private BoardState createMock3(BoardState tmpState){
-		//linked list with all of white pieces. This mock has two extra white pieces
-		LinkedList<Piece> myWhitePieces = new LinkedList();
+	/*
+	 * Mock3 is a state with the king at 0,7, ad rook at 3,3 and the other players queen at 2, 6 and bishop at 5, 2. 
+	 * The king is in check, and can only be removed from check if the rook moves in front of the bishop at
+	 * 4,3 or 3,4
+	 */
+	private BoardState createMock3(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's new position
+		Point kingPoint = new Point(0, 7);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
 		
 		//list of all relevant moves possible by the bishop (according to chess rules)
 		//(Relevant moves is defined as the moves that the bishop can make around the king to kill him)
-		Point[] bishopMoves = {new Point(4, 3), new Point(4, 3), new Point(3, 4), new Point(2, 5), new Point(1,6)};
+		Point[] bishopMoves = {new Point(4, 3), new Point(3, 4), new Point(2, 5), new Point(1,6), new Point(0, 7)};
+		//bshops position
+		Point bishopPoint = new Point(5, 2);
+		//creating a bishop piece
+		Bishop mockBishop = createMockBishop(bishopPoint, bishopMoves);
+		myWhitePieces.add(mockBishop);
+		
+		//list of all relevant moves possible by the rook (according to chess rules)
+		//(Relevant moves is defined as the moves that the rook can make to get the king out of check plus
+		//a few moves that will not get the king out of check)
+		Point[] rookMoves = {new Point(4, 3), new Point(3, 4), new Point(3, 2), new Point(2,3)};
+		//rooks position
+		Point rookPoint = new Point(3, 3);
+		//creating a bishop piece
+		Rook mockRook = createMockRook(rookPoint, rookMoves);
+		myBlackPieces.add(mockRook);
+		
+		//Creating mock fncs 
+		//when we ask for the piece at the king's point, we should get the king
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0)); 
+		//when we ask for the piece at the queen's point, we should get the queen
+		when(tmpState.getPieceAt(rookPoint)).thenReturn(myBlackPieces.get(1)); 
+		//when we ask for black pieces, we should get black pieces
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces);
+		//when we ask for white pieces, we should get white pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces); 
+		/*When we ask for the board state after we move the rook (at 3, 3) to 3, 2
+		 * we should get that board state, represent by mockState3x2
+		 */
+		when(tmpState.move(new Point(3, 3), new Point(3, 2))).thenReturn(mockState3x2);
+		/*When we ask for the board state after we move the rook (at 3, 3) to 3, 4
+		 * we should get that board state, represent by mockState3x3
+		 */
+		when(tmpState.move(new Point(3, 3), new Point(3, 4))).thenReturn(mockState3x3);
+		return tmpState;
+	}
+	
+	//Mock3x2 is mock 3 after the rook has attempted to move from 3, 3 to 3, 2, an invalid move because the king will stay in check
+	private BoardState createMock3x2(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's new position
+		Point kingPoint = new Point(0, 7);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+		
+		//list of all relevant moves possible by the bishop (according to chess rules)
+		//(Relevant moves is defined as the moves that the bishop can make around the king to kill him)
+		Point[] bishopMoves = {new Point(4, 3), new Point(3, 4), new Point(2, 5), new Point(1,6), new Point(0, 7)};
 		//bshops position
 		Point bishopPoint = new Point(5, 2);
 		//creating a bishop piece
 		Bishop mockBishop = createMockBishop(bishopPoint, bishopMoves);
 		
 		//list of all relevant moves possible by the rook (according to chess rules)
-		//(Relevant moves is defined as the moves that the rook can make around the king to kill him)
-		Point[] rookMoves = {new Point(4, 3), new Point(4, 3), new Point(3, 4), new Point(2, 5), new Point(1,6)};
+		//(Relevant moves is defined as the moves that the rook can make to get the king out of check plus
+		//a few moves that will not get the king out of check)
+		Point[] rookMoves = {new Point(4, 3), new Point(3, 4), new Point(3, 5), new Point(3,3)};
 		//rooks position
-		Point rookPoint = new Point(5, 2);
+		Point rookPoint = new Point(3, 2);
 		//creating a bishop piece
 		Rook mockRook = createMockRook(rookPoint, rookMoves);
-		
-		//add the original queen and new bishop and rook to our list
-		myWhitePieces.add(whitePieces.get(0));
 		myWhitePieces.add(mockBishop);
-		myWhitePieces.add(mockRook);
+		myBlackPieces.add(mockRook);
 		
 		//Creating mock fncs 
 		//when we ask for white pieces, we should get our white pieces
 		when(tmpState.getPieces(true)).thenReturn(myWhitePieces);
-		/*When we ask for the board state after we move the king (at 1, 7) to 1, 6
-		 * we should get that board state, represent by mockState2x2
-		 */
-		when(tmpState.move(new Point(1, 7), new Point(1, 6))).thenReturn(mockState3x2);
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces);
+		//make sure we get the right piece when it is asked for
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0));
+		when(tmpState.getPieceAt(bishopPoint)).thenReturn(myWhitePieces.get(1));
+		when(tmpState.getPieceAt(rookPoint)).thenReturn(myBlackPieces.get(1));
+		return tmpState;
+		
+	}
+	
+	//Mock3x3 is mock 3 after the rook has attempted to move from 3, 3 to 3, 4, a valid move because the king will be out of check
+	private BoardState createMock3x3(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's position
+		Point kingPoint = new Point(0, 7);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+		
+		
+		//list of all relevant moves possible by the bishop (according to chess rules)
+		//(Relevant moves is defined as the moves that the bishop can make around the king to kill him)
+		Point[] bishopMoves = {new Point(4, 3), new Point(3, 4)};
+		//bshops position
+		Point bishopPoint = new Point(5, 2);
+		//creating a bishop piece
+		Bishop mockBishop = createMockBishop(bishopPoint, bishopMoves);
+		
+		//list of all relevant moves possible by the rook (according to chess rules)
+		//(Relevant moves is defined as the moves that the rook can make to get the king out of check plus
+		//a few moves that will not get the king out of check)
+		Point[] rookMoves = {new Point(4, 2), new Point(3, 2), new Point(3, 5), new Point(3,3), new Point(4,4)};
+		//rooks position
+		Point rookPoint = new Point(3, 4);
+		//creating a bishop piece
+		Rook mockRook = createMockRook(rookPoint, rookMoves);
+		myWhitePieces.add(mockBishop);
+		myBlackPieces.add(mockRook);
+		
+		//Creating mock fncs 
+		//when we ask for pieces, we should get our pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces);
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces);
+		//make sure we get the right piece when it is asked for
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0));
+		when(tmpState.getPieceAt(bishopPoint)).thenReturn(myWhitePieces.get(1));
+		when(tmpState.getPieceAt(rookPoint)).thenReturn(myBlackPieces.get(1));
+		return tmpState;
+		
+	}
+	/*
+	 * Mock4 is a state with the king at 0,7, and the other players queen at 2, 6 . 
+	 * The king is not in check, as the other player is not direcly attacking him
+	 */
+	private BoardState createMock4(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's position
+		Point kingPoint = new Point(0, 7);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+	
+		//mock functions for make state
+		//when we ask for the piece at the king's point, we should get the king
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0)); 
+		//when we ask for the piece at the queen's point, we should get the queen
+		when(tmpState.getPieceAt(queenPoint)).thenReturn(myWhitePieces.get(0)); 
+		//when we ask for black pieces, we should get black pieces
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces); 
+		//when we ask for white pieces, we should get white pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces); 
+		//these mock state will return states for every possible move the king can make in this state
+		//even though he is not in check, he cannot move, thus stale mate
+		when(tmpState.move(new Point(0, 7), new Point(0, 6))).thenReturn(mockState4x2);
+		when(tmpState.move(new Point(0, 7), new Point(0, 6))).thenReturn(mockState4x3);
+		when(tmpState.move(new Point(0, 7), new Point(0, 6))).thenReturn(mockState4x4);
+		return tmpState;
+	}
+	
+	private BoardState createMock4x2(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's position
+		Point kingPoint = new Point(0, 6);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,7), new Point(1,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+	
+		//mock functions for make state
+		//when we ask for the piece at the king's point, we should get the king
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0)); 
+		//when we ask for the piece at the queen's point, we should get the queen
+		when(tmpState.getPieceAt(queenPoint)).thenReturn(myWhitePieces.get(0)); 
+		//when we ask for black pieces, we should get black pieces
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces); 
+		//when we ask for white pieces, we should get white pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces); 
+		//return this base state to be used by other states
+		return tmpState;
+	}
+	
+	private BoardState createMock4x3(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's position
+		Point kingPoint = new Point(1, 7);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(0,7), new Point(1,6)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+	
+		//mock functions for make state
+		//when we ask for the piece at the king's point, we should get the king
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0)); 
+		//when we ask for the piece at the queen's point, we should get the queen
+		when(tmpState.getPieceAt(queenPoint)).thenReturn(myWhitePieces.get(0)); 
+		//when we ask for black pieces, we should get black pieces
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces); 
+		//when we ask for white pieces, we should get white pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces); 
+		//return this base state to be used by other states
+		return tmpState;
+	}
+	
+	private BoardState createMock4x4(){
+		BoardState tmpState = mock(BoardState.class);
+		//king's position
+		Point kingPoint = new Point(1, 6);
+		//list of all moves possible by the king (according to chess rules)
+		Point[] kingMoves = {new Point(0,6), new Point(1,7), new Point(0,7)};
+		
+		Piece mockKing = createMockKing(kingPoint, kingMoves);
+		
+		Point queenPoint = new Point(2, 6);	
+		//list of all relevant moves possible by the queen (according to chess rules)
+		Point[] queenMoves = {new Point(1,7), new Point(0,6), new Point(1,6), new Point(1,7), new Point(2,7)};
+			
+		Queen mockQueen = createMockQueen(queenPoint, queenMoves);
+		
+		//linked list with all of black pieces
+		LinkedList<Piece> myBlackPieces = new LinkedList(); 
+		myBlackPieces.add(mockKing);
+		//linked list with all of white pieces
+		LinkedList<Piece> myWhitePieces = new LinkedList(); 
+		myWhitePieces.add(mockQueen);
+	
+		//mock functions for make state
+		//when we ask for the piece at the king's point, we should get the king
+		when(tmpState.getPieceAt(kingPoint)).thenReturn(myBlackPieces.get(0)); 
+		//when we ask for the piece at the queen's point, we should get the queen
+		when(tmpState.getPieceAt(queenPoint)).thenReturn(myWhitePieces.get(0)); 
+		//when we ask for black pieces, we should get black pieces
+		when(tmpState.getPieces(false)).thenReturn(myBlackPieces); 
+		//when we ask for white pieces, we should get white pieces
+		when(tmpState.getPieces(true)).thenReturn(myWhitePieces); 
+		//return this base state to be used by other states
 		return tmpState;
 	}
 	

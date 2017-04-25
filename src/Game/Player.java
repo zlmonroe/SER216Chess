@@ -51,9 +51,11 @@ public class Player {
 	}
 	
 	/**
-	 * Attempts to move the piece at point start to point end. Returns true if the move is successful, false if the move would result in check
+	 * Attempts to move the piece at point start to point end. Returns true if the move is successful, 
+	 * false if the move would result in check. Does not change th board state if realMove is false
 	 * @param start
 	 * @param end
+	 * @param realMove
 	 * @return
 	 */
 	public boolean move(Point start, Point end){
@@ -68,6 +70,26 @@ public class Player {
 		}
 		state = tmp;
 		return true;
+	}
+	
+	/**
+	 * Checks to see if the player has any possible moves
+	 * @return
+	 */
+	public boolean hasMoves(){
+		LinkedList<Piece> pieces = state.getPieces(isWhite);
+		for (Piece piece : pieces) {
+			LinkedList<Point> pieceMoves = piece.getMoves();
+			for(Point move : pieceMoves){
+				BoardState tmp = state.move(piece.getPosition(), move);
+				if(tmp == null){//added for testing
+				}
+				else if(!inCheck(tmp)){
+					return true;
+				}
+			}
+	    }
+		return false;
 	}
 	
 	private Piece getKing(BoardState board){
