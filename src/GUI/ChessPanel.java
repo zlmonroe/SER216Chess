@@ -91,8 +91,10 @@ public class ChessPanel extends JPanel {
                         endPoint.y = 7 - endPoint.y;
                         client.sendMove(new Move(startPoint, endPoint));
                     }
-                    else
+                    else {
                         updatePieces();
+                        paintComponent(getGraphics());
+                    }
                 }
             }
 
@@ -109,7 +111,17 @@ public class ChessPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
             public void mouseDragged(MouseEvent e) {
                 if(dragImage!=null&& isTurn) {
-                    dragImage.setPos(e.getX() - 35, e.getY() - 35);
+                    int x = e.getX();
+                    int y = e.getY();
+                    if(x>565)
+                        x = 565;
+                    else if (x<35)
+                        x = 35;
+                    if(y>565)
+                        y = 565;
+                    else if (y<35)
+                        y = 35;
+                    dragImage.setPos(x-35, y-35);
                     dragImage.paint(getGraphics());
                     repaint();
                 }
