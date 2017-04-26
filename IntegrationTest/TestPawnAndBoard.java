@@ -203,7 +203,7 @@ public class TestPawnAndBoard {
 		movesL.add(new Point(x, y));
 		HashSet<Point> moves = new HashSet(movesL);
 		
-		assertEquals(moves, new HashSet(pawn.getMoves()));
+		assertEquals(new HashSet(pawn.getMoves()), moves);
 	}
 	
 	private void testPawnMovesEmpty(Piece pawn){
