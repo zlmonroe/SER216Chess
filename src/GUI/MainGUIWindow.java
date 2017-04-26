@@ -131,19 +131,19 @@ public class MainGUIWindow extends JFrame {
     }
 
     public void checkMessage(){
-            if(!client.messages.isEmpty()) {
-                Message msg = client.messages.removeFirst();
-                if (msg.newMessage != null)
-                    chat.append(msg.newMessage);
-                if (msg.newMove != null){
-                    chess.movePiece(msg.newMove);
-                    repaint();
-                }
-                if (msg.newGameInfo!=null){
-                    status = new JLabel(msg.newGameInfo);
-                    chess.updatePieces();
-                }
-
+        if(!client.messages.isEmpty()) {
+            Message msg = client.messages.removeFirst();
+            if (msg.newMessage != null)
+                chat.append(msg.newMessage);
+            if (msg.newMove != null){
+                chess.movePiece(msg.newMove);
+                repaint();
             }
+            if (msg.newGameInfo!=null){
+                status = new JLabel(msg.newGameInfo);
+                chess.updatePieces();
+            }
+
+        }
     }
 }

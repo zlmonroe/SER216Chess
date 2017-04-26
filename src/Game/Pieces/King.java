@@ -19,7 +19,9 @@ public class King extends Piece {
                     Point currentMove = new Point(this.position.x + xOffset, this.position.y + yOffset);
                     Piece pieceAtMove = board.getPieceAt(currentMove);
 
-                    if(pieceAtMove == null || pieceAtMove.isWhite() != this.isWhite) {
+                    if((pieceAtMove == null || pieceAtMove.isWhite() != this.isWhite) &&
+                            currentMove.x < 8 && currentMove.x >= 0 &&
+                            currentMove.y < 8 && currentMove.y >= 0) {
                         moves.add(currentMove);
                     }
                 }
