@@ -40,7 +40,7 @@ public class Client implements Runnable{
         if (chatMessage != null) {
             System.out.println("Message Sent: " + chatMessage.trim());
             try {
-                out.writeObject(new Message(true, null, chatMessage, null, System.currentTimeMillis()));
+                out.writeObject(new Message(isWhite, null, chatMessage, null, System.currentTimeMillis()));
                 out.reset();
             } catch (IOException e) {
                 e.printStackTrace();

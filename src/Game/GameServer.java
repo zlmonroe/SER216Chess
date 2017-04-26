@@ -66,7 +66,8 @@ public class GameServer {
 
             try {
                 if (whiteMessage != null) {
-                    System.out.println("The move in the new message says: " + whiteMessage.newMove.oldPoint + " to " + whiteMessage.newMove.newPoint);
+                    if (whiteMessage.newMove!=null)
+                        System.out.println("The move in the new message says: " + whiteMessage.newMove.oldPoint + " to " + whiteMessage.newMove.newPoint);
                     if (processMove(whiteMessage)) {
                         isWhiteTurn = !isWhiteTurn;
                         gameState = checkGameState(isWhiteTurn);
@@ -108,9 +109,8 @@ public class GameServer {
                         }
                         informMoveUpdate(message);
                         return true;
-                    }
-                    else{
-                        whiteOut.writeObject(new Message(true,null,null,"Invalid Move",0));
+                    } else {
+                        whiteOut.writeObject(new Message(true, null, null, "Invalid Move", 0));
                         whiteOut.reset();
                     }
                 } else {
@@ -121,9 +121,8 @@ public class GameServer {
                         }
                         informMoveUpdate(message);
                         return true;
-                    }
-                    else{
-                        blackOut.writeObject(new Message(false,null,null,"Invalid Move",0));
+                    } else {
+                        blackOut.writeObject(new Message(false, null, null, "Invalid Move", 0));
                         blackOut.reset();
                     }
                 }
