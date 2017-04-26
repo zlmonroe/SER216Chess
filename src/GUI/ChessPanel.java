@@ -82,13 +82,19 @@ public class ChessPanel extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 if(dragImage!=null&&isTurn) {
                     endPoint.setLocation(e.getX() / 75, e.getY() / 75);
-                    dragImage.setPos((int) endPoint.getX() * 75 + 2, (int) endPoint.getY() * 75 + 2);
-                    paintComponent(getGraphics());
-                    drawPieces();
-                    System.out.println(endPoint.getX() + "\t" + endPoint.getY());
-                    startPoint.y = 7 - startPoint.y;
-                    endPoint.y = 7 - endPoint.y;
-                    client.sendMove(new Move(startPoint, endPoint));
+                    if(endPoint.getX()<8&&endPoint.getX()>=0&&endPoint.getY()<8&&endPoint.getY()>=0) {
+                        dragImage.setPos((int) endPoint.getX() * 75 + 2, (int) endPoint.getY() * 75 + 2);
+                        paintComponent(getGraphics());
+                        drawPieces();
+                        System.out.println(endPoint.getX() + "\t" + endPoint.getY());
+                        startPoint.y = 7 - startPoint.y;
+                        endPoint.y = 7 - endPoint.y;
+                        client.sendMove(new Move(startPoint, endPoint));
+                    }
+                    else {
+                        updatePieces();
+                        paintComponent(getGraphics());
+                    }
                 }
             }
 
@@ -105,7 +111,17 @@ public class ChessPanel extends JPanel {
         addMouseMotionListener(new MouseMotionListener() {
             public void mouseDragged(MouseEvent e) {
                 if(dragImage!=null&& isTurn) {
-                    dragImage.setPos(e.getX() - 35, e.getY() - 35);
+                    int x = e.getX();
+                    int y = e.getY();
+                    if(x>565)
+                        x = 565;
+                    else if (x<35)
+                        x = 35;
+                    if(y>565)
+                        y = 565;
+                    else if (y<35)
+                        y = 35;
+                    dragImage.setPos(x-35, y-35);
                     dragImage.paint(getGraphics());
                     repaint();
                 }
