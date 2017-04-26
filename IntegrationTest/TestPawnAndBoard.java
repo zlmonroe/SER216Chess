@@ -19,37 +19,6 @@ public class TestPawnAndBoard {
 	@Before
 	public void setUp() throws Exception {
 		board1 = new BoardState();
-		board2 = createBoard2();
-	}
-	
-	private BoardState createBoard2(){
-		BoardState tmp = new BoardState();
-		
-		/*moving all white pieces up one
-		 *this will delete the pawns
-		 *this is only allowed because the player class is
-		 *not checking if the moves are correct
-		 */
-		tmp = tmp.move(new Point(0, 0), new Point(0,1));
-		tmp = tmp.move(new Point(1, 0), new Point(1,1));
-		tmp = tmp.move(new Point(2, 0), new Point(2,1));
-		tmp = tmp.move(new Point(3, 0), new Point(3,1));
-		tmp = tmp.move(new Point(4, 0), new Point(4,1));
-		tmp = tmp.move(new Point(5, 0), new Point(5,1));
-		tmp = tmp.move(new Point(6, 0), new Point(6,1));
-		tmp = tmp.move(new Point(7, 0), new Point(7,1));
-		
-		//moving all black pieces down one
-		tmp = tmp.move(new Point(0, 7), new Point(0,6));
-		tmp = tmp.move(new Point(1, 7), new Point(1,6));
-		tmp = tmp.move(new Point(2, 7), new Point(2,6));
-		tmp = tmp.move(new Point(3, 7), new Point(3,6));
-		tmp = tmp.move(new Point(4, 7), new Point(4,6));
-		tmp = tmp.move(new Point(5, 7), new Point(5,6));
-		tmp = tmp.move(new Point(6, 7), new Point(6,6));
-		tmp = tmp.move(new Point(7, 7), new Point(7,6));
-		
-		return tmp;
 	}
 
 	@After
@@ -59,6 +28,14 @@ public class TestPawnAndBoard {
 	//testing the basic moves of the pawn
 	@Test
 	public void testPawnBasicMoves() {
+		
+		//We had an error where the pawn can attack if it if its first turn. This tested if the error
+		//was in the pawn. It was.		
+		Piece pawnBE = board1.getPieceAt(new Point(4,6));
+		
+		board1 = board1.move(new Point(4,1), new Point(4,4));
+		
+		testPawnMoves1(pawnBE, 4, 5);
 		Piece pawnWhite = board1.getPieceAt(new Point(0,1));
 		assertTrue(pawnWhite.getIdentifier() == 0);
 		assertTrue(pawnWhite.isWhite());

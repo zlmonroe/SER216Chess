@@ -4,22 +4,23 @@ import java.awt.Point;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Game.BoardState;
 import Game.Player;
 import Game.Pieces.Piece;
 
-public class TestPlayerAndBoard {
+public class TestPlayerAndOthers {
 	
-	Player player1;
-	Player player2;
+	static Player player1;
+	static Player player2;
 	
-	BoardState board1;
-	BoardState board2;
+	static BoardState board1;
+	static BoardState board2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		player1 = new Player(true);
 		player2 = new Player(false);
 		
@@ -28,6 +29,8 @@ public class TestPlayerAndBoard {
 		
 		board2 = new BoardState();
 		Piece king = board2.getPieceAt(new Point(4,7));
+		board2 = board2.move(new Point(3,0), new Point(3,3));
+		assertFalse(board2.getPieceAt(new Point(3,3)) == null);
 		for(int x = 0; x < 7 ; x++){
 			for(int y = 7; y > 5 ; y--){
 				board2 = board2.move(king.getPosition(), new Point(x, y));
@@ -52,7 +55,8 @@ public class TestPlayerAndBoard {
 	}
 
 	@Test
-	public void testPawnMoves() {
+	public void testMoves() {
+		Player.state = board1;
 		assertTrue(player1.move(new Point(0,1), new Point(0,2)));
 		assertTrue(player2.move(new Point(1,6), new Point(1,4)));
 		
@@ -100,7 +104,7 @@ public class TestPlayerAndBoard {
 	}
 	
 	@Test 
-	public void testPawnCheckAndCheckMate() {
+	public void testCheckAndCheckMate() {
 		Player.state = board2;
 		
 		//black king at 4,7 and white pawn at 4,6. in check and in check mate are false
@@ -121,5 +125,20 @@ public class TestPlayerAndBoard {
 		assertTrue(player2.inCheck());
 		assertFalse(player2.inCheckMate());
 		assertTrue(player2.move(new Point(4,7), new Point(5,6)));
+		
+		board2 = Player.state;
+		kingBlack = board2.getPieceAt(new Point(5,6));
+		assertTrue(kingBlack.getIdentifier() == 5);
+		assertFalse(kingBlack.isWhite());
+	}
+	
+	@Test 
+	public void testHasMoves() {
+		Player.state = board2;
+		Player.state = Player.state.move(new Point(3,3), new Point(2,6));
+		Player.state = Player.state.move(new Point(5,6), new Point(0,7));
+		
+		assertTrue(player2.hasMoves());
+		assertFalse(player2.inCheckMate());
 	}
 }
