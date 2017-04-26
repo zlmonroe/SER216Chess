@@ -36,8 +36,11 @@ public class MainGUIWindow extends JFrame {
 
         tools = new ToolPanel();
         status = new JLabel();
-        //status.setBorder(new LineBorder(Color.BLACK));
+        status.setBorder(new LineBorder(Color.CYAN, 3));
         status.setSize(300,60);
+        status.setHorizontalAlignment(SwingConstants.CENTER);
+        status.setText("New Game");
+
         chat = new ChatPanel();
         chess = new ChessPanel();
         start = new StartPanel();
@@ -96,7 +99,7 @@ public class MainGUIWindow extends JFrame {
                             chess.drawPieces();
                         }
                     });
-                    c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 3; c.weightx = .3; c.weighty = .05;
+                    c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 2; c.weightx = 1; c.weighty = 1;
                     timer.start();
                     chess.drawPieces();
                 }
@@ -112,9 +115,10 @@ public class MainGUIWindow extends JFrame {
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 1;
-        add(status, c);
-        status.setLocation(20,640);
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 3;c.weightx = 1;
+        pane.add(status, c);
+        status.setMaximumSize(new Dimension(300,60));
+        System.out.println();
         c.gridx = 1;
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

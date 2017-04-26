@@ -82,13 +82,17 @@ public class ChessPanel extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 if(dragImage!=null&&isTurn) {
                     endPoint.setLocation(e.getX() / 75, e.getY() / 75);
-                    dragImage.setPos((int) endPoint.getX() * 75 + 2, (int) endPoint.getY() * 75 + 2);
-                    paintComponent(getGraphics());
-                    drawPieces();
-                    System.out.println(endPoint.getX() + "\t" + endPoint.getY());
-                    startPoint.y = 7 - startPoint.y;
-                    endPoint.y = 7 - endPoint.y;
-                    client.sendMove(new Move(startPoint, endPoint));
+                    if(endPoint.getX()<8&&endPoint.getX()>=0&&endPoint.getY()<8&&endPoint.getY()>=0) {
+                        dragImage.setPos((int) endPoint.getX() * 75 + 2, (int) endPoint.getY() * 75 + 2);
+                        paintComponent(getGraphics());
+                        drawPieces();
+                        System.out.println(endPoint.getX() + "\t" + endPoint.getY());
+                        startPoint.y = 7 - startPoint.y;
+                        endPoint.y = 7 - endPoint.y;
+                        client.sendMove(new Move(startPoint, endPoint));
+                    }
+                    else
+                        updatePieces();
                 }
             }
 
