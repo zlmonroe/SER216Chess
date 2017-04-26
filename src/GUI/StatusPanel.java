@@ -35,7 +35,8 @@ public class StatusPanel extends JPanel {
         statusLabel.setText("  Game Started ");
     }
     
-    public void changeStatus(Object str) {//fnc that changes what it says in reference to Game turn (and possibly for end game)
-        statusLabel.setText((String) str);
+    public void changeStatus(String str) {//fnc that changes what it says in reference to Game turn (and possibly for end game)
+        statusLabel.setText(str);
+        //statusLabel.setSize(570,25);
     }
 }
