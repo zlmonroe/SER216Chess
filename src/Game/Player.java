@@ -1,8 +1,9 @@
 package Game;
 
-import java.awt.Point;
+import Game.Pieces.Piece;
+
+import java.awt.*;
 import java.util.LinkedList;
-import Game.Pieces.*;
 
 public class Player {
 	public static BoardState state;
@@ -65,6 +66,7 @@ public class Player {
 	public boolean move(Point start, Point end){
 		Piece piece = state.getPieceAt(start);
 		System.out.println("Trying to move piece at " + start.x + " " + start.y);
+		if(piece == null) System.out.println("null things here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		LinkedList<Point> pieceMoves = piece.getMoves();
 		if(!pieceMoves.contains(end)){
 			return false;
