@@ -149,7 +149,6 @@ public class MainGUIWindow extends JFrame {
                 chess.updatePieces();
                 chess.repaint();
             }
-
         }
     }
 }
