@@ -109,12 +109,14 @@ public class MainGUIWindow extends JFrame {
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
         pane.add(start, c);
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 3; c.gridheight = 1; c.weightx = .3; c.weighty = .05;
-        pane.add(status, c);
+        c.gridheight = 1; c.weightx = .3; c.weighty = .05;
+
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
+        pane.add(status, c);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -140,8 +142,12 @@ public class MainGUIWindow extends JFrame {
                 repaint();
             }
             if (msg.newGameInfo!=null){
-                status = new JLabel(msg.newGameInfo);
+                remove(status);
+                status.setText(msg.newGameInfo);
+                add(status);
+                status.repaint();
                 chess.updatePieces();
+                chess.repaint();
             }
 
         }
