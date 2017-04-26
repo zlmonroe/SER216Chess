@@ -56,13 +56,13 @@ public class GameServer {
 
             try {
                 whiteMessage = (Message) whiteIn.readObject();
-            } catch (Exception e) {
-            }
+                whiteIn.reset();
+            } catch (IOException e) {} catch (ClassNotFoundException e) {}
 
             try {
                 blackMessage = (Message) blackIn.readObject();
-            } catch (Exception e) {
-            }
+                blackIn.reset();
+            } catch (IOException e) {} catch (ClassNotFoundException e) {}
 
             try {
                 if (whiteMessage != null) {
