@@ -30,13 +30,14 @@ public class TestKingAndBoard {
 		assertTrue(kingWhite.getIdentifier() == 5);
 		assertTrue(kingWhite.isWhite());
 		
-		//assertEquals(new HashSet(moves), new HashSet(kingWhite.getMoves()));
+		assertEquals(new HashSet(moves), new HashSet(kingWhite.getMoves()));
 		
 		board1 = board1.move(new Point(4, 1), new Point(4, 3));
+		kingWhite = board1.getPieceAt(new Point(4, 0));
 		
 		moves.add(new Point(4, 1));
 		
-		//assertEquals(new HashSet(moves), new HashSet(kingWhite.getMoves()));
+		assertEquals(new HashSet(moves), new HashSet(kingWhite.getMoves()));
 		
 		board1 = board1.move(new Point(4, 0), new Point(4, 1));
 		kingWhite = board1.getPieceAt(new Point(4, 1));
