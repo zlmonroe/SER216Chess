@@ -99,7 +99,6 @@ public class MainGUIWindow extends JFrame {
                             chess.drawPieces();
                         }
                     });
-                    c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 2; c.weightx = 1; c.weighty = 1;
                     timer.start();
                     chess.drawPieces();
                 }
@@ -110,16 +109,12 @@ public class MainGUIWindow extends JFrame {
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
         pane.add(start, c);
-        c.gridheight = 1; c.weightx = .3; c.weighty = .05;
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 3; c.gridheight = 1; c.weightx = .3; c.weighty = .05;
+        pane.add(status, c);
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 3;c.weightx = 1;
-        pane.add(status, c);
-        status.setMaximumSize(new Dimension(300,60));
-        System.out.println();
-        c.gridx = 1;
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -145,11 +140,8 @@ public class MainGUIWindow extends JFrame {
                     repaint();
                 }
                 if (msg.newGameInfo!=null){
-                    status.setText(msg.newGameInfo.trim());
+                    status = new JLabel(msg.newGameInfo);
                     chess.updatePieces();
-                    chess.repaint();
-                    tools.repaint();
-
                 }
 
             }
