@@ -7,6 +7,8 @@ import java.io.Serializable;
  * Created by tjcup on 4/19/2017.
  */
 public class Move implements Serializable {
+
+    private static final long serialVersionUID = 7606604080009360587L;
     public final Point oldPoint,newPoint;
 
     /**

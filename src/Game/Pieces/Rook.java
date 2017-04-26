@@ -25,6 +25,7 @@ public class Rook extends Piece {
                 Piece pieceAtMove = board.getPieceAt(move);
                 if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
                     moves.add(move);
+                    if(pieceAtMove != null && pieceAtMove.isWhite != isWhite) break;
                 }
                 else break;
             }

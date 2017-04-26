@@ -1,35 +1,33 @@
 package Game;
 
 import Game.Pieces.Piece;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.awt.*;
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by jon on 4/22/2017.
  */
-class BoardStateTest {
+public class TestBoardState {
     BoardState bs;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         bs = new BoardState();
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         bs = null;
     }
-
     @Test
-    void getPieceAt() {
+    public void getPieceAt() throws Exception {
         assertEquals(0,bs.getPieceAt(new Point(0,1)).getIdentifier());
         BoardState newBS = bs.move(new Point(0,1),new Point(0,3));
         assertNotEquals(null, bs.getPieceAt(new Point(0,1)));
@@ -39,7 +37,7 @@ class BoardStateTest {
     }
 
     @Test
-    void getPieces() {
+    public void getPieces() throws Exception {
         HashSet<Piece> prev = new HashSet<>(bs.getPieces(true));
         BoardState newBs = bs.move(new Point(0,0), new Point(0, 1));
         assertNotEquals(new HashSet<Piece>(bs.getPieces(true)), new HashSet<Piece>(newBs.getPieces(true)));
@@ -47,7 +45,7 @@ class BoardStateTest {
     }
 
     @Test
-    void move() {
+    public void move() throws Exception {
         BoardState sameSpot = bs.move(new Point(1,1), new Point(1,1));
         assertEquals(bs, sameSpot);
         assertEquals(0,bs.getPieceAt(new Point(0,1)).getIdentifier());

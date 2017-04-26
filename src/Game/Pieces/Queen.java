@@ -1,5 +1,7 @@
 
 package Game.Pieces;
+import Game.BoardState;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -10,7 +12,9 @@ public class Queen extends Piece {
     public Queen(Point start, boolean isWhite) {
         super(start, isWhite, 4);
         bishop = new Bishop(start, isWhite);
+        bishop.setBoardState(this.board);
         rook = new Rook(start, isWhite);
+        rook.setBoardState(this.board);
     }
 
     @Override
@@ -19,6 +23,13 @@ public class Queen extends Piece {
         LinkedList<Point> movesR = rook.getMoves();
         movesB.addAll(movesR);
         return movesB;
+    }
+
+    @Override
+    public void setBoardState(BoardState board) {
+        bishop.setBoardState(board);
+        rook.setBoardState(board);
+        this.board = board;
     }
 
     @Override

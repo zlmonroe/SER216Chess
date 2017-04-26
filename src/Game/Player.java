@@ -1,8 +1,9 @@
 package Game;
 
-import java.awt.Point;
+import Game.Pieces.Piece;
+
+import java.awt.*;
 import java.util.LinkedList;
-import Game.Pieces.*;
 
 public class Player {
 	public static BoardState state;
@@ -10,6 +11,7 @@ public class Player {
 	
 	public Player(boolean w){
 		isWhite = w;
+		state = new BoardState();
 	}
 	
 	/**
@@ -18,13 +20,17 @@ public class Player {
 	 * @return 
 	 */
 	public boolean inCheck(BoardState tmp){
-		Piece king = getKing();
+		Piece king = getKing(tmp);
         for (Piece enemyPiece : tmp.getPieces(!isWhite)) {
-            if (enemyPiece.canMove(king.getPosition())) {
+            if (enemyPiece.getMoves().contains(king.getPosition())) {
                 return true;
             }
         }
         return false;
+	}
+	
+	public boolean inCheck(){
+		return inCheck(state);
 	}
 	
 	/**
@@ -40,22 +46,27 @@ public class Player {
 		for(Piece piece : pieces){
 			for(Point move: piece.getMoves()){
 				BoardState tmp = state.move(piece.getPosition(), move);
-				if(!inCheck(tmp)){
-					return true;
+				if(tmp == null){//added for testing
+				}
+				else if(!inCheck(tmp)){
+					return false;
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**
-	 * Attempts to move the piece at point start to point end. Returns true if the move is successful, false if the move would result in check
+	 * Attempts to move the piece at point start to point end. Returns true if the move is successful, 
+	 * false if the move would result in check. Does not change th board state if realMove is false
 	 * @param start
 	 * @param end
 	 * @return
 	 */
 	public boolean move(Point start, Point end){
 		Piece piece = state.getPieceAt(start);
+		System.out.println("Trying to move piece at " + start.x + " " + start.y);
+		if(piece == null) System.out.println("null things here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		LinkedList<Point> pieceMoves = piece.getMoves();
 		if(!pieceMoves.contains(end)){
 			return false;
@@ -65,13 +76,34 @@ public class Player {
 			return false;
 		}
 		state = tmp;
-		piece = state.getPieceAt(start);
-		piece.setPosition(end);
+        System.out.println(this.state);
 		return true;
 	}
 	
-	private Piece getKing(){
+	/**
+	 * Checks to see if the player has any possible moves
+	 * @return
+	 */
+	public boolean hasMoves(){
+	    boolean hasMoves = false;
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
+		for (Piece piece : pieces) {
+			LinkedList<Point> pieceMoves = piece.getMoves();
+			for(Point move : pieceMoves){
+				BoardState tmp = state.move(piece.getPosition(), move);
+				if(tmp == null){//added for testing
+				}
+				else if(!inCheck(tmp)){
+					hasMoves = true;
+					System.out.println("Ok move: "+piece.getIdentifier() + " " +piece.getPosition() + " "+ move);
+				}
+			}
+	    }
+		return hasMoves;
+	}
+	
+	private Piece getKing(BoardState board){
+		LinkedList<Piece> pieces = board.getPieces(isWhite);
 		for(int i = 0; i < pieces.size(); i++){
 			if(5 == pieces.get(i).getIdentifier()){//5 is the identifier for king, we check if this piece is the king
 				return pieces.get(i);

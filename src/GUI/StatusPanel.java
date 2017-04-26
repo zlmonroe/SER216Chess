@@ -25,7 +25,7 @@ public class StatusPanel extends JPanel {
         statusLabel.setLocation(5,5);
         statusLabel.setText(" Start New Game ");
         statusLabel.setBackground(Color.lightGray);
-        statusLabel.setFont(new Font("Aril",Font.BOLD,11));
+        statusLabel.setFont(new Font("Ariel",Font.BOLD,11));
         statusLabel.setForeground(Color.RED.brighter());
         statusLabel.setBorder(LabelBorder);
         add(statusLabel);
@@ -35,7 +35,8 @@ public class StatusPanel extends JPanel {
         statusLabel.setText("  Game Started ");
     }
     
-    public void changeStatus(Object str) {//fnc that changes what it says in reference to Game turn (and possibly for end game)
-        statusLabel.setText((String) str);
+    public void changeStatus(String str) {//fnc that changes what it says in reference to Game turn (and possibly for end game)
+        statusLabel.setText(str);
+        //statusLabel.setSize(570,25);
     }
 }

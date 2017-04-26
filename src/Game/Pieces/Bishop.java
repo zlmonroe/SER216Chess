@@ -8,7 +8,7 @@ public class Bishop extends Piece {
     public Bishop(Point start, boolean isWhite) {
         super(start, isWhite, 2);
     }
-
+//
     @Override
     @SuppressWarnings("Duplicates")
     public LinkedList<Point> getMoves() {
@@ -25,6 +25,7 @@ public class Bishop extends Piece {
                 Piece pieceAtMove = board.getPieceAt(move);
                 if (pieceAtMove == null || pieceAtMove.isWhite != isWhite) {
                     moves.add(move);
+                    if(pieceAtMove != null && pieceAtMove.isWhite != isWhite) break;
                 }
                 else break;
             }

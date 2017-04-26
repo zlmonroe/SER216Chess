@@ -14,9 +14,19 @@ public class BoardState {
     private final Piece[][] board;
     private LinkedList<Piece> blackPieces;
     private LinkedList<Piece> whitePieces;
+    /**
+     * Indicates how many moves have happened since a pawn was last moved
+     */
+    public final int movesSincePawn;
+    /**
+     * Total number of moves completed thus far
+     */
+    public final int totalNumMoves;
 
-    private BoardState(Piece[][] board) {
+    private BoardState(Piece[][] board, int movesSincePawn, int totalNumMoves) {
+        this.totalNumMoves = totalNumMoves;
         this.board = board;
+        this.movesSincePawn = movesSincePawn;
         initLists();
     }
 
@@ -41,9 +51,11 @@ public class BoardState {
      * Creates a new BoardState with the initial chess setup
      */
     public BoardState() {
+        totalNumMoves = 0;
+        movesSincePawn = 0;
         board = new Piece[8][8];
-        Piece[] whites = new Piece[]{new Rook(new Point(0,0), true), new Knight(new Point(1,0), true), new Bishop(new Point(2, 0), true), new King(new Point(3, 0), true), new Queen(new Point(4,0),true), new Bishop(new Point(5,0),true), new Knight(new Point(6, 0), true), new Rook(new Point(7, 0), true)};
-        Piece[] blacks = new Piece[]{new Rook(new Point(0,7), false), new Knight(new Point(1,7), false), new Bishop(new Point(2, 7), false), new King(new Point(3, 7), false), new Queen(new Point(4,7),false), new Bishop(new Point(5,7),false), new Knight(new Point(6, 7), false), new Rook(new Point(7, 7), false)};
+        Piece[] whites = new Piece[]{new Rook(new Point(0,0), true), new Knight(new Point(1,0), true), new Bishop(new Point(2, 0), true), new Queen(new Point(3, 0), true), new King(new Point(4,0),true), new Bishop(new Point(5,0),true), new Knight(new Point(6, 0), true), new Rook(new Point(7, 0), true)};
+        Piece[] blacks = new Piece[]{new Rook(new Point(0,7), false), new Knight(new Point(1,7), false), new Bishop(new Point(2, 7), false), new Queen(new Point(3, 7), false), new King(new Point(4,7),false), new Bishop(new Point(5,7),false), new Knight(new Point(6, 7), false), new Rook(new Point(7, 7), false)};
         for (int i = 0; i < 8; i++) {
             board[i][0] = whites[i];
             board[i][7] = blacks[i];
@@ -72,7 +84,9 @@ public class BoardState {
     public LinkedList<Piece> getPieces(boolean whitePlayer) {
         LinkedList<Piece> pieces = new LinkedList<>();
         for( Piece p : whitePlayer ? whitePieces : blackPieces) {
-            pieces.add(p.clone());
+            Piece pc = p.clone();
+            pc.setBoardState(this);
+            pieces.add(pc);
         }
         return pieces;
     }
@@ -91,11 +105,17 @@ public class BoardState {
                     newBoard[i][j] = board[i][j].clone();
             }
         }
+        int pawnMoves;
+        if (newBoard[moveStart.x][moveStart.y].identifier == 0) {
+            pawnMoves = 0;
+        } else {
+            pawnMoves = movesSincePawn + 1;
+        }
         newBoard[moveEnd.x][moveEnd.y] = newBoard[moveStart.x][moveStart.y];
         newBoard[moveEnd.x][moveEnd.y].setPosition(moveEnd);
         if (!moveStart.equals(moveEnd))
             newBoard[moveStart.x][moveStart.y] = null;
-        return new BoardState(newBoard);
+        return new BoardState(newBoard, pawnMoves, totalNumMoves + 1);
     }
 
     @Override
@@ -103,7 +123,7 @@ public class BoardState {
         if (!(other instanceof BoardState)) {
             return false;   // if other is not a BoardState
         }
-        BoardState b = (BoardState)other;
+        BoardState b = (BoardState) other;
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (board[i][j] == null) {
@@ -118,5 +138,23 @@ public class BoardState {
         Set<Piece> otherWhite = new HashSet<>(b.whitePieces);
         Set<Piece> otherBlack = new HashSet<>(b.blackPieces);
         return thisWhite.equals(otherWhite) && thisBlack.equals(otherBlack);
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for(int r = 7; r >= 0; r--) {
+            for(int c = 0; c <= 7; c++) {
+                Piece p = getPieceAt(new Point(c, r));
+                if(p!=null) {
+                    s += "[" +r + ", " + c + ", " + (p.isWhite() ? "white" : "black") + ", " + p.getIdentifier() + "] ";
+                }
+                else {
+                    s += "[" + r + ", " + c + ",      , x] ";
+                }
+            }
+            s += "\n";
+        }
+        return s;
     }
 }
