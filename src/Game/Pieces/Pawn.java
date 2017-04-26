@@ -55,7 +55,7 @@ public class Pawn extends Piece{
                 return board.getPieceAt(newPoint) == null;
             }
             if(newPoint.y == (this.position.y + 2 * direction)) {
-                return board.getPieceAt(newPoint) != null &&
+                return board.getPieceAt(newPoint) != null ||
                         board.getPieceAt(new Point(newPoint.x, newPoint.y - direction)) != null;
             }
         }
