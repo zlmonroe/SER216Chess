@@ -25,7 +25,7 @@ public class TestPawnAndBoard {
 	public void tearDown() throws Exception {
 	}
 	
-	//testing the basic moves of the pawn
+	//testing the basic moves o f the pawn
 	@Test
 	public void testPawnBasicMoves() {
 		
@@ -33,7 +33,7 @@ public class TestPawnAndBoard {
 		//was in the pawn. It was.		
 		Piece pawnBE = board1.getPieceAt(new Point(4,6));
 		
-		board1 = board1.move(new Point(4,1), new Point(4,4));
+		board1 = board1.move(new Point(4,1), new Point(4,4));//m
 		
 		testPawnMoves1(pawnBE, 4, 5);
 		Piece pawnWhite = board1.getPieceAt(new Point(0,1));

@@ -69,10 +69,10 @@ public class TestPlayerAndOthers {
 		assertFalse(pawnBlack.isWhite());
 		
 		assertFalse(player1.move(new Point(0,2), new Point(0,4)));//cannot move two after first turn
-		assertFalse(player2.move(new Point(1,4), new Point(1,5)));//cannot move back
+		assertFalse(player2.move(new Point(1,4), new Point(1,5)));//cannot move bac k
 		
 		assertTrue(player1.move(new Point(0,2), new Point(0,3)));
-		assertTrue(player2.move(new Point(0,6), new Point(0,5)));
+		assertTrue(player2.move(new Point(0,6), new Point(0,5)));//h
 		
 		pawnWhite = Player.state.getPieceAt(new Point(0, 3));
 		assertTrue(pawnWhite.getIdentifier() == 0);
