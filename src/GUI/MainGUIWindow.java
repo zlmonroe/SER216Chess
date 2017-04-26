@@ -5,6 +5,7 @@ import Game.Client;
 import Game.Message;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +15,7 @@ import java.awt.event.KeyListener;
 
 public class MainGUIWindow extends JFrame {
     private ToolPanel tools;
-    private StatusPanel status;
+    private JLabel status;
     private ChatPanel chat;
     private ChessPanel chess;
     private StartPanel start;
@@ -34,14 +35,16 @@ public class MainGUIWindow extends JFrame {
         c.weightx = 1; c.weighty = 1;
 
         tools = new ToolPanel();
-        status = new StatusPanel();
+        status = new JLabel();
+        //status.setBorder(new LineBorder(Color.BLACK));
+        status.setSize(300,60);
         chat = new ChatPanel();
         chess = new ChessPanel();
         start = new StartPanel();
         chess.setSize(600,600);
         chessTimer = new ChessTimer(5*60);
 
-        chat.sendButton.addActionListener(new ActionListener() {
+        chat.sendButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 chat.textArea.append(chat.textField.getText()+"\n");
                 client.sendChat(chat.textField.getText());
@@ -50,11 +53,10 @@ public class MainGUIWindow extends JFrame {
         });
 
         chat.textField.addKeyListener(new KeyListener() {
-            @Override
+
             public void keyTyped(KeyEvent e) {
             }
 
-            @Override
             public void keyPressed(KeyEvent e) {
                 if( e.getKeyChar()=='\n') {
                     chat.textArea.append(chat.textField.getText()+"\n");
@@ -62,13 +64,11 @@ public class MainGUIWindow extends JFrame {
                     chat.textField.setText(null);
                 }
             }
-            @Override
             public void keyReleased(KeyEvent e) {
             }
         });
 
         start.startClient.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 client = new Client(start.IPAddressField.getText(), Integer.parseInt(start.PortNumField.getText()));
                 if (client.isConnected) {
@@ -96,6 +96,7 @@ public class MainGUIWindow extends JFrame {
                             chess.drawPieces();
                         }
                     });
+                    c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 3; c.weightx = .3; c.weighty = .05;
                     timer.start();
                     chess.drawPieces();
                 }
@@ -106,12 +107,15 @@ public class MainGUIWindow extends JFrame {
 
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
         pane.add(start, c);
-        c.gridx = 0; c.gridy = 2; c.gridheight = 1; c.gridwidth = 3; c.weightx = .3; c.weighty = .05;
-        pane.add(status, c);
+        c.gridheight = 1; c.weightx = .3; c.weighty = .05;
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 1;
+        add(status, c);
+        status.setLocation(20,640);
+        c.gridx = 1;
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -137,8 +141,10 @@ public class MainGUIWindow extends JFrame {
                     repaint();
                 }
                 if (msg.newGameInfo!=null){
+                    status.setText(msg.newGameInfo.trim());
                     chess.updatePieces();
                     chess.repaint();
+                    tools.repaint();
 
                 }
 
