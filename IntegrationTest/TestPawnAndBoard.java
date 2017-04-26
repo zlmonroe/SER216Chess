@@ -34,6 +34,7 @@ public class TestPawnAndBoard {
 		Piece pawnBE = board1.getPieceAt(new Point(4,6));
 		
 		board1 = board1.move(new Point(4,1), new Point(4,4));//m
+		pawnBE = board1.getPieceAt(new Point(4,6));
 		
 		testPawnMoves1(pawnBE, 4, 5);
 		Piece pawnWhite = board1.getPieceAt(new Point(0,1));
@@ -202,7 +203,7 @@ public class TestPawnAndBoard {
 		movesL.add(new Point(x, y));
 		HashSet<Point> moves = new HashSet(movesL);
 		
-		assertEquals(new HashSet(pawn.getMoves()), moves);
+		assertEquals(moves, new HashSet(pawn.getMoves()));
 	}
 	
 	private void testPawnMovesEmpty(Piece pawn){

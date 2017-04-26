@@ -83,6 +83,7 @@ public class Player {
 	 * @return
 	 */
 	public boolean hasMoves(){
+	    boolean hasMoves = false;
 		LinkedList<Piece> pieces = state.getPieces(isWhite);
 		for (Piece piece : pieces) {
 			LinkedList<Point> pieceMoves = piece.getMoves();
@@ -91,11 +92,12 @@ public class Player {
 				if(tmp == null){//added for testing
 				}
 				else if(!inCheck(tmp)){
-					return true;
+					hasMoves = true;
+					System.out.println("Ok move: "+piece.getIdentifier() + " " +piece.getPosition() + " "+ move);
 				}
 			}
 	    }
-		return false;
+		return hasMoves;
 	}
 	
 	private Piece getKing(BoardState board){

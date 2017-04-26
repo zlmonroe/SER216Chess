@@ -144,7 +144,7 @@ public class BoardState {
     public String toString() {
         String s = "";
         for(int r = 7; r >= 0; r--) {
-            for(int c = 0; c < 7; c++) {
+            for(int c = 0; c <= 7; c++) {
                 Piece p = getPieceAt(new Point(c, r));
                 if(p!=null) {
                     s += "[" +r + ", " + c + ", " + (p.isWhite() ? "white" : "black") + ", " + p.getIdentifier() + "] ";

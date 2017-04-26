@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by tjcup on 4/21/2017.
@@ -84,6 +86,21 @@ public class GameServer {
                 System.err.println("The move could not be processed (likely due to a connection error)!");
             }
         }
+        Message m;
+        if(gameState == State.BLACKLOSES) {
+            m = new Message(false, null, null, "Black loses", 0);
+        }
+        else if(gameState == State.WHITELOSES) {
+            m = new Message(false, null, null, "White loses", 0);
+        }
+        else if(gameState == State.STALEMATE) {
+            m = new Message(false, null, null, "Stalemate, it's a draw", 0);
+        }
+        else {
+            m = new Message(false, null, null, "The server crashed!", 0);
+        }
+        informMoveUpdate(m);
+        System.out.println("The game has been finished");
 
     }
 
@@ -140,8 +157,20 @@ public class GameServer {
 
         public int val;
 
+        static Map<Integer, State> map = new HashMap<>();
+
+        static {
+            for(State s : State.values()) {
+                map.put(s.val, s);
+            }
+        }
+
         State(int val) {
             this.val = val;
+        }
+
+        public static State valueOf(int val) {
+            return map.get(val);
         }
     }
 
@@ -159,7 +188,9 @@ public class GameServer {
 
         int stateValue = (player << 2) | (checkMate << 1) | hasMoves;
         if(stateValue > 0b011 && stateValue != 0b110) stateValue &= 0b011;
-        return State.values()[stateValue];
+
+        //if(whitePlayer.inCheck()) System.out.println(whitePlayer.hasMoves());
+        return State.valueOf(stateValue);
     }
 
     private void informMoveUpdate(Message message) {

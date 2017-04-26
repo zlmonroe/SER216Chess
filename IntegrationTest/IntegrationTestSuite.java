@@ -3,7 +3,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)//m
-@SuiteClasses({TestPlayerAndBoard.class, TestKingAndBoard.class, TestBishopAndBoard.class, TestRookAndBoard.class, TestKnightAndBoard.class, TestPawnAndBoard.class })
+@SuiteClasses({TestPlayerAndOthers.class, TestKingAndBoard.class, TestBishopAndBoard.class, TestRookAndBoard.class, TestKnightAndBoard.class, TestPawnAndBoard.class })
 public class IntegrationTestSuite {
 
 }
