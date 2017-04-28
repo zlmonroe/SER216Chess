@@ -1,11 +1,9 @@
 
 package GUI;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
+import java.awt.*;
 
 
 public class StatusPanel extends JPanel {
@@ -39,4 +37,5 @@ public class StatusPanel extends JPanel {
         statusLabel.setText(str);
         //statusLabel.setSize(570,25);
     }
+
 }

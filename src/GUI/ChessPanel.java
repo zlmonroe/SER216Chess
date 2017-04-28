@@ -188,7 +188,7 @@ public class ChessPanel extends JPanel {
         final String[] pieceNames = {"pawn", "knight", "bishop", "rook", "queen", "king"};
         int type = (pieceLocations[p.x][7-p.y] - 1) / 2;
         if (type >= 0) {
-            return ((pieceLocations[p.x][7-p.y] % 2 == 0) ? "white " : "black ") + pieceNames[type];
+            return ((pieceLocations[p.x][7-p.y] % 2 == 0) ? "Black " : "White ") + pieceNames[type];
         }
         return null;
     }

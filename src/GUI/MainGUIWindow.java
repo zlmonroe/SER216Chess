@@ -118,7 +118,7 @@ public class MainGUIWindow extends JFrame {
         c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
         pane.add(status, c);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
 
         this.setSize(860, 700);
@@ -137,6 +137,7 @@ public class MainGUIWindow extends JFrame {
             Message msg = client.messages.removeFirst();
             if (msg.newMove != null){
                 chess.movePiece(msg.newMove);
+                tools.add_to_History(chess.getPieceName(msg.newMove.newPoint) + " to " + Character.toString((char)('a' + (char)msg.newMove.newPoint.x)) + (1+msg.newMove.newPoint.y) );
                 repaint();
             }
             if (msg.newMessage != null) {
