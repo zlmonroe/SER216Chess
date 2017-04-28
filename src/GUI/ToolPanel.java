@@ -18,20 +18,23 @@ public class ToolPanel extends JPanel {
     //the panel with the history of piece moves in it
     private final HistoryList historyList = new HistoryList();
     //the two chess timer objects that need to be replaced
-    private ChessTimer chessTimer1;
-    private ChessTimer chessTimer2;
+    private long whiteTime;
+    private long blackTime;
+    JLabel JLblack;
+    JLabel JLwhite;
+    long offsetStart;
 
     public ToolPanel() {
         setLayout(null);
 
-        JLabel JLblack = new JLabel("  Black ");
-        JLblack.setSize(60, 25);
+        JLblack = new JLabel("  Black Time:");
+        JLblack.setSize(150, 25);
         JLblack.setLocation(20, 34);
         JLblack.setBackground(new Color(230, 12, 0));
         JLblack.setOpaque(true);
 
-        JLabel JLwhite = new JLabel("  White ");
-        JLwhite.setSize(60, 25);
+        JLwhite = new JLabel("  White Time:");
+        JLwhite.setSize(150, 25);
         JLwhite.setLocation(20, 230);
         JLwhite.setBackground(new Color(230, 12, 0));
         JLwhite.setOpaque(true);
@@ -50,15 +53,21 @@ public class ToolPanel extends JPanel {
     }
 
     public void start_Again() {
-        chessTimer1 = new ChessTimer(300);
-        chessTimer2 = new ChessTimer(300);
-
-        chessTimer1.start();
-        chessTimer2.start();
-        chessTimer2.pause();
-
+        JLblack.setText("  Black Time:");
+        JLwhite.setText("  White Time:");
         historyList.cleanList();
         historyList.addToList("Move History:");
+
+    }
+    public void updateTimer(boolean isWhite, String timeString){
+        if (isWhite){
+            JLwhite.setText("White Timer: "+timeString);
+            //JLwhite.repaint();
+        }
+        else{
+            JLblack.setText("Black Timer: "+timeString);
+            //JLblack.repaint();
+        }
 
     }
 

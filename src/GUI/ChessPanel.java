@@ -1,5 +1,6 @@
 package GUI;
 
+import Game.ChessTimer;
 import Game.Client;
 import Game.Move;
 import Game.Player;
@@ -23,6 +24,7 @@ public class ChessPanel extends JPanel {
     pieceIcon dragImage;
     Client client;
     boolean isTurn;
+    ChessTimer time;
 
     ChessPanel() {
         setDoubleBuffered(true);
@@ -87,6 +89,7 @@ public class ChessPanel extends JPanel {
                         startPoint.y = 7 - startPoint.y;
                         endPoint.y = 7 - endPoint.y;
                         client.sendMove(new Move(startPoint, endPoint));
+                        time.pause();
                     }
                     else {
                         updatePieces();
@@ -164,7 +167,7 @@ public class ChessPanel extends JPanel {
                 if (pieceType != 0) {
                     img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons/" + pieceExtentions[pieceType] + ".gif"));
                     pieces[i][j] = new pieceIcon(img, i, j);
-                    add(pieces[i][j]);
+                    //add(pieces[i][j]);
                 } else {
                     pieces[i][j] = null;
                 }

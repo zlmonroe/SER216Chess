@@ -37,18 +37,32 @@ public class ChessTimer {
      * Method to return the remaining time on the timer. will automatically stop timer if time would go negative.
      * @return Returns time remaining on the timer, will not go negative.
      */
-    public double getTime(){
-        double time;
+    public long getTime(){
+        long time;
         if(isRunning)
-            time = (length-(System.currentTimeMillis()-startTime))/10/100.0;
+            time = (length-(System.currentTimeMillis()-startTime));
         else
-            time = (length)/10/100.0;
+            time = (length);
         if(time<=0){
             this.pause();
             length = 0;
             time = 0;
         }
         return time;
+    }
+
+    public String getTimeString(){
+        long time;
+        if(isRunning)
+            time = (length-(System.currentTimeMillis()-startTime));
+        else
+            time = (length);
+        if(time<=0){
+            this.pause();
+            length = 0;
+            time = 0;
+        }
+        return ((time/1000)/60)+":"+((time/1000)%60);
     }
 }
 

@@ -43,8 +43,8 @@ public class GameServer {
 
             blackOut = new ObjectOutputStream(blackSocket.getOutputStream());
             blackIn = new ObjectInputStream(blackSocket.getInputStream());
-            whiteOut.writeObject(new Message(true, null, null, null, 0));
-            blackOut.writeObject(new Message(false, null, null, null, 0));
+            whiteOut.writeObject(new Message(true, null, null, null, null));
+            blackOut.writeObject(new Message(false, null, null, null, null));
             blackSocket.setSoTimeout(500);
             whiteSocket.setSoTimeout(500);
         } catch (Throwable e) {
@@ -88,16 +88,16 @@ public class GameServer {
         }
         Message m;
         if(gameState == State.BLACKLOSES) {
-            m = new Message(false, null, null, "Black loses", 0);
+            m = new Message(false, null, null, "Black loses", "0:0");
         }
         else if(gameState == State.WHITELOSES) {
-            m = new Message(false, null, null, "White loses", 0);
+            m = new Message(false, null, null, "White loses", "0:0");
         }
         else if(gameState == State.STALEMATE) {
-            m = new Message(false, null, null, "Stalemate, it's a draw", 0);
+            m = new Message(false, null, null, "Stalemate, it's a draw", "0:0");
         }
         else {
-            m = new Message(false, null, null, "The server crashed!", 0);
+            m = new Message(false, null, null, "The server crashed!", "0:0");
         }
         informMoveUpdate(m);
         System.out.println("The game has been finished");
@@ -105,7 +105,7 @@ public class GameServer {
     }
 
     boolean processMove(Message message) throws IOException {
-        if (message.newMessage != null) {
+        if (message.newMessage != null ||message.timeLeft!=null) {
             //move is just a message
             if (message.isWhite) {
                 //if the message is from white
@@ -119,28 +119,32 @@ public class GameServer {
             //move contains info to be processed
             Move move = message.newMove;
                 if (message.isWhite) {
-                    if (whitePlayer.move(move.oldPoint, move.newPoint)) {
-                        if (blackPlayer.inCheck()) {
-                            //the move has happened and the black player is now in check
-                            message = message.setNewGameInfo("Black is now in check!");
+                    if(message.newMove!=null) {
+                        if (whitePlayer.move(move.oldPoint, move.newPoint)) {
+                            if (blackPlayer.inCheck()) {
+                                //the move has happened and the black player is now in check
+                                message = message.setNewGameInfo("Black is now in check!");
+                            }
+                            informMoveUpdate(message);
+                            return true;
+                        } else {
+                            whiteOut.writeObject(new Message(true, null, null, "Invalid Move", null));
+                            whiteOut.reset();
                         }
-                        informMoveUpdate(message);
-                        return true;
-                    } else {
-                        whiteOut.writeObject(new Message(true, null, null, "Invalid Move", 0));
-                        whiteOut.reset();
                     }
                 } else {
-                    if (blackPlayer.move(move.oldPoint, move.newPoint)) {
-                        if (whitePlayer.inCheck()) {
-                            //the move has happened and the white player is now in check
-                            message = message.setNewGameInfo("White is now in check!");
+                    if(message.newMove!=null) {
+                        if (blackPlayer.move(move.oldPoint, move.newPoint)) {
+                            if (whitePlayer.inCheck()) {
+                                //the move has happened and the white player is now in check
+                                message = message.setNewGameInfo("White is now in check!");
+                            }
+                            informMoveUpdate(message);
+                            return true;
+                        } else {
+                            blackOut.writeObject(new Message(false, null, null, "Invalid Move", null));
+                            blackOut.reset();
                         }
-                        informMoveUpdate(message);
-                        return true;
-                    } else {
-                        blackOut.writeObject(new Message(false, null, null, "Invalid Move", 0));
-                        blackOut.reset();
                     }
                 }
             }

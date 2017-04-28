@@ -40,7 +40,7 @@ public class Client implements Runnable{
         if (chatMessage != null) {
             System.out.println("Message Sent: " + chatMessage.trim());
             try {
-                out.writeObject(new Message(isWhite, null, chatMessage, null, System.currentTimeMillis()));
+                out.writeObject(new Message(isWhite, null, chatMessage, null, null));
                 out.reset();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -50,9 +50,18 @@ public class Client implements Runnable{
     }
     public void sendMove(Move move){
         try {
-            out.writeObject(new Message(isWhite, move, null, null, System.currentTimeMillis()));
+            out.writeObject(new Message(isWhite, move, null, null, null));
             out.reset();
             System.out.println((isWhite ? "white":"black") + " sent the server: " + move.oldPoint + " to " + move.newPoint);
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+    }
+
+    public void sendTime(String time){
+        try {
+            out.writeObject(new Message(isWhite, null, null, "Game In Progress", time));
+            out.reset();
         } catch (IOException e) {
             //e.printStackTrace();
         }

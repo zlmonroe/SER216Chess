@@ -12,7 +12,7 @@ public class Message implements Serializable {
     public final Move newMove;
     public final String newMessage;
     public final String newGameInfo;
-    public final long timeLeft;
+    public String timeLeft;
 
     /**
      * Creates a new message to be passed between the server and client
@@ -22,7 +22,7 @@ public class Message implements Serializable {
      * @param newGameInfo New information about the game
      * @param timeLeft Amount of time remaining for the current player, in ms
      */
-    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, long timeLeft) {
+    public Message(boolean isWhite, Move newMove, String newMessage, String newGameInfo, String timeLeft) {
         this.isWhite = isWhite;
         this.newMove = newMove;
         this.newMessage = newMessage;

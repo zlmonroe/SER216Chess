@@ -27,7 +27,6 @@ public class MainGUIWindow extends JFrame {
     MainGUIWindow() {
 
         //Begin GUI setup
-        //client = new Client();
         Container pane = this.getContentPane();
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -46,6 +45,7 @@ public class MainGUIWindow extends JFrame {
         start = new StartPanel();
         chess.setSize(600,600);
         chessTimer = new ChessTimer(5*60);
+        chess.time = chessTimer;
 
         chat.sendButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -58,6 +58,7 @@ public class MainGUIWindow extends JFrame {
         chat.textField.addKeyListener(new KeyListener() {
 
             public void keyTyped(KeyEvent e) {
+
             }
 
             public void keyPressed(KeyEvent e) {
@@ -68,6 +69,7 @@ public class MainGUIWindow extends JFrame {
                 }
             }
             public void keyReleased(KeyEvent e) {
+
             }
         });
 
@@ -96,9 +98,13 @@ public class MainGUIWindow extends JFrame {
                     timer = new Timer(100, new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             checkMessage();
-                            chess.drawPieces();
+                            //chess.drawPieces();
+                            tools.updateTimer(client.isWhite,chessTimer.getTimeString());
+                            client.sendTime(chessTimer.getTimeString());
+                            repaint();
                         }
                     });
+                    if (client.isWhite) chessTimer.start();
                     timer.start();
                     chess.drawPieces();
                 }
@@ -110,12 +116,11 @@ public class MainGUIWindow extends JFrame {
         c.gridx = 0; c.gridy = 0; c.gridheight = 2;
         pane.add(start, c);
         c.gridheight = 1; c.weightx = .3; c.weighty = .05;
-
         c.gridx = 1; c.gridy = 1; c.gridwidth = 1;
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 1;
         pane.add(status, c);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,7 +142,12 @@ public class MainGUIWindow extends JFrame {
             Message msg = client.messages.removeFirst();
             if (msg.newMove != null){
                 chess.movePiece(msg.newMove);
+                if (msg.isWhite!=client.isWhite) chessTimer.start();
                 repaint();
+            }
+            if(msg.timeLeft!=null&&(msg.isWhite!=client.isWhite)){
+                //System.out.println(msg.isWhite+"\t"+msg.timeLeft);
+                tools.updateTimer(msg.isWhite, msg.timeLeft);
             }
             if (msg.newMessage != null) {
                 chat.append(msg.newMessage);
@@ -149,6 +159,7 @@ public class MainGUIWindow extends JFrame {
                 status.repaint();
                 chess.updatePieces();
                 chess.repaint();
+                if (msg.newGameInfo.equals("Invalid Move")) chessTimer.start();
             }
             else {
                 remove(status);
@@ -158,6 +169,8 @@ public class MainGUIWindow extends JFrame {
                 chess.updatePieces();
                 chess.repaint();
             }
+
+
         }
     }
 }
