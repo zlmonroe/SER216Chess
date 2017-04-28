@@ -89,7 +89,7 @@ public class ChessPanel extends JPanel {
                         startPoint.y = 7 - startPoint.y;
                         endPoint.y = 7 - endPoint.y;
                         client.sendMove(new Move(startPoint, endPoint));
-                        time.pause();
+                        //time.pause();
                     }
                     else {
                         updatePieces();
