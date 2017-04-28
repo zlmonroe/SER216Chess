@@ -93,7 +93,7 @@ public class MainGUIWindow extends JFrame {
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
-                    timer = new Timer(100, new ActionListener() {
+                    timer = new Timer(500, new ActionListener() {
                         public void actionPerformed(ActionEvent evt) {
                             checkMessage();
                             //chess.drawPieces();
@@ -127,8 +127,6 @@ public class MainGUIWindow extends JFrame {
         this.setSize(860, 700);
         this.setResizable(false);
         this.setVisible(true);
-
-
     }
 
     public static void main(String args[]) {
@@ -156,18 +154,20 @@ public class MainGUIWindow extends JFrame {
                 status.setText(msg.newGameInfo);
                 add(status);
                 status.repaint();
-                chess.updatePieces();
                 chess.repaint();
-                if (msg.newGameInfo.equals("Invalid Move")) chessTimer.start();
+                if (msg.newGameInfo.equals("Invalid Move")) {
+                    chessTimer.start();
+                    chess.updatePieces();
+                }
             }
-            else {
+            /*else {
                 remove(status);
                 status.setText("Game in progress");
                 add(status);
                 status.repaint();
                 chess.updatePieces();
                 chess.repaint();
-            }
+            }*/
         }
     }
 }
