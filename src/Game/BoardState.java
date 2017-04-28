@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.Set;
 
 /**
- * Created by tjcup on 4/19/2017.
+ * Immutable board state, including pieces
+ * @author Jonathan Bush
  */
 public class BoardState {
     private final Piece[][] board;
