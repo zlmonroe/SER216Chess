@@ -165,6 +165,8 @@ public class ChessPanel extends JPanel {
                     img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons/" + pieceExtentions[pieceType] + ".gif"));
                     pieces[i][j] = new pieceIcon(img, i, j);
                     add(pieces[i][j]);
+                } else {
+                    pieces[i][j] = null;
                 }
 
             }
@@ -180,6 +182,15 @@ public class ChessPanel extends JPanel {
                 }
             }
         }
+    }
+
+    public String getPieceName(Point p) {
+        final String[] pieceNames = {"pawn", "knight", "bishop", "rook", "queen", "king"};
+        int type = (pieceLocations[p.x][7-p.y] - 1) / 2;
+        if (type >= 0) {
+            return ((pieceLocations[p.x][7-p.y] % 2 == 0) ? "white " : "black ") + pieceNames[type];
+        }
+        return null;
     }
 
     /**
