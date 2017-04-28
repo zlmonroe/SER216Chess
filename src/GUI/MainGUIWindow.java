@@ -21,7 +21,7 @@ public class MainGUIWindow extends JFrame {
     private StartPanel start;
     private Client client;
     private Timer timer;
-    private ChessTimer chessTimer;
+    //private ChessTimer chessTimer;
 
 
     MainGUIWindow() {
@@ -44,8 +44,8 @@ public class MainGUIWindow extends JFrame {
         chess = new ChessPanel();
         start = new StartPanel();
         chess.setSize(600,600);
-        chessTimer = new ChessTimer(5*60);
-        chess.time = chessTimer;
+        //chessTimer = new ChessTimer(5*60);
+        //chess.time = chessTimer;
 
         chat.sendButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
@@ -97,12 +97,12 @@ public class MainGUIWindow extends JFrame {
                         public void actionPerformed(ActionEvent evt) {
                             checkMessage();
                             //chess.drawPieces();
-                            tools.updateTimer(client.isWhite,chessTimer.getTimeString());
-                            client.sendTime(chessTimer.getTimeString());
+                            //tools.updateTimer(client.isWhite,chessTimer.getTimeString());
+                            //client.sendTime(chessTimer.getTimeString());
                             repaint();
                         }
                     });
-                    if (client.isWhite) chessTimer.start();
+                    //if (client.isWhite) chessTimer.start();
                     timer.start();
                     chess.drawPieces();
                 }
@@ -138,13 +138,13 @@ public class MainGUIWindow extends JFrame {
             Message msg = client.messages.removeFirst();
             if (msg.newMove != null){
                 chess.movePiece(msg.newMove);
-                if (msg.isWhite!=client.isWhite) chessTimer.start();
+                //if (msg.isWhite!=client.isWhite) chessTimer.start();
                 tools.add_to_History(chess.getPieceName(msg.newMove.newPoint) + " to " + Character.toString((char)('a' + (char)msg.newMove.newPoint.x)) + (1+msg.newMove.newPoint.y) );
                 repaint();
             }
             if(msg.timeLeft!=null&&(msg.isWhite!=client.isWhite)){
                 //System.out.println(msg.isWhite+"\t"+msg.timeLeft);
-                tools.updateTimer(msg.isWhite, msg.timeLeft);
+                //tools.updateTimer(msg.isWhite, msg.timeLeft);
             }
             if (msg.newMessage != null) {
                 chat.append(msg.newMessage);
@@ -156,18 +156,18 @@ public class MainGUIWindow extends JFrame {
                 status.repaint();
                 chess.repaint();
                 if (msg.newGameInfo.equals("Invalid Move")) {
-                    chessTimer.start();
+                    //chessTimer.start();
                     chess.updatePieces();
                 }
             }
-            /*else {
+            else {
                 remove(status);
                 status.setText("Game in progress");
                 add(status);
                 status.repaint();
                 chess.updatePieces();
                 chess.repaint();
-            }*/
+            }
         }
     }
 }
