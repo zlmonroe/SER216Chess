@@ -4,15 +4,12 @@ import Game.Client;
 import Game.Move;
 import Game.Player;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
-import java.io.IOException;
 
 public class ChessPanel extends JPanel {
     private Rectangle2D board;
@@ -164,13 +161,11 @@ public class ChessPanel extends JPanel {
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 pieceType = pieceLocations[i][j];
-                    try {
-                        img = ImageIO.read(new File("src/Game/Pieces/Icons/"+pieceExtentions[pieceType]+".gif"));
-                        pieces[i][j] = new pieceIcon(img,i,j);
-                        add(pieces[i][j]);
-                    } catch (IOException e) {
-                        pieces[i][j] = null;
-                    }
+                if (pieceType != 0) {
+                    img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("Icons/" + pieceExtentions[pieceType] + ".gif"));
+                    pieces[i][j] = new pieceIcon(img, i, j);
+                    add(pieces[i][j]);
+                }
 
             }
         }
