@@ -58,7 +58,6 @@ public class MainGUIWindow extends JFrame {
         chat.textField.addKeyListener(new KeyListener() {
 
             public void keyTyped(KeyEvent e) {
-
             }
 
             public void keyPressed(KeyEvent e) {
@@ -69,7 +68,6 @@ public class MainGUIWindow extends JFrame {
                 }
             }
             public void keyReleased(KeyEvent e) {
-
             }
         });
 
@@ -120,10 +118,10 @@ public class MainGUIWindow extends JFrame {
         pane.add(chat, c);
         c.gridx = 1; c.gridy = 0;
         pane.add(tools, c);
-        c.gridx = 0; c.gridy = 2; c.gridwidth = 1;
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
         pane.add(status, c);
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
 
         this.setSize(860, 700);
@@ -143,6 +141,7 @@ public class MainGUIWindow extends JFrame {
             if (msg.newMove != null){
                 chess.movePiece(msg.newMove);
                 if (msg.isWhite!=client.isWhite) chessTimer.start();
+                tools.add_to_History(chess.getPieceName(msg.newMove.newPoint) + " to " + Character.toString((char)('a' + (char)msg.newMove.newPoint.x)) + (1+msg.newMove.newPoint.y) );
                 repaint();
             }
             if(msg.timeLeft!=null&&(msg.isWhite!=client.isWhite)){
@@ -169,8 +168,6 @@ public class MainGUIWindow extends JFrame {
                 chess.updatePieces();
                 chess.repaint();
             }
-
-
         }
     }
 }
